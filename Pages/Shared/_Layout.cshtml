@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AJJD Hotel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div id="pageContainer">
+        */
+        <header>
+            <nav>
+                <button id="toggleRole">Click for admin view</button>
+                <button id="toggleLogin">Click to toggle login state</button>
+                <ul>
+                    <li><a href="~/">Home</a></li>
+                    <li class="adminView hideLink"><a href="#">Manage Rooms</a></li>
+                    <li class="adminView hideLink"><a href="#">Get Reports</a></li>
+                    <li><a href="~/AreaInfo">Discover Augusta</a></li>
+                    <partial name="_LoginPartial" />
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="banner">
+                @RenderSection("banner", required: false)
+            </div>
+            <div class="contentContainer">
+                @RenderBody()
+            </div>
+        </main>
+
+
+        <footer>
+            &copy; 2020 - AJJD Hotel
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/js/site.js"></script>
+</body>
+</html>

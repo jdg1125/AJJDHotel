@@ -1,0 +1,51 @@
+﻿@page
+@model ReportModel
+@{
+    ViewData["Title"] = "Report";
+}
+
+<h1>Report Page</h1>
+<form action="#" id="searchBar">
+    <label for="checkin">
+        Check-in:
+        <input type="date" id="checkin" name="checkin"
+               value="@DateTime.Today"
+               min="@DateTime.Today" max="2021-12-31" />
+    </label>
+    <label for="checkout">
+        Check-out:
+        <input type="date" id="checkout" name="checkout"
+               value="@DateTime.Today"
+               min="@DateTime.Today" max="2021-12-31" />
+    </label>
+    <label for="submit">
+        <a href="#"><input type="button" id="submit" value="Search" /></a>
+    </label>
+</form>
+
+
+
+
+
+<div class="tab">
+    <button class="tablinks" id="revenue-btn">Revenue</button>
+    <button class="tablinks" id="occupancy-btn">Occupancy</button>
+    <button class="tablinks" id="stuff-btn">Stuff</button>
+</div>
+
+<div id="report-revenue" class="tabcontent">
+    <h3>Revenue</h3>
+    <p>This is the report in tab revenue.</p>
+</div>
+
+<div id="report-occupancy" style="display: none" class="tabcontent">
+    <h3>Occupancy</h3>
+    <p>This is the report in tab occupancy.</p>
+</div>
+
+<div id="report-stuff" style="display: none" class="tabcontent">
+    <h3>Stuff</h3>
+    <p>This is the report in tab stuff.</p>
+</div>
+
+<script src="~/js/reports.js"></script>

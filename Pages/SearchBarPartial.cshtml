@@ -1,0 +1,38 @@
+﻿@model int
+@{
+}
+
+<form action="#" class="searchBar">
+    <label for="checkin">
+        Check-in:
+        <input type="date" id="checkin" name="checkin"
+               value="@DateTime.Today"
+               min="@DateTime.Today" max="2021-12-31" />
+    </label>
+    <label for="checkout">
+        Check-out:
+        <input type="date" id="checkout" name="checkout"
+               value="@DateTime.Today"
+               min="@DateTime.Today" max="2021-12-31" />
+    </label>
+    <label for="numGuests">
+        Number of guests:
+        <select id="numGuests" name="numGuests">
+            @Html.Raw(@RenderDropDown(Model));
+        </select>
+    </label>
+    <label for="submit">
+        <a href="~/SearchResults"><input type="button" id="submit" value="Search" /></a>
+    </label>
+</form>
+
+
+@functions {
+    string RenderDropDown(int n)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        for (int i = 1; i < n; i++)
+            sb.Append($"<option name=\"{i}\">{i}</option>");
+        return sb.ToString();
+    }
+}

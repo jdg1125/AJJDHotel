@@ -1,0 +1,79 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<h1>My account</h1>
+
+<h2>My personal info</h2>
+
+<form name="update-info" method="GET"
+      action="process.php">
+
+    <div class="update-box">
+        <div class="textbox">
+            <label for="first-name">First Name:</label>
+            <input type="text" placeholder="John" name="first-name" value="">
+        </div>
+
+        <div class="textbox">
+            <label for="Last-name">Last name:</label>
+            <input type="text" placeholder="Doe" name="Last-name" value="">
+        </div>
+
+        <div class="textbox">
+            <label for="phone-number">phone number:</label>
+            <input type="text" placeholder="555-555-5555" name="phone-number" value="">
+        </div>
+
+        <div class="textbox">
+            <label for="birthday">birthday:</label>
+            <input type="date" placeholder="" name="birthday" value="">
+        </div>
+
+        <div class="textbox">
+            <label for="email">email:</label>
+            <input type="email" name="email" id="email-address" placeholder="email@example.com" />
+        </div>
+
+        <input type="submit" name="submit" value="update" />
+        <h4>change password</h4>
+
+        <div class="textbox">
+            <label for="new-Password">New password:</label>
+            <input type="password" placeholder="password" name="new-Password" value="">
+        </div>
+
+        <div class="textbox">
+            <label for="retype-Password">retype password:</label>
+            <input type="password" placeholder="password" name="retype-Password" value="">
+        </div>
+
+        <div class="textbox">
+            <label for="old-Password">old password:</label>
+            <input type="password" placeholder="password" name="old-Password" value="">
+            <input type="submit" name="submit" value="change" />
+        </div>
+
+</form>
+
+<h2>My reservations</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Date</th>
+            <th>Length of stay</th>
+            <th>number of guests</th>
+        </tr>
+        <tr>
+            <th>123A</th>
+            <th>10/10/2020</th>
+            <th>2 days</th>
+            <th>3 guests</th>
+        </tr>
+</table>
+
+<h2>Manage my account </h2>
+<input type="button" id="submit" value="Delete my account" />
