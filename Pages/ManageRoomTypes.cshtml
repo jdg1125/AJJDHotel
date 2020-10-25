@@ -1,0 +1,39 @@
+﻿@page
+@model AJJDHotel.Pages.ManageRoomTypesModel
+@{
+    ViewData["Title"] = "Manage Room Types";
+}
+
+<h1>Manage Room Types</h1>
+
+<form id="dansform" action="/my-handling-form-page" method="post">
+    <ul>
+        <li>
+            <label for="title">Title:</label>
+            <select id="title" name="room_title">
+                <option selected>type1 title</option>
+                <option>type2 title</option>
+                <option>type3 title</option>
+            </select>
+        </li>
+        <li>
+            <label for="description">Description:</label>
+            <textarea id="description" name="room_description">This is a description of a room.</textarea>
+        </li>
+        <li>
+            <label for="room_view">View:</label>
+            <input type="text" id="room_view" name="room_view_type">
+        </li>
+        <li>
+            <label for="beds">Beds:</label>
+            <input type="text" id="beds" name="beds_setup">
+        </li>
+        <li>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="room_price">
+        </li>
+        <li class="button">
+            <button type="submit">Save changes</button>
+        </li>
+    </ul>
+</form>
