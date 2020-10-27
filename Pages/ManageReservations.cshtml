@@ -1,0 +1,64 @@
+﻿@page
+@model AJJDHotel.Pages.ManageReservationsModel
+@using AJJDHotel.Models;
+@using System.Text;
+@{
+
+}
+
+<div class="adminView">
+    <h1>Manage Reservations</h1>
+    <button id="changeResView">Click to see results of searching by name</button>
+
+    <table class="resTable">
+        <tr>
+            <th>Confirmation Number</th>
+            <th>Hotel Location</th>
+            <th>Customer Name</th>
+            <th>Room Type</th>
+            <th>Room Number</th>
+            <th>Check-in date</th>
+            <th>Check-out date</th>
+            <th>Total charge</th>
+            <th>Management Options</th>
+        </tr>
+        <tr>
+            @Html.Raw(RenderRowData(Model.QueryByName[0]))
+            <td>
+                <div class="searchBar manageHide" id="manage1">
+                    <partial name="ManagePartial" model="@Model.QueryByName[0]" />
+                </div>
+            </td>
+        </tr>
+        <tr id="rowToHide" class="hideRes">
+            @Html.Raw(RenderRowData(Model.QueryByName[1]))
+            <td>
+                <div class="searchBar manageHide" id="manage2">
+                    <partial name="ManagePartial" model="@Model.QueryByName[1]" />
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@functions {
+    string RenderRowData(Reservation r)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(MakeCell(r.ConfirmationNum));
+        sb.Append(MakeCell(r.Location));
+        sb.Append(MakeCell(r.NameFirstLast));
+        sb.Append(MakeCell(r.RoomType));
+        sb.Append(MakeCell(r.RoomNum));
+        sb.Append(MakeCell(r.Checkin.ToString("D")));
+        sb.Append(MakeCell(r.Checkout.ToString("D")));
+        sb.Append(MakeCell($"{r.TotalCharge:C}"));
+
+        return sb.ToString();
+    }
+
+    string MakeCell(string s)
+    {
+        return $"<td>{s}</td>";
+    }
+}

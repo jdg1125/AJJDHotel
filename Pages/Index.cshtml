@@ -5,21 +5,26 @@
 }
 
 @section banner{
-    <img src="~/b.png" />
+    <img src="~/b.png" alt="bedView" class="slideImg hideLink" />
+    <img src="~/pexels-engin-akyurt-2736388.jpg" alt="roomView" class="slideImg hideLink" />
+    <img src="~/pool.jpg" alt="poolView" class="slideImg hideLink" />
+    <img src="~/food.jpg" alt="poolView" class="slideImg hideLink" />
+
 }
-<h1>Hotel Name</h1>
+
 
 
 <div id="indexSearchArea">
-    <img src="https://media.comicbook.com/uploads1/2014/07/overlook-hotel-103177.jpg" alt="testImg" width="640" height="484" />
-    <p>To get started, enter the dates of your stay</p>
+    <h4>To get started, enter the dates of the trip</h4>
     <partial name="SearchBarPartial" model="5" />
 
     <div class="adminView hideLink">
+        <h4>Or search below to manage a reservation</h4>
+
         <form action="#" class="searchBar">
             <label for="searchByResNumber">
                 Enter reservation number:
-                <input type="number" id="searchByResNumber" name="searchByResNumber" />
+                <input type="text" id="searchByResNumber" name="searchByResNumber" />
             </label>
             OR
             <label for="searchByCustName">
@@ -27,8 +32,10 @@
                 <input type="text" id="searchByCustName" name="searchByCustName" />
             </label>
             <label for="submit">
-                <a href="#"><input type="button" id="submit" value="Search" /></a>
+                <a href="~/ManageReservations"><input type="button" id="submit" value="Search" /></a>
             </label>
         </form>
+        <br />
+        <br />
     </div>
 </div>
