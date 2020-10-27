@@ -9,19 +9,23 @@ body {
     font-family: sans-serif;
 }
 
-#pageContainer {
-    position: relative;
-    min-height: calc(100vh - 60px);
-    background-color: #ECEAEA;
-}
-/*stuff i screweed twith*/
 .banner {
-    width: 100vw;
-    margin: auto;
-    display: block;
+    max-height: 40%;
 }
 
-nav {
+#pageContainer {
+    position: relative;
+    min-height:calc(100vh - 60px);
+    background-color: #ECEAEA;
+}
+
+.slideImgShow {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+
+header {
     background-color: #003049;
     position: fixed;
     width: 100%;
@@ -31,11 +35,15 @@ nav {
     z-index: 100;
 }
 
-#toggle {
+
+header h1 {
+    padding: 0 30px 0 60px;
     float: left;
+    color: #ECEAEA;
+    line-height: 60px;
 }
 
-.hideLink {
+.hideLink, .hideRes {
     display: none;
 }
 
@@ -52,7 +60,7 @@ nav li {
     padding: 20px 40px 20px 40px;
 }
 
-nav a {
+nav a, nav a:hover {
     text-decoration: none;
     color: #ECEAEA;
 }
@@ -63,7 +71,6 @@ nav a {
     margin: 0 auto 0 auto;
     text-align: center;
     background-color: #ECEAEA;
-    min-height: 100vh;
 }
 
 @media (min-width: 576px) {
@@ -101,15 +108,15 @@ nav a {
 }
 
 h1 {
-    padding-bottom: 35px;
+    padding: 35px 0 35px 0;
 }
 
-#indexSearchArea p {
-    padding-top: 50px;
+#indexSearchArea h4 {
+    padding-top: 30px;
 }
 
 .searchBar {
-    padding: 50px 0 0 0;
+    padding: 30px 0 0 0;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -163,8 +170,6 @@ footer {
     color: #ECEAEA;
 }
 
-
-
 .btn {
     border: thick;
     border-color: black;
@@ -178,3 +183,12 @@ footer {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.resTable {
+    margin-top: 100px;
+    padding: 100px 0 0 0;
+}
+
+    .resTable td, .resTable th {
+        padding: 15px 15px 15px 0;
+    }
