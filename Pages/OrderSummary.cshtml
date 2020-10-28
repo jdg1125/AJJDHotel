@@ -39,15 +39,22 @@
             <tbody>
                 <tr>
                     <td>Room Cost:</td>
-                    <td>$150</td>
+                    <td>$@Model.RoomsAvailable[Model.RoomChosen].Rate</td>
                 </tr>
                 <tr>
                     <td>Tax:</td>
-                    <td>$13.62</td>
+                    <td>
+                        @{
+                            decimal rate;
+                            decimal tax = (rate=Model.RoomsAvailable[Model.RoomChosen].Rate) * (decimal)0.08;
+                            decimal total = tax + rate;
+                        }
+                        $@tax
+                    </td>
                 </tr>
                 <tr>
                     <td>Order Total:</td>
-                    <td>$163.62</td>
+                    <td>$@total</td>
                 </tr>
             </tbody>
         </table>
@@ -55,7 +62,7 @@
 
 </div>
 
-<a href="~/OrderConfirmation"><button type="submit" class="btn">Place your order</button></a>
+<a href="~/OrderConfirmation?id=@Model.RoomChosen"><button type="submit" class="btn">Place your order</button></a>
 
 
 

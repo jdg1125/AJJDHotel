@@ -8,10 +8,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AJJDHotel.Pages
 {
-    public class OrderConfirmationModel : PageModel
+    public class OrderConfirmationModel : PurchaseModel //change this after mockup 
     {
-        public void OnGet()
-        {
-        }
+       
     }
 }

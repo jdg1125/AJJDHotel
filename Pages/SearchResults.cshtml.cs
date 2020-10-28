@@ -15,8 +15,18 @@ namespace AJJDHotel.Pages
         public void OnGet()
         {
             Results = new List<RoomType>(3);
+            AddDummyResults();
+        }
+        
+        public SearchResultsModel()
+        {
+            Results = new List<RoomType>(3);
+            AddDummyResults();
+        }
 
-            Results.Add(new RoomType() 
+        private void AddDummyResults()
+        {
+            Results.Add(new RoomType()
             {
                 RoomName = "Standard Room",
                 Rate = 150,
@@ -39,7 +49,6 @@ namespace AJJDHotel.Pages
                 Description = "Exquisitely appointed, our nicest room has recently been renovated following the horrific event that gave it its reputation.  Don't expect it to look anything like the picture.",
                 ImgPath = "https://hi-cdn.t-rp.co.uk/images/hotels/2746051/38?width=870&height=480&crop=false"
             });
-
         }
     }
 }
