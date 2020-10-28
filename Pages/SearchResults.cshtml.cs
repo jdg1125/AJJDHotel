@@ -17,9 +17,9 @@ namespace AJJDHotel.Pages
 
             Results.Add(new RoomType()
             {
-                RoomName = "Standard room",
+                RoomName = "Standard Room",
                 Rate = 150,
-                Description = "All of our standard rooms offer beautiful views of the restaurant's loading deck and the staff parking lot. Our widely talked about super thin walls allow you to get to know your neighbors. Don't expect it to look anything like the picture.",
+                Description = "The standard room offers beautiful views of the restaurant's loading deck and the staff parking lot. Our widely talked about super thin walls allow you to get to know your neighbors. Don't expect it to look anything like the picture.",
                 ImgPath = "https://www.bakuun.com/img/rooms/r1.jpg"
             });
 
