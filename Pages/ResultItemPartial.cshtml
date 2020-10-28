@@ -1,4 +1,4 @@
-﻿@model List<AJJDHotel.Models.ResultItem>
+﻿@model List<AJJDHotel.Models.RoomType>
 @{
 }
 <div class="resultsWrapper">
@@ -6,10 +6,10 @@
     @foreach (var item in Model)
     {
         <div class="resultItem">
-            <img src="@item.imgPath" alt="testImg" height="128" width="128" />
+            <img src="@item.ImgPath" alt="testImg" height="128" width="128" />
 
             <div class="textContainer">
-                <h3>@item.Name</h3>
+                <h3>@item.RoomName</h3>
                 <a href="~/Purchase"><button>Reserve</button></a>
                 <h5>$@item.Rate</h5>
                 <p>@item.Description</p>
