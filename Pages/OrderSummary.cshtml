@@ -5,43 +5,59 @@
 }
 
 
-<div>
+
+<div class="my-columns">
     <h1>Order Summary</h1>
-    <table class="table leftalign">
-        <thead>
-            <tr>
-                <th>Review your information</th>
 
-                <th></th>
-                <th>Order Cost</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td  colspan="2">John Doe</td>
-
-                <td>Room Cost:</td>
-                <td>$150</td>
-            </tr>
-            <tr>
-                <td colspan="2">jdo@gmail.com</td>
-   
-                <td>Tax:</td>
-                <td>$13.62</td>
-            </tr>
-            <tr>
-                <td colspan="2">1-555-777-1111</td>
-   
-                <td>Order Total:</td>
-                <td>$163.62</td>
-            </tr>
-
-
-        </tbody>
-    </table>
-    <a href="~/OrderConfirmation"><button type="submit" class="btn">Place your order</button></a>
+    <section>
+        <table class="table my-table leftalign my-color">
+            <thead>
+                <tr>
+                    <th colspan="2">Review your information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                </tr>
+                <tr>
+                    <td>jdoe@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>1-555-777-1111</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <aside>
+        <table class="table my-table leftalign my-color">
+            <thead>
+                <tr>
+                    <th>Order Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Room Cost:</td>
+                    <td>$150</td>
+                </tr>
+                <tr>
+                    <td>Tax:</td>
+                    <td>$13.62</td>
+                </tr>
+                <tr>
+                    <td>Order Total:</td>
+                    <td>$163.62</td>
+                </tr>
+            </tbody>
+        </table>
+    </aside>
 
 </div>
+
+<a href="~/OrderConfirmation"><button type="submit" class="btn">Place your order</button></a>
+
+
 
 
 
