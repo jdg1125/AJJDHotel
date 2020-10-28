@@ -1,12 +1,12 @@
 ﻿@page
-@model PurchaseModel
+@model AJJDHotel.Pages.SearchResultsModel
 @{
     ViewData["Title"] = "Purchase";
 }
 
-<h1>Purchase Button Page</h1> @*Comment for purchase.*@
+<h1>Enter your information</h1> @*Comment for purchase.*@
 
-<div class="row">
+@*<div class="row">
     <div class="col-sm-6">
         <div class="card">
             <div class="card-body">
@@ -20,6 +20,18 @@
                 <h2 class="card-title">Facts</h2>
                 <p class="card-text">Information about the tentative purchase.</p>
             </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="textContainer">
+    <div class="resultItem">
+        <img src="@Model.Results[0].ImgPath" alt="testImg" height="128" width="128" />
+
+        <div class="textContainer">
+            <h3>@Model.Results[0].RoomName</h3>
+            <h5>$@Model.Results[0].Rate</h5>
+            <p>@Model.Results[0].Description</p>
         </div>
     </div>
 </div>
@@ -44,7 +56,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <button class="btn btn-success" type="submit">Continue</button>
+        <a href="~/OrderSummary"><button class="btn btn-success" type="submit">Continue</button></a>
     </div>
 </form>
 
