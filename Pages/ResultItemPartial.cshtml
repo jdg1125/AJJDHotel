@@ -3,16 +3,16 @@
 }
 <div class="resultsWrapper">
 
-    @foreach (var item in Model)
+    @for(int i=0; i<Model.Count; i++)
     {
         <div class="resultItem">
-            <img src="@item.ImgPath" alt="testImg" height="128" width="128" />
-
+            <img src="@Model[i].ImgPath" alt="testImg" height="128" width="128" />
+            <input type="hidden" value="@i" />
             <div class="textContainer">
-                <h3>@item.RoomName</h3>
-                <a href="~/Purchase"><button>Reserve</button></a>
-                <h5>$@item.Rate</h5>
-                <p>@item.Description</p>
+                <h3>@Model[i].RoomName</h3>
+                <a href="~/Purchase?id=@i"><button>Reserve</button></a>
+                <h5>$@Model[i].Rate</h5>
+                <p>@Model[i].Description</p>
             </div>
         </div>
     }

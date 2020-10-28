@@ -1,62 +1,42 @@
 ﻿@page
-@model AJJDHotel.Pages.SearchResultsModel
+@model AJJDHotel.Pages.PurchaseModel
 @{
     ViewData["Title"] = "Purchase";
 }
 
-<h1>Enter your information</h1> @*Comment for purchase.*@
-
-@*<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <img src="..." alt="Picture">
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title">Facts</h2>
-                <p class="card-text">Information about the tentative purchase.</p>
-            </div>
-        </div>
-    </div>
-</div>*@
+<h1>Enter your information</h1> 
 
 <div class="textContainer">
     <div class="resultItem">
-        <img src="@Model.Results[0].ImgPath" alt="testImg" height="128" width="128" />
+        <img src="@Model.RoomsAvailable[Model.RoomChosen].ImgPath" alt="testImg" height="128" width="128" />
 
         <div class="textContainer">
-            <h3>@Model.Results[0].RoomName</h3>
-            <h5>$@Model.Results[0].Rate</h5>
-            <p>@Model.Results[0].Description</p>
+            <h3>@Model.RoomsAvailable[Model.RoomChosen].RoomName</h3>
+            <h5>$@Model.RoomsAvailable[Model.RoomChosen].Rate</h5>
+            <p>@Model.RoomsAvailable[Model.RoomChosen].Description</p>
         </div>
     </div>
 </div>
 
-<form>
     <div class="form-group row">
         <label for="PurchaseName" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control-plaintext" id="PurchaseName" value="[Name Goes Here]">
+            <input type="text" id="PurchaseName" >
         </div>
     </div>
     <div class="form-group row">
         <label for="PurchaseEmail" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control-plaintext" id="PurchaseEmail" value="[Email Goes Here]">
+            <input type="email" id="PurchaseEmail" >
         </div>
     </div>
     <div class="form-group row">
         <label for="PurchasePhone" class="col-sm-2 col-form-label">Phone</label>
         <div class="col-sm-10">
-            <input type="tel" class="form-control-plaintext" id="PurchasePhone" value="[Phone Number Goes Here]">
+            <input type="tel" id="PurchasePhone" >
         </div>
     </div>
     <div class="form-group row">
-        <a href="~/OrderSummary"><button class="btn btn-success" type="submit">Continue</button></a>
+        <a href="~/OrderSummary?id=@Model.RoomChosen"><button type="submit" class="btn btn-success">Continue</button></a>
     </div>
-</form>
 

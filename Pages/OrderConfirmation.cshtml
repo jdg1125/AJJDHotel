@@ -1,5 +1,5 @@
 ﻿@page
-@model AJJDHotel.Pages.SearchResultsModel
+@model AJJDHotel.Pages.OrderConfirmationModel
 
 @{
     ViewData["Title"] = "Order Confirmation";
@@ -11,12 +11,12 @@
     <p>Please check your email for order confirmation number or visit <a href="~/MyAccount">My Account</a> to review reservation information.</p>
     <h3>Confirmation number: A21746</h3>
     <div class="resultItem">
-        <img src="@Model.Results[0].ImgPath" alt="testImg" height="128" width="128" />
+        <img src="@Model.RoomsAvailable[Model.RoomChosen].ImgPath" alt="testImg" height="128" width="128" />
 
         <div class="textContainer">
-            <h3>@Model.Results[0].RoomName</h3>
-            <h5>$@Model.Results[0].Rate</h5>
-            <p>@Model.Results[0].Description</p>
+            <h3>@Model.RoomsAvailable[Model.RoomChosen].RoomName</h3>
+            <h5>$@Model.RoomsAvailable[Model.RoomChosen].Rate</h5>
+            <p>@Model.RoomsAvailable[Model.RoomChosen].Description</p>
         </div>
     </div>
 </div>

@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AJJDHotel.Pages
 {
-    public class OrderSummaryModel : PageModel
+    public class OrderSummaryModel : PurchaseModel   //change after the mockup
     {
-        public void OnGet()
-        {
-        }
+     
     }
 }
