@@ -1,16 +1,48 @@
 ﻿@page
 @model AJJDHotel.Pages.OrderSummaryModel
-@{ 
+@{
     ViewData["Title"] = "Order Summary";
 }
 
+
 <div>
     <h1>Order Summary</h1>
-    <p>Review your information</p>
-    <h2>Name:</h2>
-    <h2>Email:</h2>
-    <h2>Phone Number:</h2><br />
-    <h2>[concise summary of room info]</h2><br />
-    <h2>Order total:</h2><br />
-    <button type="button" class="btn">Place your order</button>
+    <table class="table leftalign">
+        <thead>
+            <tr>
+                <th>Review your information</th>
+
+                <th></th>
+                <th>Order Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td  colspan="2">John Doe</td>
+
+                <td>Room Cost:</td>
+                <td>$150</td>
+            </tr>
+            <tr>
+                <td colspan="2">jdo@gmail.com</td>
+   
+                <td>Tax:</td>
+                <td>$13.62</td>
+            </tr>
+            <tr>
+                <td colspan="2">1-555-777-1111</td>
+   
+                <td>Order Total:</td>
+                <td>$163.62</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    <a href="~/OrderConfirmation"><button type="submit" class="btn">Place your order</button></a>
+
 </div>
+
+
+
+
