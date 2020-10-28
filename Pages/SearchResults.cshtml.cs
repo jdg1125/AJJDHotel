@@ -11,15 +11,16 @@ namespace AJJDHotel.Pages
     public class SearchResultsModel : PageModel
     {
         public List<RoomType> Results { get; set; }
+
         public void OnGet()
         {
             Results = new List<RoomType>(3);
 
-            Results.Add(new RoomType()
+            Results.Add(new RoomType() 
             {
                 RoomName = "Standard Room",
                 Rate = 150,
-                Description = "The standard room offers beautiful views of the restaurant's loading deck and the staff parking lot. Our widely talked about super thin walls allow you to get to know your neighbors. Don't expect it to look anything like the picture.",
+                Description = "The Standard Room offers beautiful views of the restaurant's loading deck and the staff parking lot. Our widely talked about super thin walls allow you to get to know your neighbors. Don't expect it to look anything like the picture.",
                 ImgPath = "https://www.bakuun.com/img/rooms/r1.jpg"
             });
 
@@ -27,7 +28,7 @@ namespace AJJDHotel.Pages
             {
                 RoomName = "Junior Suite",
                 Rate = 250,
-                Description = "Exactly like the standard room, but we use newer sheets and towels. You're paying for the ability to say that you stayed in a suite.  Don't expect it to look anything like the picture.",
+                Description = "Exactly like the Standard Room, but we use newer sheets and towels. You're paying for the ability to say that you stayed in a suite.  Don't expect it to look anything like the picture.",
                 ImgPath = "https://www.bakuun.com/img/rooms/r1.jpg"
             });
 
