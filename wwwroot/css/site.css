@@ -97,15 +97,6 @@ nav a, nav a:hover {
     }
 }
 
-#pageContainer {
-    position: relative;
-    min-height: calc(100vh - 60px);
-    background-color: #ECEAEA;
-    /*background-image: url(https://images.pexels.com/photos/2029698/pexels-photo-2029698.jpeg?cs=srgb&dl=pexels-naim-benjelloun-2029698.jpg&fm=jpg);*/
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
 
 h1 {
     padding: 35px 0 35px 0;
@@ -256,3 +247,32 @@ button {
      between the labels and their text fields */
     margin-left: .5em;
 }
+
+.leftalign {
+    text-align: left;
+}
+
+.my-color {
+    background-color: gainsboro;
+}
+
+.my-columns {
+
+}
+
+    .my-columns section {
+        float: left;
+        width: 48%;
+        padding: 1%;
+        margin-left: 2%;
+        margin-right: 0%;
+    }
+
+.my-columns aside {
+    float: left;
+    width: 48%;
+    padding: 1%;
+    margin-left: 0%;
+    margin-right: 2%;
+}
+
