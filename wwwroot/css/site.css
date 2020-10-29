@@ -18,7 +18,19 @@ body {
     min-height: calc(100vh - 60px);  /*DONT PUT A SPACE BETWEEN : AND CALC*/
     background-color: #ECEAEA;
 }
+/**/
 
+.buttonblue {
+background-color: #BDE0FE !important;
+}
+#buttonblue {
+    background-color: #BDE0FE;
+    }
+/*report tablinks button*/
+.tablinks{
+    background-color:#BDE0FE;
+  
+}
 .slideImgShow {
     display: block;
     max-width: 100%;
@@ -196,7 +208,7 @@ footer {
     border: thick;
     border-color: black;
     color: black;
-    background-color: gold;
+    background-color:#BDE0FE;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -324,5 +336,6 @@ button {
 /*margin-top: 300px;
     border: 1px solid gainsboro;
 }*/
-
+.b
+/* report page tabs*/
 
