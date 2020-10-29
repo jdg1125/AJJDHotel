@@ -18,6 +18,10 @@ var navLinks = document.getElementById("navLinks");
 var slides = document.getElementsByClassName("slideImg");
 var slideIndex = 0;
 
+//vars for manage room types
+var roomTypeSelect = document.getElementById("roomTypeSelect");
+var results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];
+
 //define functions
 
 function toggleAdminView() {
@@ -57,13 +61,13 @@ function showSlides() {
         slides[i].classList.add("hideLink");
         slides[i].classList.remove("slideImgShow");
     }
-    
+
     if (++slideIndex > slides.length)
         slideIndex = 1;
 
     slides[slideIndex - 1].classList.remove("hideLink");
     slides[slideIndex - 1].classList.add("slideImgShow");
-    setTimeout(showSlides, 3000); 
+    setTimeout(showSlides, 3000);
 }
 
 var toggleResView = (function () {  //this is a closure
@@ -98,15 +102,47 @@ var showNav = (function () {
     }
 })();
 
-//procedure - add event listeners and call relevant one-time functions
-toggleRole.addEventListener("click", toggleAdminView);
-toggleLogin.addEventListener("click", toggleLoginView);
-navIcon.addEventListener("click", showNav);
+var showCurrentDesc = (function () {
+    var oneToShow;
 
-if(slides!=null)
-    showSlides();
+    return function () {
 
-if (changeResView != null)
-    changeResView.addEventListener("click", toggleResView);
+        if (oneToShow != null) {
+            oneToShow.classList.add("hideRes");
+            oneToShow.classList.remove("resultItem");
+        }
+
+        switch (this.value) {
+            case "option_0":
+                oneToShow = results[0];
+                break;
+            case "option_1":
+                oneToShow = results[1];
+                break;
+            case "option_2":
+                oneToShow = results[2];
+                break;
+        }
+
+        oneToShow.classList.remove("hideRes");
+        oneToShow.classList.add("resultItem");
+    }
+})();
+
+    //procedure - add event listeners and call relevant one-time functions
+    toggleRole.addEventListener("click", toggleAdminView);
+    toggleLogin.addEventListener("click", toggleLoginView);
+    navIcon.addEventListener("click", showNav);
+
+    if (slides != null && slides.length != 0)
+        showSlides();
+
+    if (changeResView != null)
+        changeResView.addEventListener("click", toggleResView);
+
+    if (roomTypeSelect != null) 
+        roomTypeSelect.addEventListener("click", showCurrentDesc);
+    
+
 
 
