@@ -336,13 +336,13 @@ button {
 }*/
 
 /* account stuff */
-/*#account{
+#account{
     text-align: left !important;
-} */
-#account #label{
+} 
+/*#account #label{
     text-align: left;
-}
-#account input[type=text], select,input[type=email], input[type=date] {
+}*/
+#account input[type=text],#account input[type=email],#account input[type=date] {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -351,7 +351,7 @@ button {
     box-sizing: border-box;
     width: 100%;
 }
-#account btn{
+#account .btn{
     text-align: left;
 }
 
