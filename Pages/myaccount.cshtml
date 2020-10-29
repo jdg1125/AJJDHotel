@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div id="account">
 <h1>My account</h1>
 
 <h2>Update personal info</h2>
@@ -36,7 +37,7 @@
             <input type="email" name="email" id="email-address" placeholder="email@example.com" />
         </div>
 
-        <input type="submit" class="buttonblue" name="submit" value="update" />
+        <input type="submit" class="btn buttonblue" name="submit" value="update" />
         <h4>change password</h4>
 
         <div class="textbox">
@@ -52,7 +53,8 @@
         <div class="textbox">
             <label for="old-Password">old password:</label>
             <input type="password" placeholder="password" name="old-Password" value="">
-            <input type="submit" class="buttonblue" name="submit" value="change" />
+            <br>
+            <input type="submit" class="btn buttonblue" name="submit" value="change" />
         </div>
 
 </form>
@@ -76,4 +78,6 @@
 </table>
 
 <h2>Manage my account </h2>
-<input type="button" class="buttonblue" id="submit" value="Delete my account" />
+<input type="button" class="btn buttonblue" id="submit" value="Delete my account" />
+
+</div>

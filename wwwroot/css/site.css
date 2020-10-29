@@ -336,6 +336,23 @@ button {
 /*margin-top: 300px;
     border: 1px solid gainsboro;
 }*/
-.b
-/* report page tabs*/
 
+/* report page tabs*/
+#account{
+    text-align: left !important;
+}
+#account #label{
+    text-align: left;
+}
+#account input[type=text], select,input[type=email], input[type=date] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#account btn{
+    text-align: left;
+}
