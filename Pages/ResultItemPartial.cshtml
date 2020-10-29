@@ -12,11 +12,11 @@
                 <h3>@Model[i].RoomName</h3>
                 @if (i != 2)
                 {
-                <a href="~/Purchase?id=@i"><button>Reserve</button></a>
+                <a href="~/Purchase?id=@i"><button class="button buttonblue">Reserve</button></a>
                 }
                 else
                 {
-                    <a href="~/Sorry"><button>Reserve</button></a>
+                    <a href="~/Sorry"><button class="buttonblue">Reserve</button></a>
                 }
                 <h5>$@Model[i].Rate</h5>
                 <p>@Model[i].Description</p>
