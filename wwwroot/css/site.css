@@ -15,7 +15,7 @@ body {
 
 #pageContainer {
     position: relative;
-    min-height:calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     background-color: #ECEAEA;
 }
 
@@ -36,35 +36,44 @@ header {
 }
 
 
-header h1 {
-    padding: 0 30px 0 60px;
-    float: left;
-    color: #ECEAEA;
-    line-height: 60px;
-}
+    header h1 {
+        padding: 0 30px 0 60px;
+        float: left;
+        color: #ECEAEA;
+        line-height: 60px;
+    }
 
 .hideLink, .hideRes {
     display: none;
 }
 
-nav ul {
+#navIcon {
+    float:right;
+    margin: auto;
+    padding: 15px 60px 0 0 ;
+    
+}
+
+.showNav {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-direction: column;
     float: right;
     justify-content: space-between;
+    padding-top: 60px;
 }
 
 nav li {
     list-style-type: none;
     padding: 20px 40px 20px 40px;
+    background-color: #003049;
 }
 
 nav a, nav a:hover {
     text-decoration: none;
     color: #ECEAEA;
 }
-
+    
 .contentContainer {
     width: 100%;
     padding: 0 15px 60px 15px;
@@ -183,6 +192,7 @@ footer {
     .resTable td, .resTable th {
         padding: 15px 15px 15px 0;
     }
+
 #dansform form {
     /* Center the form on the page */
     margin: 0 auto;
@@ -223,11 +233,11 @@ footer {
     border: 1px solid #999;
 }
 
-#dansform input:focus,
-#dansform textarea:focus {
-    /* Additional highlight for focused elements */
-    border-color: #000;
-}
+    #dansform input:focus,
+    #dansform textarea:focus {
+        /* Additional highlight for focused elements */
+        border-color: #000;
+    }
 
 #dansform textarea {
     /* Align multiline text fields with their labels */
@@ -257,35 +267,34 @@ button {
 }
 
 .my-columns {
-
 }
 
-.my-columns section {
-    float: left;
-    width: 48%;
-    padding: 1%;
-    margin-left: 2%;
-    margin-right: 0%;
-}
+    .my-columns section {
+        float: left;
+        width: 48%;
+        padding: 1%;
+        margin-left: 2%;
+        margin-right: 0%;
+    }
 
-.my-columns aside {
-    float: left;
-    width: 48%;
-    padding: 1%;
-    margin-left: 0%;
-    margin-right: 2%;
-}
+    .my-columns aside {
+        float: left;
+        width: 48%;
+        padding: 1%;
+        margin-left: 0%;
+        margin-right: 2%;
+    }
 
-.my-columns:after {
-    display: block;
-    content: "";
-    clear: both;
-}
+    .my-columns:after {
+        display: block;
+        content: "";
+        clear: both;
+    }
 
 /*.my-text-container {
     padding-top: 30px;*/
-    /*margin: 10px;*/
-    /*margin-top: 300px;
+/*margin: 10px;*/
+/*margin-top: 300px;
     border: 1px solid gainsboro;
 }*/
 

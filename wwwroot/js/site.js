@@ -1,11 +1,24 @@
-﻿var toggleRole = document.getElementById("toggleRole");
+﻿//vars involved with toggling login state view
+var toggleRole = document.getElementById("toggleRole");
 var toggleLogin = document.getElementById("toggleLogin");
-var changeResView = document.getElementById("changeResView");
-var rowToHide = document.getElementById("rowToHide");
 var adminLink = document.getElementsByClassName("adminView");
 var linksToChg = document.getElementsByClassName("chgLinkTxt");
 var isAdmin = false;
 var isLoggedIn = false;
+
+//vars to change viewing manage reservation by conf num or name
+var changeResView = document.getElementById("changeResView");
+var rowToHide = document.getElementById("rowToHide");
+
+//vars for navbar 
+var navIcon = document.getElementById("navIcon");
+var navLinks = document.getElementById("navLinks");
+
+//vars for index page banner
+var slides = document.getElementsByClassName("slideImg");
+var slideIndex = 0;
+
+//define functions
 
 function toggleAdminView() {
 
@@ -38,6 +51,20 @@ function toggleLoginText() {
     toggleRole.innerHTML = isAdmin ? "Click for customer view" : "Click for admin view";
 }
 
+function showSlides() {
+
+    for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.add("hideLink");
+        slides[i].classList.remove("slideImgShow");
+    }
+    
+    if (++slideIndex > slides.length)
+        slideIndex = 1;
+
+    slides[slideIndex - 1].classList.remove("hideLink");
+    slides[slideIndex - 1].classList.add("slideImgShow");
+    setTimeout(showSlides, 3000); 
+}
 
 var toggleResView = (function () {  //this is a closure
     var isHidden = true;  //this only happens the first time it's called
@@ -55,27 +82,31 @@ var toggleResView = (function () {  //this is a closure
     }
 })();
 
+var showNav = (function () {
+    var isShown = false;
+
+    return function () {
+        isShown = !isShown;
+
+        if (isShown) {
+            navLinks.classList.remove("hideLink");
+            navLinks.classList.add("showNav");
+        } else {
+            navLinks.classList.add("hideLink");
+            navLinks.classList.remove("showNav");
+        }
+    }
+})();
+
+//procedure - add event listeners and call relevant one-time functions
 toggleRole.addEventListener("click", toggleAdminView);
 toggleLogin.addEventListener("click", toggleLoginView);
+navIcon.addEventListener("click", showNav);
+
+if(slides!=null)
+    showSlides();
+
 if (changeResView != null)
     changeResView.addEventListener("click", toggleResView);
 
-var slideIndex = 0;
-var slides = document.getElementsByClassName("slideImg");
 
-function showSlides() {
-
-    for (var i = 0; i < slides.length; i++) {
-        slides[i].classList.add("hideLink");
-        slides[i].classList.remove("slideImgShow");
-    }
-    
-    if (++slideIndex > slides.length)
-        slideIndex = 1;
-
-    slides[slideIndex - 1].classList.remove("hideLink");
-    slides[slideIndex - 1].classList.add("slideImgShow");
-    setTimeout(showSlides, 3000); 
-}
-
-showSlides();
