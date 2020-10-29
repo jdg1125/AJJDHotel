@@ -11,15 +11,17 @@ namespace AJJDHotel.Pages
     public class SearchResultsModel : PageModel
     {
         public List<RoomType> Results { get; set; }
-
-        public void OnGet()
+        public bool IsSentFromNav { get; set; }
+        public void OnGet(bool sorry)
         {
+            IsSentFromNav = sorry;
             Results = new List<RoomType>(3);
             AddDummyResults();
         }
-        
+
         public SearchResultsModel()
         {
+            IsSentFromNav = false;
             Results = new List<RoomType>(3);
             AddDummyResults();
         }
@@ -42,13 +44,14 @@ namespace AJJDHotel.Pages
                 ImgPath = "https://www.bakuun.com/img/rooms/r1.jpg"
             });
 
-            Results.Add(new RoomType()
-            {
-                RoomName = "Deluxe Suite",
-                Rate = 350,
-                Description = "Exquisitely appointed, our nicest room has recently been renovated following the horrific event that gave it its reputation.  Don't expect it to look anything like the picture.",
-                ImgPath = "https://hi-cdn.t-rp.co.uk/images/hotels/2746051/38?width=870&height=480&crop=false"
-            });
+            if (!IsSentFromNav)
+                Results.Add(new RoomType()
+                {
+                    RoomName = "Deluxe Suite",
+                    Rate = 350,
+                    Description = "Exquisitely appointed, our nicest room has recently been renovated following the horrific event that gave it its reputation.  Don't expect it to look anything like the picture.",
+                    ImgPath = "https://hi-cdn.t-rp.co.uk/images/hotels/2746051/38?width=870&height=480&crop=false"
+                });
         }
     }
 }
