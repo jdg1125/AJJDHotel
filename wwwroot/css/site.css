@@ -15,17 +15,15 @@ body {
 
 #pageContainer {
     position: relative;
-    min-height: calc(100vh - 60px);  /*DONT PUT A SPACE BETWEEN : AND CALC*/
+    min-height:calc(100vh - 60px);  /*DONT PUT A SPACE BETWEEN : AND CALC*/
     background-color: #ECEAEA;
 }
+
 /**/
 
 .buttonblue {
 background-color: #BDE0FE !important;
 }
-#buttonblue {
-    background-color: #BDE0FE;
-    }
 /*report tablinks button*/
 .tablinks{
     background-color:#BDE0FE;
@@ -336,6 +334,38 @@ button {
 /*margin-top: 300px;
     border: 1px solid gainsboro;
 }*/
-.b
-/* report page tabs*/
 
+/* account stuff */
+#account{
+    text-align: left !important;
+} 
+/*#account #label{
+    text-align: left;
+}*/
+#account input[type=text],#account input[type=email],#account input[type=date] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#account .btn{
+    text-align: left;
+}
+
+#account #accReservationTable thead th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 12px;
+    text-align: left;
+    background-color: #003049 !important;
+    color: white;
+}
+
+#account #accReservationTable tr:hover {
+    background-color: #BDE0FE;
+}
+#account tr:nth-child(even){background-color: #D3D3D3;}
+#account tr:nth-child(odd){background-color: #ECEAEA;}
