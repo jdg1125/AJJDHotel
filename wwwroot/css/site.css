@@ -15,7 +15,7 @@ body {
 
 #pageContainer {
     position: relative;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);  /*DONT PUT A SPACE BETWEEN : AND CALC*/
     background-color: #ECEAEA;
 }
 
@@ -79,6 +79,7 @@ nav a, nav a:hover {
     padding: 0 15px 60px 15px;
     margin: 0 auto 0 auto;
     text-align: center;
+    justify-content: center;
     background-color: #ECEAEA;
 }
 
@@ -124,9 +125,17 @@ h1 {
     align-content: center;
 }
 
-.resultsWrapper {
+.resultsWrapper{
     justify-content: space-between;
     padding-bottom: 20px;
+}
+
+#restaurantResults {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    background-color: #eceaea;
 }
 
 .resultItem {
@@ -140,13 +149,26 @@ h1 {
     border-radius: 15px; /*rounded corners*/
 }
 
+.result-pad {
+    padding: 20px 20px 20px 20px;
+    flex: 1;
+}
+
+.result-add-space {
+    flex: 4;
+}
+
 .columnWrapper {
     display: flex;
     flex-direction: row;
 }
 
-.weather, .yelp {
+.left {
     flex: 1;
+}
+
+.right {
+    flex: 2;
 }
 
 .textContainer {
@@ -185,13 +207,18 @@ footer {
 }
 
 .resTable {
-    margin-top: 100px;
-    padding: 100px 0 0 0;
+    margin: 30px auto 30px auto;
+    align-self: center;
+    /*padding: 100px 0 0 0;*/
 }
 
     .resTable td, .resTable th {
         padding: 15px 15px 15px 0;
     }
+
+.tab, .report-revenue h3, .report-occupancy h3, .report-stuff h3 {
+    padding: 30px 0 30px 0;
+}
 
 #dansform form {
     /* Center the form on the page */

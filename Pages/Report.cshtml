@@ -35,12 +35,53 @@
 
 <div id="report-revenue" class="tabcontent">
     <h3>Revenue</h3>
-    <p>This is the report in tab revenue.</p>
+    <table class="resTable">
+        <tr>
+            <th>Gross amount</th>
+            <th>Room type</th>
+        </tr>
+        <tr>
+            <td>$1,102,399.36</td>
+            <td>Standard Room</td>
+        </tr>
+        <tr>
+            <td>$1,000,242.92</td>
+            <td>Junior Suite
+            <td>
+        </tr>
+        <tr>
+            <td>$942,915.60</td>
+            <td>Deluxe Suite</td>
+        </tr>
+    </table>
+
+    <p>@{ double math = 1102339.36 + 1000242.92 + 942915.60;
+        string total = $"{math:C}";
+    }Total revenue for this period: @total</p>
+
 </div>
 
 <div id="report-occupancy" style="display: none" class="tabcontent">
     <h3>Occupancy</h3>
-    <p>This is the report in tab occupancy.</p>
+    <table class="resTable">
+        <tr>
+            <th>Room type</th>
+            <th>Total reservation instances</th>
+        </tr>
+        <tr>
+            <td>Standard Room</td>
+            <td>5,434</td>
+        </tr>
+        <tr>
+            <td>Junior Suite</td>
+            <td>3,138</td>
+        </tr>
+        <tr>
+            <td>Deluxe Suite</td>
+            <td>2,288</td>
+        </tr>
+    </table>
+    <p>@{math = 5434 + 3138 + 2288;}Total occupancy for this period: @math</p>
 </div>
 
 <div id="report-stuff" style="display: none" class="tabcontent">

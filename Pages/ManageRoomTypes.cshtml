@@ -1,39 +1,59 @@
 ﻿@page
-@model AJJDHotel.Pages.ManageRoomTypesModel
+@model AJJDHotel.Pages.PurchaseModel
 @{
     ViewData["Title"] = "Manage Room Types";
 }
 
 <h1>Manage Room Types</h1>
 
-<form id="dansform" action="/my-handling-form-page" method="post">
-    <ul>
-        <li>
-            <label for="title">Title:</label>
-            <select id="title" name="room_title">
-                <option selected>type1 title</option>
-                <option>type2 title</option>
-                <option>type3 title</option>
-            </select>
-        </li>
-        <li>
-            <label for="description">Description:</label>
-            <textarea id="description" name="room_description">This is a description of a room.</textarea>
-        </li>
-        <li>
-            <label for="room_view">View:</label>
-            <input type="text" id="room_view" name="room_view_type">
-        </li>
-        <li>
-            <label for="beds">Beds:</label>
-            <input type="text" id="beds" name="beds_setup">
-        </li>
-        <li>
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="room_price">
-        </li>
-        <li class="button">
-            <button type="submit">Save changes</button>
-        </li>
-    </ul>
-</form>
+<div class="columnWrapper">
+    <div class="left">
+        <h3>Current description</h3>
+        @for (int i = 0; i < Model.RoomsAvailable.Count; i++)
+        {
+            string className = (i == 0) ? "resultItem" : "hideRes";
+
+            <div class=@className id="result_@i">
+                <img src="@Model.RoomsAvailable[i].ImgPath" alt="testImg" height="128" width="128" />
+                <div class="textContainer">
+                    <h3>@Model.RoomsAvailable[i].RoomName</h3>
+                    <h5>$@Model.RoomsAvailable[i].Rate</h5>
+                    <p>@Model.RoomsAvailable[i].Description</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="right">
+        <form id="dansform" action="/my-handling-form-page" method="post">
+            <ul>
+                <li>
+                    <label for="title">Title:</label>
+                    <select id="roomTypeSelect" name="room_title">
+                        <option selected value="option_0">@Model.RoomsAvailable[0].RoomName</option>
+                        <option value="option_1">@Model.RoomsAvailable[1].RoomName</option>
+                        <option value="option_2">@Model.RoomsAvailable[2].RoomName</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="room_description">This is a description of a room.</textarea>
+                </li>
+                <li>
+                    <label for="room_view">View:</label>
+                    <input type="text" id="room_view" name="room_view_type">
+                </li>
+                <li>
+                    <label for="beds">Beds:</label>
+                    <input type="text" id="beds" name="beds_setup">
+                </li>
+                <li>
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="room_price">
+                </li>
+                <li class="button">
+                    <button type="submit">Save changes</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
