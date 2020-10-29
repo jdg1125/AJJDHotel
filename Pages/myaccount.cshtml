@@ -29,7 +29,8 @@
 
         <div class="textbox">
             <label for="birthday">birthday:</label>
-            <input type="date" placeholder="" name="birthday" value="">
+           @* <input type="date" placeholder="" name="birthday" value="">*@
+               <input type="text" placeholder="01/14/1990" onfocus="(this.type='date')" onblur="(this.type='text')"> 
         </div>
 
         <div class="textbox">
@@ -60,7 +61,7 @@
 </form>
 
 <h2>My reservations</h2>
-<table border="1">
+<table id="accReservationTable" border="1">
     <thead>
         <tr>
             <th>Room Number</th>
@@ -69,12 +70,29 @@
             <th>Length of stay</th>
             <th>number of guests</th>
         </tr>
+        </thead>
         <tr>
             <th>123A</th>
+            <th>Standard Room</th>
             <th>10/10/2020</th>
             <th>2 days</th>
             <th>3 guests</th>
         </tr>
+                <tr>
+            <th>123B</th>
+            <th>Junior Suite</th>
+            <th>1/10/2020</th>
+            <th>8 days</th>
+            <th>1 guests</th>
+        </tr>
+                <tr>
+            <th>123C</th>
+            <th>Deluxe Suite</th>
+            <th>10/15/2020</th>
+            <th>5 days</th>
+            <th>2 guests</th>
+        </tr>
+
 </table>
 
 <h2>Manage my account </h2>
