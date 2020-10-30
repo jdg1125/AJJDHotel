@@ -32,7 +32,7 @@ namespace AJJDHotel.Pages
             {
                 RoomName = "Standard Room",
                 Rate = 150,
-                Description = "The Standard Room offers beautiful views of the restaurant's loading deck and the staff parking lot. Our widely talked about super thin walls allow you to get to know your neighbors. Don't expect it to look anything like the picture.",
+                Description = "The Standard Room offers beautiful views of the restaurant's loading dock and the staff parking lot. Our widely talked about super thin walls allow you to get to know your neighbors. Don't expect it to look anything like the picture.",
                 ImgPath = "https://www.bakuun.com/img/rooms/r1.jpg",
                 View = "Parking lot/loading dock",
                 Beds = "1 Queen"
