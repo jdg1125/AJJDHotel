@@ -109,7 +109,7 @@ var showCurrentDesc = (function () {
 
         if (oneToShow != null) {
             oneToShow.classList.add("hideRes");
-            oneToShow.classList.remove("resultItem");
+            oneToShow.classList.remove("textbox");
         }
 
         switch (this.value) {
@@ -125,7 +125,7 @@ var showCurrentDesc = (function () {
         }
 
         oneToShow.classList.remove("hideRes");
-        oneToShow.classList.add("resultItem");
+        oneToShow.classList.add("textbox");
     }
 })();
 
