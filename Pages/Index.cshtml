@@ -21,7 +21,7 @@
     <div class="adminView hideLink">
         <h4>Or search below to manage a reservation</h4>
 
-        <form action="#" class="searchBar">
+        <div class="searchBar">
             <label for="searchByResNumber">
                 Enter reservation number:
                 <input type="text" id="searchByResNumber" name="searchByResNumber" />
@@ -32,9 +32,9 @@
                 <input type="text" id="searchByCustName" name="searchByCustName" />
             </label>
             <label for="submit">
-                <a href="~/ManageReservations"><input type="button" id="submit" value="Search" /></a>
+                <a href="~/ManageReservations"><button id="submit" class="btn buttonblue">Search</button></a>
             </label>
-        </form>
+        </div>
         <br />
         <br />
     </div>

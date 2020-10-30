@@ -8,7 +8,7 @@
 
 <div class="adminView">
     <h1>Manage Reservations</h1>
-    <button id="changeResView">Click to see results of searching by name</button>
+    <button id="changeResView" class="btn buttonblue">Click to see results of searching by name</button>
 
     <table class="resTable">
         <tr>
@@ -25,7 +25,7 @@
         <tr>
             @Html.Raw(RenderRowData(Model.QueryByName[0]))
             <td>
-                <div class="searchBar manageHide" id="manage1">
+                <div class=" manageHide" id="manage1">
                     <partial name="ManagePartial" model="@Model.QueryByName[0]" />
                 </div>
             </td>
@@ -33,7 +33,7 @@
         <tr id="rowToHide" class="hideRes">
             @Html.Raw(RenderRowData(Model.QueryByName[1]))
             <td>
-                <div class="searchBar manageHide" id="manage2">
+                <div class=" manageHide" id="manage2">
                     <partial name="ManagePartial" model="@Model.QueryByName[1]" />
                 </div>
             </td>

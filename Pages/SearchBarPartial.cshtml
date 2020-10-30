@@ -4,7 +4,7 @@
     today = today.Substring(0, today.IndexOf(' '));
 }
 
-<form action="#" class="searchBar">
+<div class="searchBar">
     <label for="checkin">
         Check-in:
         <input type="date" id="checkin" name="checkin"
@@ -24,10 +24,10 @@
         </select>
     </label>
     <label for="submit">
-        <a href="~/SearchResults?sorry=false"><input class="buttonblue" type="button" id="submit" value="Search" /></a>
-
+        <a href="~/SearchResults?sorry=false"><button class="btn buttonblue" id="submit" value="Search">Search</button></a>
     </label>
-</form>
+
+</div>
 
 
 @functions {
