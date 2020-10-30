@@ -35,6 +35,8 @@ background-color: #BDE0FE !important;
     width: 100%;
 }
 
+
+
 header {
     background-color: #003049;
     position: fixed;
@@ -298,3 +300,43 @@ footer {
 }
 #account tr:nth-child(even){background-color: #D3D3D3;}
 #account tr:nth-child(odd){background-color: #ECEAEA;}
+
+#account .buttonblue {
+    margin-top: 25px;
+}
+
+#account label {
+    margin-bottom: 0px;
+    margin-top: 8px;
+}
+
+#purchase-form .buttonblue {
+    margin-left: 55px;
+}
+
+#purchase-form input[type=tel], #purchase-form input[type=email], #purchase-form input[type=text] {
+    margin-left: 40px;
+    padding-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#purchase-form label {
+    margin-left: 43px;
+}
+
+#purchase-form #purchaseEmail {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#purchase-form h2 {
+    padding-top: 60px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 110px;
+    width: 560px;
+    border-bottom: 1px solid lightgray;
+    margin-left: 55px;
+}
+
