@@ -17,28 +17,28 @@ namespace AJJDHotel.Pages
             QueryByName = new List<Reservation>();
             QueryByConfNum = new Reservation()
             { 
-                ConfirmationNum = "A46C938JF1",
-                RoomNum = "E1202",
-                Location = "Augusta, GA",
-                Checkin = new DateTime(2021, 6, 12),
-                Checkout = new DateTime(2021, 6, 19),
-                TotalCharge = 932.76, 
-                NameFirstLast = "John Smith",
-                RoomType = "Junior Suite"
+                // = "A46C938JF1",
+                //RoomNum = "E1202",
+                //Location = "Augusta, GA",
+                //Checkin = new DateTime(2021, 6, 12),
+                //Checkout = new DateTime(2021, 6, 19),
+                //TotalCharge = 932.76M, 
+                //NameFirstLast = "John Smith",
+                //RoomType = "Junior Suite"
             };
 
             QueryByName.Add(QueryByConfNum);
 
             QueryByName.Add(new Reservation()
             {
-                ConfirmationNum = "B7320AQ133",
-                RoomNum = "E1018",
-                Location = "Augusta, GA",
-                Checkin = new DateTime(2021, 11, 20),
-                Checkout = new DateTime(2021, 11, 27),
-                TotalCharge = 788.02,
-                NameFirstLast = "John Smith",
-                RoomType = "Standard Room"
+                //ConfirmationNum = "B7320AQ133",
+                //RoomNum = "E1018",
+                //Location = "Augusta, GA",
+                //Checkin = new DateTime(2021, 11, 20),
+                //Checkout = new DateTime(2021, 11, 27),
+                //TotalCharge = 788.02,
+                //NameFirstLast = "John Smith",
+                //RoomType = "Standard Room"
             });
 
         }
