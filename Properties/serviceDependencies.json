@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "type": "mssql",
+      "type": "sqlite",
       "connectionId": "DefaultConnection"
     }
   }
