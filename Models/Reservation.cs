@@ -29,11 +29,12 @@ namespace AJJDHotel.Models
     public class Reservation
     {
         public int ReservationId { get; set; }
-        [Required]
-        public int GuestId { get; set; }  // TODO Link with IdentityUser (custom) class
+        
+        
         [Required]
         public Room Room { get; set; }
         [Required]
+        [ForeignKey("Room")]
         public int RoomId { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
@@ -44,5 +45,11 @@ namespace AJJDHotel.Models
         public decimal TotalCharge { get; set; }
         [Required]
         public int NumGuests { get; set; }
+
+        
+        public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string Id { get; set; }
+
     }
 }
