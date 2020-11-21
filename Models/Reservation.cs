@@ -28,14 +28,15 @@ namespace AJJDHotel.Models
 {
     public class Reservation
     {
+        [Key]
         public int ReservationId { get; set; }
         
         
-        [Required]
         public Room Room { get; set; }
         [Required]
         [ForeignKey("Room")]
         public int RoomId { get; set; }
+
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
@@ -46,7 +47,7 @@ namespace AJJDHotel.Models
         [Required]
         public int NumGuests { get; set; }
 
-        
+
         public ApplicationUser ApplicationUser { get; set; }
         [ForeignKey("ApplicationUser")]
         public string Id { get; set; }

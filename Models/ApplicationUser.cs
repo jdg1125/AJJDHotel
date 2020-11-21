@@ -10,12 +10,10 @@ namespace AJJDHotel.Models
     public class ApplicationUser : IdentityUser
     {
        
-
+        [Required]
         public bool IsAdmin { get; set; }
 
-        [Required]
-        [Range(18, 160)]
-        public int Age { get; set; }
+        [Required]    
         [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
 
@@ -26,7 +24,6 @@ namespace AJJDHotel.Models
         [Required]
         [StringLength(100)]
         public string FirstName { get; set; }
-
         
 
         public List<Reservation> Reservations { get; set; }
