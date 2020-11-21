@@ -14,8 +14,8 @@ namespace AJJDHotel.Pages
         public List<RoomType> RoomsAvailable { get; set; }
         public void OnGet(int id)
         {
-            SearchResultsModel dataModel = new SearchResultsModel();
-            RoomsAvailable = dataModel.Results;
+           
+          //  RoomsAvailable = dataModel.Results;
             RoomChosen = id;
         }
     }
