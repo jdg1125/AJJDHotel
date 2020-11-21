@@ -26,7 +26,6 @@ namespace AJJDHotel.Models
 {
     public class RoomType
     {
-        //should room type have a location? weird to have room type with ocean view in Kansas City
         public int RoomTypeId { get; set; }
 
         [MaxLength(280)]
