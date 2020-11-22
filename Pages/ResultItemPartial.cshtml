@@ -12,7 +12,12 @@
                 <h3>@Model[i].RoomName</h3>
                 @if (i != 2)
                 {
-                <a href="~/Purchase?id=@i"><button class="button buttonblue">Reserve</button></a>
+                    @*<a href="~/Purchase?id=@Model[i].RoomTypeId"><button class="button buttonblue">Reserve</button></a>*@
+
+                    <a asp-page="/Purchase" asp-route-ID="@Model[i].RoomTypeId"><button class="button buttonblue">Reserve</button></a>
+                    @*<a asp-page="/Employees/Details" asp-route-ID="@employee.Id"
+                       class="btn btn-primary m-1">View</a>*@
+
                 }
                 else
                 {

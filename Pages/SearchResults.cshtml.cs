@@ -28,6 +28,11 @@ namespace AJJDHotel.Pages
             Results = new List<RoomType>();
         }
 
-     
+        public void OnPostItem(int id)
+        {
+           // Message = "Edit handler fired";
+        }
+
+
     }
 }
