@@ -1,0 +1,59 @@
+﻿@page
+@model AJJDHotel.Pages.RandomModel
+
+@{
+    ViewData["Title"] = "Random";
+}
+
+<h1>Random</h1>
+
+<h4>RoomType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoomType.Description" class="control-label"></label>
+                <input asp-for="RoomType.Description" class="form-control" />
+                <span asp-validation-for="RoomType.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomType.Beds" class="control-label"></label>
+                <input asp-for="RoomType.Beds" class="form-control" />
+                <span asp-validation-for="RoomType.Beds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomType.View" class="control-label"></label>
+                <input asp-for="RoomType.View" class="form-control" />
+                <span asp-validation-for="RoomType.View" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomType.RoomName" class="control-label"></label>
+                <input asp-for="RoomType.RoomName" class="form-control" />
+                <span asp-validation-for="RoomType.RoomName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomType.Rate" class="control-label"></label>
+                <input asp-for="RoomType.Rate" class="form-control" />
+                <span asp-validation-for="RoomType.Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomType.ImgPath" class="control-label"></label>
+                <input asp-for="RoomType.ImgPath" class="form-control" />
+                <span asp-validation-for="RoomType.ImgPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
