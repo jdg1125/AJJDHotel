@@ -32,7 +32,7 @@ namespace AJJDHotel.Pages
 
         }
 
-        public void OnGet()
+        public void OnGet(DateTime start, DateTime end)
         {
 
             tempStartDate = new DateTime(2020, 12, 06);

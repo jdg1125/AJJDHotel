@@ -1,12 +1,4 @@
-﻿//vars involved with toggling login state view
-var toggleRole = document.getElementById("toggleRole");
-var toggleLogin = document.getElementById("toggleLogin");
-var adminLink = document.getElementsByClassName("adminView");
-var linksToChg = document.getElementsByClassName("chgLinkTxt");
-var isAdmin = false;
-var isLoggedIn = false;
-
-//vars to change viewing manage reservation by conf num or name
+﻿//vars to change viewing manage reservation by conf num or name
 var changeResView = document.getElementById("changeResView");
 var rowToHide = document.getElementById("rowToHide");
 
@@ -24,36 +16,6 @@ var results = [document.getElementById("result_0"), document.getElementById("res
 
 //define functions
 
-function toggleAdminView() {
-
-    isAdmin = !isAdmin;
-
-    for (var i = 0; i < adminLink.length; i++)
-        if (!isAdmin)
-            adminLink[i].classList.add("hideLink");
-        else
-            adminLink[i].classList.remove("hideLink");
-
-    if (isAdmin)
-        isLoggedIn = true;
-
-    toggleLoginText();
-}
-
-function toggleLoginView() {
-    isLoggedIn = !isLoggedIn;
-
-    if (isAdmin)
-        toggleAdminView();
-    else
-        toggleLoginText();
-}
-
-function toggleLoginText() {
-    linksToChg[0].innerHTML = isLoggedIn ? "Manage Account" : "Register";
-    linksToChg[1].innerHTML = isLoggedIn ? "Logout" : "Login";
-    toggleRole.innerHTML = isAdmin ? "Click for customer view" : "Click for admin view";
-}
 
 function showSlides() {
 
@@ -70,21 +32,6 @@ function showSlides() {
     setTimeout(showSlides, 3000);
 }
 
-var toggleResView = (function () {  //this is a closure
-    var isHidden = true;  //this only happens the first time it's called
-
-    return function () {
-        isHidden = !isHidden;
-        if (!isHidden) {
-            rowToHide.classList.remove("hideRes");
-            this.innerHTML = "Click to see results of searching by confirmation number";
-        }
-        else {
-            rowToHide.classList.add("hideRes");
-            this.innerHTML = "Click to see results of searching by name";
-        }
-    }
-})();
 
 var showNav = (function () {
     var isShown = false;
@@ -130,15 +77,13 @@ var showCurrentDesc = (function () {
 })();
 
     //procedure - add event listeners and call relevant one-time functions
-    toggleRole.addEventListener("click", toggleAdminView);
-    toggleLogin.addEventListener("click", toggleLoginView);
+ 
     navIcon.addEventListener("click", showNav);
 
     if (slides != null && slides.length != 0)
         showSlides();
 
-    if (changeResView != null)
-        changeResView.addEventListener("click", toggleResView);
+   
 
     if (roomTypeSelect != null) 
         roomTypeSelect.addEventListener("click", showCurrentDesc);

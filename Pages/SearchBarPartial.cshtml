@@ -3,31 +3,34 @@
     string today = DateTime.Today.ToString("u");
     today = today.Substring(0, today.IndexOf(' '));
 }
+<form method="Post">
+    <div class="searchBar">
 
-<div class="searchBar">
-    <label for="checkin">
-        Check-in:
-        <input type="date" id="checkin" name="checkin"
-               value="@today"
-               min="@today" max="2021-12-31" />
-    </label>
-    <label for="checkout">
-        Check-out:
-        <input type="date" id="checkout" name="checkout"
-               value="@today"
-               min="@today" max="2021-12-31" />
-    </label>
-    <label for="numGuests">
-        Number of guests:
-        <select id="numGuests" name="numGuests">
-            @Html.Raw(@RenderDropDown(Model));
-        </select>
-    </label>
-    <label for="submit">
-        <a href="~/SearchResults?sorry=false"><button class="btn buttonblue" id="submit" value="Search">Search</button></a>
-    </label>
+        <label for="checkin">
+            Check-in:
+            <input type="date" id="checkin" name="checkin"
+                   value="@today"
+                   min="@today" max="2021-12-31" />
+        </label>
+        <label for="checkout">
+            Check-out:
+            <input type="date" id="checkout" name="checkout"
+                   value="@today"
+                   min="@today" max="2021-12-31" />
+        </label>
+        <label for="numGuests">
+            Number of guests:
+            <select id="numGuests" name="numGuests">
+                @Html.Raw(@RenderDropDown(Model));
+            </select>
+        </label>
+        <label for="submit">
+            @*<a href="~/SearchResults?sorry=false"><button class="btn buttonblue" id="submit" value="Search">Search</button></a>*@
+            <input type="submit" class="btn buttonblue" value="Search">
+        </label>
 
-</div>
+    </div>
+</form>
 
 
 @functions {
