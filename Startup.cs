@@ -38,6 +38,8 @@ namespace AJJDHotel
                 .AddEntityFrameworkStores<ApplicationDbContext>();
            
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddTransient<IDbAccess, DbAccess>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
