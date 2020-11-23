@@ -14,15 +14,16 @@
 
 
 <div id="indexSearchArea">
-    @if (Model.SignInManager.IsSignedIn(User))
-    {
-        <h4>To get started, enter the dates of the trip</h4>
-        <partial name="SearchBarPartial" model="5" />
-    }
-    else 
-    {
-        <h3>not signed in</h3>
-    }
+    @*@if (Model.SignInManager.IsSignedIn(User))
+        {
+            <h4>To get started, enter the dates of the trip</h4>
+            <partial name="SearchBarPartial" model="5" />
+        }
+        else
+        {
+            <h3>not signed in</h3>
+        }*@
+    <partial name="SearchBarPartial" model="5" />
     <div class="adminView hideLink">
         <h4>Or search below to manage a reservation</h4>
 
