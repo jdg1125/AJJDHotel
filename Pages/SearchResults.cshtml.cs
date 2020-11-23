@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AJJDHotel.Models;
 using AJJDHotel.Data;
+using System.Text;
 
 namespace AJJDHotel.Pages
 {
@@ -17,27 +18,28 @@ namespace AJJDHotel.Pages
         public ApplicationDbContext context;
         //public IQueryable query; 
 
-        public string tempStartDate { get; set; }
-        public string tempEndDate { get; set; }
+        public string tempStartDate;
+        public DateTime tempEndDate { get; set; }
 
 
         public void OnGet()
         {
-          
 
-            tempStartDate = "2020-12-07 00:00:00";
-            tempEndDate = "2020-12-10 00:00:00";
 
-            var myRawSqlForGetAvailableRooms = 
-                @$"SELECT DISTINCT RoomTypes.RoomTypeId, Description, Beds, View, RoomName, Rate, ImgPath
+            tempStartDate = "2020-12-06 00:00:00";
+            tempEndDate = new DateTime(2020, 12, 10);
+            //public DateTime myDT = new DateTime(2020, 12, 7);
+
+            string myRawSqlForGetAvailableRooms =
+                @"SELECT DISTINCT RoomTypes.RoomTypeId, Description, Beds, View, RoomName, Rate, ImgPath
                   FROM RoomTypes
                   INNER JOIN Rooms ON Rooms.RoomTypeId = RoomTypes.RoomTypeId
                   WHERE Rooms.RoomId NOT IN(SELECT Rooms.RoomId
                                             FROM Rooms
                                             INNER JOIN Reservations ON Rooms.RoomId = Reservations.RoomId
-                                            WHERE (Reservations.StartDate <= '2020-12-07 00:00:00' and Reservations.EndDate > '2020-12-07 00:00:00')
+                                            WHERE ((Reservations.StartDate <= '2020-12-06 00:00:00' and Reservations.EndDate > '2020-12-06 00:00:00')
                                                 or (Reservations.StartDate < '2020-12-10 00:00:00' and Reservations.EndDate > '2020-12-10 00:00:00')
-                                                or (Reservations.StartDate >= '2020-12-07 00:00:00' and Reservations.EndDate < '2020-12-10 00:00:00'))";
+                                                or (Reservations.StartDate >= '2020-12-06 00:00:00' and Reservations.EndDate < '2020-12-10 00:00:00')))";
 
            
             this.AvailableRoomTypes = context.RoomTypes
@@ -51,7 +53,7 @@ namespace AJJDHotel.Pages
             this.context = context;
             AvailableRoomTypes = new List<RoomType>();
             //tempStartDate = new DateTime();
-            //tempEndDate = new DateTime();
+            tempEndDate = new DateTime();
 
         }
     }
