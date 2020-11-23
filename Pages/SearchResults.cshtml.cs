@@ -22,7 +22,7 @@ namespace AJJDHotel.Pages
         public DateTime tempEndDate { get; set; }
 
 
-        public void OnGet()
+        public void OnGet(DateTime start, DateTime end)
         {
 
 
