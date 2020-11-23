@@ -5,26 +5,23 @@
 }
 
 <h1>Report Page</h1>
-<form action="#" id="searchBar">
+<form method="post">
     <label for="checkin">
         Check-in:
-        <input type="date" id="checkin" name="checkin"
+        <input type="date" id="checkin" name="checkin_date"
                value="@DateTime.Today"
                min="@DateTime.Today" max="2021-12-31" />
     </label>
     <label for="checkout">
         Check-out:
-        <input type="date" id="checkout" name="checkout"
+        <input type="date" id="checkout" name="checkout_date"
                value="@DateTime.Today"
                min="@DateTime.Today" max="2021-12-31" />
     </label>
     <label for="submit">
-        <a href="#"><input class="buttonblue" type="button" id="submit" value="Search" /></a>
+        <input class="buttonblue" type="submit" id="submit" value="Search" />
     </label>
 </form>
-
-
-
 
 
 <div class="tab">
@@ -32,6 +29,9 @@
     <button class="tablinks" id="occupancy-btn">Occupancy</button>
     <button class="tablinks" id="stuff-btn">Stuff</button>
 </div>
+
+
+
 
 <div id="report-revenue" class="tabcontent">
     <h3>Revenue</h3>
@@ -41,23 +41,47 @@
             <th>Room type</th>
         </tr>
         <tr>
-            <td>$1,102,399.36</td>
+            @{
+                decimal srRev = 0;
+                @for (int i = 0; i < Model.SRCount.Count; i++)
+                {
+                    srRev += @Model.SRCount[i].TotalCharge;
+                }
+                <td>@srRev</td>
+            }
             <td>Standard Room</td>
         </tr>
         <tr>
-            <td>$1,000,242.92</td>
+            @{
+                decimal jsRev = 0;
+                @for (int i = 0; i < Model.JSCount.Count; i++)
+                {
+                    jsRev += @Model.JSCount[i].TotalCharge;
+                }
+                <td>@jsRev</td>
+            }
             <td>Junior Suite
             <td>
         </tr>
         <tr>
-            <td>$942,915.60</td>
+            @{
+                decimal dsRev = 0;
+                @for (int i = 0; i < Model.DSCount.Count; i++)
+                {
+                    dsRev += @Model.DSCount[i].TotalCharge;
+                }
+                <td>@dsRev</td>
+            }
             <td>Deluxe Suite</td>
         </tr>
     </table>
 
-    <p>@{ double math = 1102339.36 + 1000242.92 + 942915.60;
-        string total = $"{math:C}";
-    }Total revenue for this period: @total</p>
+    <p>
+        @{
+            decimal RevTotal = srRev + jsRev + dsRev;
+        }
+        Total revenue for this period: @RevTotal
+    </p>
 
 </div>
 
@@ -70,23 +94,47 @@
         </tr>
         <tr>
             <td>Standard Room</td>
-            <td>5,434</td>
+            <td>@Model.SROcc</td>
         </tr>
         <tr>
             <td>Junior Suite</td>
-            <td>3,138</td>
+            <td>@Model.JSOcc</td>
         </tr>
         <tr>
             <td>Deluxe Suite</td>
-            <td>2,288</td>
+            <td>@Model.DSOcc</td>
         </tr>
     </table>
-    <p>@{math = 5434 + 3138 + 2288;}Total occupancy for this period: @math</p>
+    @{
+        int OccTotal = Model.SROcc + Model.JSOcc + Model.DSOcc;
+    }
+    <p>Total occupancy for this period: @OccTotal</p>
 </div>
 
 <div id="report-stuff" style="display: none" class="tabcontent">
     <h3>Stuff</h3>
-    <p>This is the report in tab stuff.</p>
+    <table class="resTable">
+        <tr>
+            <th>Room type</th>
+            <th>Total Number of Guests</th>
+        </tr>
+        <tr>
+            <td>Standard Room</td>
+            <td>@Model.SRCount.Sum(n => n.NumGuests)</td>
+        </tr>
+        <tr>
+            <td>Junior Suite</td>
+            <td>@Model.JSCount.Sum(n => n.NumGuests)</td>
+        </tr>
+        <tr>
+            <td>Deluxe Suite</td>
+            <td>@Model.DSCount.Sum(n => n.NumGuests)</td>
+        </tr>
+    </table>
+    @{
+        int GuestTotal = Model.SRCount.Sum(n => n.NumGuests) + Model.JSCount.Sum(n => n.NumGuests) + Model.DSCount.Sum(n => n.NumGuests);
+    }
+    <p>Total number of guests for this period: @GuestTotal</p>
 </div>
 
 <script src="~/js/reports.js"></script>
