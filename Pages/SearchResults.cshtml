@@ -7,5 +7,30 @@
 <div id="searchForm">
     <partial name="SearchBarPartial" model="5" />
 </div>
+
+<select id="bedViewBy">
+    <option value="1 King">1 King</option>
+    <option value="1 Queen" >1 Queen</option>
+    <option value="2 Queen">2 Queen </option>
+    <option value="Any" selected="selected"> Any</option>
+</select>
+
+
 <br />
 <partial name="ResultItemPartial" model="Model.AvailableRoomTypes" />
+<script>
+    var e = document.getElementById("bedViewBy").onchange = function hideBeds() {
+        var e = document.getElementById("bedViewBy");
+        var bedDrop = e.options[e.selectedIndex].value;
+        alert(bedDrop);
+        var input = bedDrop;
+        //var allItems = document.getElementsByClassName('resultItem');
+        //var idvItems = allItems.getElementsByClassName('textContainer');
+        //for (var i = 0; i < idvItems.length; i += 1) {
+        //    if (idvItems.)
+        //    idvItems[i].syle.display = "";
+
+        //}
+        //var li
+    }
+</script>
