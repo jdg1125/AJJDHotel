@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using AJJDHotel.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,13 +14,14 @@
         <header>
             <h1>AJJD Hotel</h1>
             <nav>
-                <button class="buttonblue" id="toggleRole">Click for admin view</button>
-                <button class="buttonblue" id="toggleLogin">Click to toggle login state</button>
-                <img src="~/icons8-menu-32.png" alt="nav-icon" id="navIcon"/>
+                <img src="~/icons8-menu-32.png" alt="nav-icon" id="navIcon" />
                 <ul id="navLinks" class="hideLink">
                     <li><a href="~/">Home</a></li>
-                    <li class="adminView hideLink"><a href="~/ManageRoomTypes">Manage Room Types</a></li>
-                    <li class="adminView hideLink"><a href="~/Report">Get Reports</a></li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(SD.AdminUser))
+                    {
+                        <li><a href="~/ManageRoomTypes">Manage Room Types</a></li>
+                        <li><a href="~/Report">Get Reports</a></li>
+                    }
                     <li><a href="~/AreaInfo">Discover Augusta</a></li>
                     <partial name="_LoginPartial" />
                 </ul>

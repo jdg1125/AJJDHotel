@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using AJJDHotel.Data;
+using AJJDHotel.Utility;
 
 namespace AJJDHotel.Areas.Identity.Pages.Account
 {
@@ -24,17 +26,23 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
+            _db = db;
         }
 
         [BindProperty]
@@ -100,6 +108,14 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(SD.AdminUser))
+                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminUser));
+
+                    if (!await _roleManager.RoleExistsAsync(SD.CustomerUser))
+                        await _roleManager.CreateAsync(new IdentityRole(SD.CustomerUser));
+
+                    await _userManager.AddToRoleAsync(user, SD.CustomerUser);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

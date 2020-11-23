@@ -14,11 +14,13 @@ namespace AJJDHotel.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         public SignInManager<ApplicationUser> SignInManager { get; set; }
+        public UserManager<ApplicationUser> UserManager { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, SignInManager<ApplicationUser> signInManager)
+        public IndexModel(ILogger<IndexModel> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             SignInManager = signInManager;
             _logger = logger;
+            UserManager = userManager;
         }
 
         public void OnGet()
