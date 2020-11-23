@@ -8,53 +8,47 @@ using Microsoft.EntityFrameworkCore;
 using AJJDHotel.Models;
 using AJJDHotel.Data;
 using System.Text;
+using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
+using AJJDHotel.Data;
 
 namespace AJJDHotel.Pages
 {
     public class SearchResultsModel : PageModel
     {
         public List<RoomType> AvailableRoomTypes { get; set; }
-        public List<RoomType> Results { get; set; }
-        public ApplicationDbContext context;
-        //public IQueryable query; 
 
-        public string tempStartDate;
-        public DateTime tempEndDate { get; set; }
+        private readonly IDbAccess dbAccess;
 
+        public DateTime tempStartDate;
+        public DateTime tempEndDate;
+
+        public SearchResultsModel(IDbAccess dbAccess)
+        {
+            this.dbAccess = dbAccess;
+            AvailableRoomTypes = new List<RoomType>();
+            tempStartDate = new DateTime();
+            tempEndDate = new DateTime();
+
+        }
 
         public void OnGet()
         {
 
-
-            tempStartDate = "2020-12-06 00:00:00";
+            tempStartDate = new DateTime(2020, 12, 06);
             tempEndDate = new DateTime(2020, 12, 10);
-            //public DateTime myDT = new DateTime(2020, 12, 7);
 
-            string myRawSqlForGetAvailableRooms =
-                @"SELECT DISTINCT RoomTypes.RoomTypeId, Description, Beds, View, RoomName, Rate, ImgPath
-                  FROM RoomTypes
-                  INNER JOIN Rooms ON Rooms.RoomTypeId = RoomTypes.RoomTypeId
-                  WHERE Rooms.RoomId NOT IN(SELECT Rooms.RoomId
-                                            FROM Rooms
-                                            INNER JOIN Reservations ON Rooms.RoomId = Reservations.RoomId
-                                            WHERE ((Reservations.StartDate <= '2020-12-06 00:00:00' and Reservations.EndDate > '2020-12-06 00:00:00')
-                                                or (Reservations.StartDate < '2020-12-10 00:00:00' and Reservations.EndDate > '2020-12-10 00:00:00')
-                                                or (Reservations.StartDate >= '2020-12-06 00:00:00' and Reservations.EndDate < '2020-12-10 00:00:00')))";
-
-           
-            this.AvailableRoomTypes = context.RoomTypes
-                .FromSqlRaw(myRawSqlForGetAvailableRooms)
-                .ToList();
+            if (tempStartDate < tempEndDate)
+            {
+                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(tempStartDate, tempEndDate);
+            }
+            else
+            {
+                throw new Exception();
+            }
 
         }
 
-        public SearchResultsModel(ApplicationDbContext context)
-        {
-            this.context = context;
-            AvailableRoomTypes = new List<RoomType>();
-            //tempStartDate = new DateTime();
-            tempEndDate = new DateTime();
 
-        }
     }
 }
