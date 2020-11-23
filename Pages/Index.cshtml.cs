@@ -27,5 +27,13 @@ namespace AJJDHotel.Pages
         { 
             
         }
+        public IActionResult OnPost()
+        {
+            var startDate = Request.Form["checkin"];
+            var endDate = Request.Form["checkout"];
+            return RedirectToPage("SearchResults", new { start = startDate, end = endDate });
+        }
+
     }
-}
+    }
+
