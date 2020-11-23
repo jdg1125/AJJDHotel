@@ -10,6 +10,14 @@ namespace AJJDHotel.Pages
 {
     public class OrderConfirmationModel : PurchaseModel //change this after mockup 
     {
+        public int confirm (int temp) 
+        {
+            return 8744304 + temp;
+        }
+        public int orginalConfirm(int confirmation)
+        {
+            return confirmation - 8744304;
+        }
        
     }
 }
