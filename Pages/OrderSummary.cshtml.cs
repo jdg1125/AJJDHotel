@@ -16,16 +16,15 @@ namespace AJJDHotel.Pages
         private readonly IDbAccess dbAccess;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public DateTime StartDate { get; set; }
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public DateTime EndDate { get; set; }
 
         [BindProperty]
         public int NumGuests { get; set; }
 
-        [BindProperty(SupportsGet = true)]
         public int RoomTypeId { get; set; }
 
         public Room Room { get; set; }

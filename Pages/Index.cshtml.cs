@@ -16,6 +16,11 @@ namespace AJJDHotel.Pages
         public SignInManager<ApplicationUser> SignInManager { get; set; }
         public UserManager<ApplicationUser> UserManager { get; set; }
 
+        [BindProperty]
+        public DateTime checkin { get; set; }
+        [BindProperty]
+        public DateTime checkout { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             SignInManager = signInManager;
@@ -29,9 +34,8 @@ namespace AJJDHotel.Pages
         }
         public IActionResult OnPost()
         {
-            var startDate = Request.Form["checkin"];
-            var endDate = Request.Form["checkout"];
-            return RedirectToPage("SearchResults", new { start = startDate, end = endDate });
+
+            return RedirectToPage("SearchResults", new { start = checkin, end = checkout });
         }
 
     }

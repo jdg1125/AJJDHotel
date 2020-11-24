@@ -12,7 +12,6 @@
                 <h3>@Model[i].RoomName</h3>
                 @*<a href="~/Purchase?id=@i"><button class="button buttonblue">Reserve</button></a>*@
                 <a asp-page="/OrderSummary" asp-route-ID="@Model[i].RoomTypeId"
-                   asp-route-StartDate="checkin" asp-route-EndDate="checkout"
                    asp-page-handler="Reserve"><button class="button buttonblue">Reserve</button></a>
                 <h5>$@Model[i].Rate</h5>
                 <p>@Model[i].Description</p>

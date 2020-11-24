@@ -19,10 +19,10 @@ namespace AJJDHotel.Pages
 
         private readonly IDbAccess dbAccess;
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public DateTime StartDate { get; set; }
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public DateTime EndDate { get; set; }
 
         private readonly UserManager<ApplicationUser> _userManager;
