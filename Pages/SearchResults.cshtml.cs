@@ -7,10 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AJJDHotel.Models;
 using AJJDHotel.Data;
-using System.Text;
-using Microsoft.Data.SqlClient;
-using Microsoft.Data.Sqlite;
-using AJJDHotel.Data;
+using AJJDHotel.Utility;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace AJJDHotel.Pages
 {
@@ -20,33 +19,58 @@ namespace AJJDHotel.Pages
 
         private readonly IDbAccess dbAccess;
 
-        public DateTime tempStartDate;
-        public DateTime tempEndDate;
+        [BindProperty, TempData]
+        public DateTime StartDate { get; set; }
 
-        public SearchResultsModel(IDbAccess dbAccess)
+        [BindProperty, TempData]
+        public DateTime EndDate { get; set; }
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+
+
+
+        public SearchResultsModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
         {
             this.dbAccess = dbAccess;
             AvailableRoomTypes = new List<RoomType>();
-            tempStartDate = new DateTime();
-            tempEndDate = new DateTime();
+
+            StartDate = new DateTime();
+            EndDate = new DateTime();
+
+            _userManager = userManager;
 
         }
 
         public void OnGet(DateTime start, DateTime end)
         {
 
-            tempStartDate = new DateTime(2020, 12, 06);
-            tempEndDate = new DateTime(2020, 12, 10);
+            StartDate = start;
+            EndDate = end;
 
-            if (tempStartDate < tempEndDate)
+            if (StartDate < EndDate)
             {
-                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(tempStartDate, tempEndDate);
+                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(StartDate, EndDate);
             }
             else
             {
                 throw new Exception();
             }
+        }
 
+
+        public IActionResult OnGetReserve(int id)
+        {
+            if (TempData.Peek("StartDate")!=null) {
+                StartDate = (DateTime)TempData.Peek("StartDate");
+                EndDate = (DateTime)TempData.Peek("EndDate");
+            }
+            else
+            {
+                StartDate = (DateTime)TempData.Peek("checkin");
+                EndDate = (DateTime)TempData.Peek("checkout");
+            }
+            return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
         }
 
 

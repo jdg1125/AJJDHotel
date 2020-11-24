@@ -8,22 +8,37 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AJJDHotel.Pages
 {
-    public class OrderConfirmationModel : PurchaseModel //change this after mockup 
+    public class OrderConfirmationModel : PageModel
     {
-        public int confirm (int temp) 
+
+        [BindProperty]
+        public DateTime StartDate { get; set; }
+
+        public Reservation Reservation { get; set; }
+
+
+
+
+        public void OnGet(int reservationId)
         {
-            return 8744304 + temp;
+            int confirmationNumber = MakeConfirmationNumber(reservationId);
+
+
         }
 
-        public int orginalConfirm(int confirmation)
+        public int MakeConfirmationNumber(int pk)
         {
-            // return -1 to indicate an invallid confirmation nubmers
-            if (confirmation < 8744304)
+            return 8744304 + pk;
+        }
+
+        public int ConfirmationNumberToPK(int confirmation)
+        {
+            // return -1 to indicate an invalid confirmation number
+            if (confirmation < 8744305)
             {
                 return -1;
             }
             return confirmation - 8744304;
         }
-       
     }
 }
