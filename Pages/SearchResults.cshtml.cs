@@ -60,7 +60,7 @@ namespace AJJDHotel.Pages
             int roomIdP = 10;
             decimal totalChargeP = 200.00M;
             Reservation myRes = new Reservation() { StartDate = tempStartDate, EndDate = tempEndDate, NumGuests = 2, RoomId = 10, TotalCharge = 200.00M, Id = "41ab7152-18a7-4d7b-905c-928d7bd1efc8" };
-            dbAccess.CreateReservation(myRes);
+            // dbAccess.CreateReservation(myRes);
 
         }
 

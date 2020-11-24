@@ -37,32 +37,33 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Room Cost:</td>
-                    <td>$@Model.RoomsAvailable[Model.RoomChosen].Rate</td>
-                </tr>
-                <tr>
-                    <td>Tax:</td>
-                    <td>
-                        @{
-                            decimal rate;
-                            decimal tax = (rate=Model.RoomsAvailable[Model.RoomChosen].Rate) * (decimal)0.08;
-                            decimal total = tax + rate;
-                        }
-                        $@tax
-                    </td>
-                </tr>
-                <tr>
+                @*<tr>
+                        <td>Room Cost:</td>
+                        <td>$@Model.RoomsAvailable[Model.RoomChosen].Rate</td>
+                    </tr>
+                    <tr>
+                        <td>Tax:</td>
+                        <td>
+                            @{
+                                decimal rate;
+                                decimal tax = (rate=Model.RoomsAvailable[Model.RoomChosen].Rate) * (decimal)0.08;
+                                decimal total = tax + rate;
+                            }
+                            $@tax
+                        </td>
+                    </tr>*@
+                @*<tr>
                     <td>Order Total:</td>
                     <td>$@total</td>
-                </tr>
+                </tr>*@
             </tbody>
         </table>
     </aside>
 
 </div>
 
-<a href="~/OrderConfirmation?id=@Model.RoomChosen"><button type="submit" class="btn">Place your order</button></a>
+@*<a href="~/OrderConfirmation?id=@Model.RoomChosen"><button type="submit" class="btn">Place your order</button></a>*@
+<a href="~/OrderConfirmation"><button type="submit" class="btn">Place your order</button></a>
 
 
 
