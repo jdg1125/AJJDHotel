@@ -40,6 +40,12 @@ namespace AJJDHotel.Data
 
         }
 
+        public void CreateReservation(Reservation myResP)
+        {
+            context.Reservations.Add(myResP);
+            var affectedRecords = context.SaveChanges();
+        }
+
 
         public Reservation GetReservationByConfirmationNumber(string confirmationNumber)
         {
