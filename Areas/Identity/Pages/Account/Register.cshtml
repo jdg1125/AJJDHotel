@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.DOB"></label>
-                <input asp-for="Input.DOB" class="form-control" />
+                <input asp-for="Input.DOB" class="form-control" max="@DateTime.Today.AddYears(-18).ToString("u")" />
                 <span asp-validation-for="Input.DOB" class="text-danger"></span>
             </div>
             <div class="form-group">
