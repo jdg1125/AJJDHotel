@@ -56,11 +56,8 @@ namespace AJJDHotel.Pages
             {
                 throw new Exception();
             }
-
-            string userId = User.Identity.Name;
-            string userId2 = _userManager.GetUserId(User);
-
         }
+
 
         public IActionResult OnGetReserve(int id)
         {

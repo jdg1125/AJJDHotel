@@ -5,79 +5,84 @@
     ViewData["Title"] = "Order Summary";
 }
 
-@Model.StartDate.ToString()
-@Model.EndDate.ToString()
+@*@Model.StartDate.ToString()
+@Model.EndDate.ToString()*@
+<form method="post">
+    <div class="my-columns">
+        <h1>Order Summary</h1>
 
-@**
-<div class="my-columns">
-    <h1>Order Summary</h1>
+        <section>
+            <table class="table my-table leftalign my-color">
+                <thead>
+                    <tr>
+                        <th colspan="2">Review your information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.User.Identity.Name</td>
+                    </tr>
+                    <tr>
+                        <td>@Model.ApplicationUser.Email</td>
+                    </tr>
+                    <tr>
+                        <td>@Model.ApplicationUser.PhoneNumber</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <aside>
+            <table class="table my-table leftalign my-color">
+                <thead>
+                    <tr>
+                        <th>Order Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <section>
-        <table class="table my-table leftalign my-color">
-            <thead>
-                <tr>
-                    <th colspan="2">Review your information</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@Model.User.Identity.Name</td>
-                </tr>
-                <tr>
-                    <td>@Model.ApplicationUser.Email</td>
-                </tr>
-                <tr>
-                    <td>@Model.ApplicationUser.PhoneNumber</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    <aside>
-        <table class="table my-table leftalign my-color">
-            <thead>
-                <tr>
-                    <th>Order Cost</th>
-                </tr>
-            </thead>
-            <tbody>
+                    <tr>
+                        <td>Dates of Stay: </td>
+                        <td>@Model.StartDate.Date.ToString("D") &mdash; @Model.EndDate.Date.ToString("D")</td>
+                    </tr>
 
-                <tr>
-                    <td>Dates of Stay: </td>
-                    <td>@Model.StartDate.Date.ToString("D") &mdash; @Model.EndDate.Date.ToString("D")</td>
-                </tr>
+                    <tr>
+                        <td>Cost: </td>
+                        <td>
+                            @{
+                                int nights = (int)((Model.EndDate - Model.StartDate).TotalDays);
+                                decimal cost = nights * Model.RoomType.Rate;
+                            }
+                            @cost
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tax:</td>
+                        <td>
+                            @{
+                                decimal tax = cost * (decimal)0.08;
+                                decimal total = tax + cost;
+                            }
+                            @tax
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Order Total:</td>
+                        <td>@total</td>
+                    </tr>
+                </tbody>
+            </table>
+        </aside>
 
-                <tr>
-                    <td>Cost: </td>
-                    <td>
-                        @{ 
-                            int nights = (int)((Model.EndDate - Model.StartDate).TotalDays);
-                            decimal cost = nights * Model.RoomType.Rate;
-                        }
-                        @cost
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tax:</td>
-                    <td>
-                        @{
-                            decimal tax = cost * (decimal)0.08;
-                            decimal total = tax + cost;
-                        }
-                        @tax
-                    </td>
-                </tr>
-                <tr>
-                    <td>Order Total:</td>
-                    <td>@total</td>
-                </tr>
-            </tbody>
-        </table>
-    </aside>
-
-</div>
-
-@*<a href="~/OrderConfirmation?id=@Model.RoomChosen"><button type="submit" class="btn">Place your order</button></a>*@
-<a href="~/OrderConfirmation"><button type="submit" class="btn">Place your order</button></a>
+    </div>
+    @*<a href="~/OrderConfirmation?id=@Model.RoomChosen"><button type="submit" class="btn">Place your order</button></a>*@
+    <button type="submit" class="btn">Place your order</button>
+    <input type="hidden" name="startdate" value="@Model.StartDate" />
+    <input type="hidden" name="enddate" value="@Model.EndDate" />
+    <input type="hidden" name="numguests" value="@Model.NumGuests" />
+    <input type="hidden" name="roomid" value="@Model.Room.RoomId" />
+    <input type="hidden" name="totalcharge" value="@Model.TotalCharge" />
+    <input type="hidden" name="id" value="@Model.Id" />
+</form>
 
 
 

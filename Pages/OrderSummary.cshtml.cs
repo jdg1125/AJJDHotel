@@ -16,10 +16,10 @@ namespace AJJDHotel.Pages
         private readonly IDbAccess dbAccess;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public DateTime StartDate { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public DateTime EndDate { get; set; }
 
         [BindProperty]
@@ -29,6 +29,8 @@ namespace AJJDHotel.Pages
 
         public Room Room { get; set; }
 
+
+
         public RoomType RoomType { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
@@ -37,8 +39,6 @@ namespace AJJDHotel.Pages
 
         // for the Id of logged in user
         public string Id { get; set; }
-
-        public int ConfirmationNumber { get; set; }
 
 
         public OrderSummaryModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
@@ -55,14 +55,9 @@ namespace AJJDHotel.Pages
         public void OnGet(DateTime start, DateTime end, int id)
         {
 
-            // these are hardcoded until data gets passed correctly (possibly data will not be OnPost parameters?)
-            //StartDate = new DateTime(2020, 12, 6);
-            //EndDate = new DateTime(2020, 12, 10);
-            //int tempRoomTypeId = 10;
             StartDate = start;
             EndDate = end;
             RoomTypeId = id;
-
 
             // get the logged in user's id
             Id = _userManager.GetUserId(User);
@@ -82,18 +77,17 @@ namespace AJJDHotel.Pages
             Room = dbAccess.GetAvailableRoomByRoomTypeId(id, StartDate, EndDate);
 
 
-
         }
 
-        public IActionResult OnPost(DateTime startDate, DateTime endDate, int roomTypeIdP)
+        public IActionResult OnPost(DateTime startdate, DateTime enddate, int numguests, int roomid, decimal totalcharge, string id)
         {
 
             // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
-            int myPK = dbAccess.CreateReservation(StartDate, EndDate, NumGuests, Room.RoomId, TotalCharge, Id);
+            int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
 
-            ConfirmationNumber = MakeConfirmationNumber(myPK);
+            
 
-            return RedirectToPage("/OrderConfirmation");
+            return RedirectToPage("/OrderConfirmation", new { reservationId = resId });
         }
 
         // possible helper method
@@ -102,20 +96,7 @@ namespace AJJDHotel.Pages
             throw new NotImplementedException();
         }
 
-        public int MakeConfirmationNumber(int pk)
-        {
-            return 8744304 + pk;
-        }
-
-        public int ConfirmationNumberToPK(int confirmation)
-        {
-            // return -1 to indicate an invalid confirmation number
-            if (confirmation < 8744305)
-            {
-                return -1;
-            }
-            return confirmation - 8744304;
-        }
+        
 
 
 

@@ -43,7 +43,7 @@ namespace AJJDHotel.Data
 
         public int CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId)
         {
-            Reservation myRes = new Reservation { StartDate = startDate, EndDate = endDate, NumGuests = numGuests, RoomId = roomId, TotalCharge = totalCharge };
+            Reservation myRes = new Reservation { StartDate = startDate, EndDate = endDate, NumGuests = numGuests, RoomId = roomId, TotalCharge = totalCharge , Id = userId };
             context.Reservations
                 .Add(myRes);
             var affectedRecords = context.SaveChanges();
@@ -67,14 +67,14 @@ namespace AJJDHotel.Data
 	                                            SELECT Rooms.RoomId
 	                                            FROM Rooms
 	                                            INNER JOIN Reservations ON Rooms.RoomId = Reservations.RoomId
-	                                            WHERE ((Reservations.StartDate <= '2020-12-06 00:00:00' and Reservations.EndDate > '2020-12-06 00:00:00')
-	                                                or (Reservations.StartDate < '2020-12-10 00:00:00' and Reservations.EndDate > '2020-12-10 00:00:00')
-	                                                or (Reservations.StartDate >= '2020-12-06 00:00:00' and Reservations.EndDate < '2020-12-10 00:00:00')))";
+	                                            WHERE ((Reservations.StartDate <= @startDate and Reservations.EndDate > @startDate)
+	                                                or (Reservations.StartDate < @endDate and Reservations.EndDate > @endDate)
+	                                                or (Reservations.StartDate >= @startDate and Reservations.EndDate < @endDate)))";
 
             return context.Rooms
                 .FromSqlRaw(getAvailableRoomsSql, startDateP, endDateP)
                 .Where(x => x.RoomTypeId == roomTypeId)
-                .FirstOrDefault();
+                .First();
         }
 
 
