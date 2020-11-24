@@ -339,7 +339,9 @@ footer {
     border-bottom: 1px solid lightgray;
     margin-left: 55px;
 }
-
+.hide {
+    display: none;
+}
 
 
 
