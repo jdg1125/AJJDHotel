@@ -23,6 +23,7 @@ namespace AJJDHotel.Pages
         public DateTime tempStartDate;
         public DateTime tempEndDate;
 
+
         public SearchResultsModel(IDbAccess dbAccess)
         {
             this.dbAccess = dbAccess;
@@ -47,6 +48,11 @@ namespace AJJDHotel.Pages
                 throw new Exception();
             }
 
+        }
+        
+        public IActionResult OnGetReserve(int id)
+        {
+            return RedirectToPage("Purchase", new { start = tempStartDate, end = tempEndDate,id= id });
         }
 
 
