@@ -14,8 +14,14 @@ namespace AJJDHotel.Pages
         {
             return 8744304 + temp;
         }
+
         public int orginalConfirm(int confirmation)
         {
+            // return -1 to indicate an invallid confirmation nubmers
+            if (confirmation < 8744304)
+            {
+                return -1;
+            }
             return confirmation - 8744304;
         }
        
