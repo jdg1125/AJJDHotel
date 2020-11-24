@@ -61,6 +61,7 @@ namespace AJJDHotel.Pages
             //int tempRoomTypeId = 10;
             StartDate = start;
             EndDate = end;
+            RoomTypeId = id;
 
 
             // get the logged in user's id
