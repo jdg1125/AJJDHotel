@@ -19,8 +19,11 @@ namespace AJJDHotel.Pages
 
         private readonly IDbAccess dbAccess;
 
-        public DateTime tempStartDate;
-        public DateTime tempEndDate;
+        [BindProperty(SupportsGet = true)]
+        public DateTime StartDate { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public DateTime EndDate { get; set; }
 
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -31,8 +34,9 @@ namespace AJJDHotel.Pages
         {
             this.dbAccess = dbAccess;
             AvailableRoomTypes = new List<RoomType>();
-            tempStartDate = new DateTime();
-            tempEndDate = new DateTime();
+
+            StartDate = new DateTime();
+            EndDate = new DateTime();
 
             _userManager = userManager;
 
@@ -41,12 +45,12 @@ namespace AJJDHotel.Pages
         public void OnGet(DateTime start, DateTime end)
         {
 
-            tempStartDate = new DateTime(2020, 12, 06);
-            tempEndDate = new DateTime(2020, 12, 10);
+            StartDate = start;
+            EndDate = end;
 
-            if (tempStartDate < tempEndDate)
+            if (StartDate < EndDate)
             {
-                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(tempStartDate, tempEndDate);
+                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(StartDate, EndDate);
             }
             else
             {
@@ -60,7 +64,7 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            return RedirectToPage("OrderSummary", new { start = tempStartDate, end = tempEndDate, id = id });
+            return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
         }
 
 

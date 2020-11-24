@@ -16,10 +16,10 @@ namespace AJJDHotel.Pages
         private readonly IDbAccess dbAccess;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public DateTime StartDate { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public DateTime EndDate { get; set; }
 
         [BindProperty]
@@ -41,26 +41,28 @@ namespace AJJDHotel.Pages
 
         public int ConfirmationNumber { get; set; }
 
-        public DateTime tempStartDate;
-        public DateTime tempEndDate;
 
         public OrderSummaryModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
         {
             this.dbAccess = dbAccess;
             _userManager = userManager;
             this.RoomType = new RoomType();
-            this.Room = new Room(); 
+            this.Room = new Room();
             StartDate = new DateTime();
             EndDate = new DateTime();
             
-
         }
 
-        public void OnGet(DateTime startDate, DateTime endDate, int roomTypeIdP)
+        public void OnGet(DateTime start, DateTime end, int id)
         {
-            // these are hardcoded until actual data is available (possibly data will not be OnPost parameters)
-            StartDate = new DateTime(2020, 12, 06);
-            EndDate = new DateTime(2020, 12, 10);
+
+            // these are hardcoded until data gets passed correctly (possibly data will not be OnPost parameters?)
+            //StartDate = new DateTime(2020, 12, 6);
+            //EndDate = new DateTime(2020, 12, 10);
+            //int tempRoomTypeId = 10;
+            StartDate = start;
+            EndDate = end;
+
 
             // get the logged in user's id
             Id = _userManager.GetUserId(User);
@@ -70,14 +72,16 @@ namespace AJJDHotel.Pages
             // used to find TotalCharge
             double nights = (EndDate - StartDate).TotalDays;
 
+            // gets room to get room rate of desired room to calculate total charge for CreateReservation and display total charge here
+            // TODO these two dbAccess queries are super wasteful, need better ones (projections)
+            RoomType = dbAccess.GetRoomTypeByRoomTypeId(id);
+
             TotalCharge = (decimal)nights * RoomType.Rate;
 
-            // gets first available room that has the desired room type id (need Room to get room id for CreateReservation)
-            Room = dbAccess.GetAvailableRoomByRoomTypeId(12, StartDate, EndDate);
+            // gets first available room that has the desired room type id (need this to get room id for CreateReservation)
+            Room = dbAccess.GetAvailableRoomByRoomTypeId(id, StartDate, EndDate);
 
-            // gets room rate of desired room to calculate total charge for CreateReservation
-            // TODO these two dbAccess queries are super wasteful, need better ones (projections)
-            RoomType = dbAccess.GetRoomTypeByRoomTypeId(1);
+
 
         }
 
