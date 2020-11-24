@@ -50,8 +50,8 @@ namespace AJJDHotel.Pages
             _userManager = userManager;
             this.RoomType = new RoomType();
             this.Room = new Room(); 
-            tempStartDate = new DateTime();
-            tempEndDate = new DateTime();
+            StartDate = new DateTime();
+            EndDate = new DateTime();
             
 
         }
@@ -68,12 +68,12 @@ namespace AJJDHotel.Pages
             ApplicationUser = dbAccess.GetUserById(Id);
 
             // used to find TotalCharge
-            double nights = (tempEndDate - tempStartDate).TotalDays;
+            double nights = (EndDate - StartDate).TotalDays;
 
             TotalCharge = (decimal)nights * RoomType.Rate;
 
             // gets first available room that has the desired room type id (need Room to get room id for CreateReservation)
-            Room = dbAccess.GetAvailableRoomByRoomTypeId(12, tempStartDate, tempEndDate);
+            Room = dbAccess.GetAvailableRoomByRoomTypeId(12, StartDate, EndDate);
 
             // gets room rate of desired room to calculate total charge for CreateReservation
             // TODO these two dbAccess queries are super wasteful, need better ones (projections)
