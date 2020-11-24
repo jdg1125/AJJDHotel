@@ -14,5 +14,6 @@ namespace AJJDHotel.Data
         List<Reservation> GetReservationsByName(string name);
         Room GetAvailableRoomByRoomTypeId(int roomTypeId, DateTime startDate, DateTime endDate);
         RoomType GetRoomTypeByRoomTypeId(int roomTypeId);
+        ApplicationUser GetUserById(string userId);
     }
 }

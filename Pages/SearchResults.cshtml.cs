@@ -56,12 +56,11 @@ namespace AJJDHotel.Pages
             string userId = User.Identity.Name;
             string userId2 = _userManager.GetUserId(User);
 
-            int numGuestsP = 2;
-            int roomIdP = 10;
-            decimal totalChargeP = 200.00M;
-            Reservation myRes = new Reservation() { StartDate = tempStartDate, EndDate = tempEndDate, NumGuests = 2, RoomId = 10, TotalCharge = 200.00M, Id = "41ab7152-18a7-4d7b-905c-928d7bd1efc8" };
-            // dbAccess.CreateReservation(myRes);
+        }
 
+        public IActionResult OnGetReserve(int id)
+        {
+            return RedirectToPage("OrderSummary", new { start = tempStartDate, end = tempEndDate, id = id });
         }
 
 

@@ -7,6 +7,7 @@ using AJJDHotel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using AJJDHotel.Utility;
 
 namespace AJJDHotel.Pages
 {
@@ -31,12 +32,14 @@ namespace AJJDHotel.Pages
 
         public RoomType RoomType { get; set; }
 
+        public ApplicationUser ApplicationUser { get; set; }
+
         public decimal TotalCharge { get; set; }
 
         // for the Id of logged in user
         public string Id { get; set; }
 
-        int ConfirmationNumber { get; set; }
+        public int ConfirmationNumber { get; set; }
 
         public DateTime tempStartDate;
         public DateTime tempEndDate;
@@ -49,23 +52,25 @@ namespace AJJDHotel.Pages
             this.Room = new Room(); 
             tempStartDate = new DateTime();
             tempEndDate = new DateTime();
+            
 
         }
 
         public void OnGet(DateTime startDate, DateTime endDate, int roomTypeIdP)
         {
+            // these are hardcoded until actual data is available (possibly data will not be OnPost parameters)
+            StartDate = new DateTime(2020, 12, 06);
+            EndDate = new DateTime(2020, 12, 10);
 
-
-        }
-
-        public IActionResult OnPost(DateTime startDate, DateTime endDate, int roomTypeIdP)
-        {
-            // these are temp until actual data is available (possible data will not be OnPost parameters)
-            tempStartDate = new DateTime(2020, 12, 06);
-            tempEndDate = new DateTime(2020, 12, 10);
-
-            // get the logged in user's id; this is part of CreateReservation below
+            // get the logged in user's id
             Id = _userManager.GetUserId(User);
+
+            ApplicationUser = dbAccess.GetUserById(Id);
+
+            // used to find TotalCharge
+            double nights = (tempEndDate - tempStartDate).TotalDays;
+
+            TotalCharge = (decimal)nights * RoomType.Rate;
 
             // gets first available room that has the desired room type id (need Room to get room id for CreateReservation)
             Room = dbAccess.GetAvailableRoomByRoomTypeId(12, tempStartDate, tempEndDate);
@@ -74,10 +79,10 @@ namespace AJJDHotel.Pages
             // TODO these two dbAccess queries are super wasteful, need better ones (projections)
             RoomType = dbAccess.GetRoomTypeByRoomTypeId(1);
 
-            // used to find TotalCharge
-            double nights = (tempEndDate - tempStartDate).TotalDays;
+        }
 
-            TotalCharge = (decimal)nights * RoomType.Rate;
+        public IActionResult OnPost(DateTime startDate, DateTime endDate, int roomTypeIdP)
+        {
 
             // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
             int myPK = dbAccess.CreateReservation(StartDate, EndDate, NumGuests, Room.RoomId, TotalCharge, Id);
@@ -100,7 +105,7 @@ namespace AJJDHotel.Pages
 
         public int ConfirmationNumberToPK(int confirmation)
         {
-            // return -1 to indicate an invallid confirmation nubmers
+            // return -1 to indicate an invalid confirmation number
             if (confirmation < 8744305)
             {
                 return -1;

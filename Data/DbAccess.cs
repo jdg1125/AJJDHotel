@@ -87,6 +87,12 @@ namespace AJJDHotel.Data
 
         }
 
+        public ApplicationUser GetUserById(string userId)
+        {
+            return context.ApplicationUsers
+                .Find(userId);
+        }
+
 
         public Reservation GetReservationByConfirmationNumber(string confirmationNumber)
         {
