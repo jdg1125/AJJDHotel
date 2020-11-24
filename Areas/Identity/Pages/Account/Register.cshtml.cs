@@ -17,6 +17,9 @@ using Microsoft.Extensions.Logging;
 using AJJDHotel.Data;
 using AJJDHotel.Utility;
 
+using System.Net;
+using System.Net.Mail;
+
 namespace AJJDHotel.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -113,6 +116,7 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName, 
                     LastName = Input.LastName
                 };
+                AJJDEmailRegister();
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -155,6 +159,32 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        public void AJJDEmailRegister()
+        {
+            MailAddress to = new MailAddress(Input.Email);
+            MailAddress from = new MailAddress("jtn2dsng@gmail.com");
+
+            MailMessage message = new MailMessage(from, to);
+            message.Subject = "AJJD Hotel Registration";
+            message.Body = "Thank you for registering at AJJD Hotel";
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("jtn2dsng", "Tw!$3r@1"),
+                EnableSsl = true
+            };
+
+            try
+            {
+                client.Send(message);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
         }
     }
 }
