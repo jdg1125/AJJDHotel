@@ -70,7 +70,7 @@ namespace AJJDHotel.Pages
             TempData["checkin"]=checkin;
             TempData["checkout"]=checkout;
             TempData["numGuests"]=numGuests;
-            return Page();
+            return RedirectToPage("SearchResults", new { start = checkin, end = checkout });
 
         }
 
