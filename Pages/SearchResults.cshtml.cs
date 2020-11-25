@@ -63,7 +63,12 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            return RedirectToPage("OrderSummary", new { id = id });
+            if (User.Identity.IsAuthenticated){
+                return RedirectToPage("OrderSummary", new { id = id });
+            }
+            else{
+                return RedirectToPage("/Account/Register", new { Area = "Identity", returnUrl = $"~/SearchResults/{Request.QueryString}" });
+            }
         }
         // for using the date pick on the search results page
         public IActionResult OnPost(){
