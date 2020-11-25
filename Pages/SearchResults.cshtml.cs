@@ -64,16 +64,40 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            if (TempData.Peek("StartDate")!=null) {
-                StartDate = (DateTime)TempData.Peek("StartDate");
-                EndDate = (DateTime)TempData.Peek("EndDate");
+            if (User.Identity.IsAuthenticated)
+            {
+                if (TempData.Peek("StartDate") != null)
+                {
+                    StartDate = (DateTime)TempData.Peek("StartDate");
+                    EndDate = (DateTime)TempData.Peek("EndDate");
+                }
+                else
+                {
+                    StartDate = (DateTime)TempData.Peek("checkin");
+                    EndDate = (DateTime)TempData.Peek("checkout");
+                }
+                return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
             }
             else
             {
-                StartDate = (DateTime)TempData.Peek("checkin");
-                EndDate = (DateTime)TempData.Peek("checkout");
+                /// very important comments
+                var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
+                //C:\Users\student\Documents\GitHub\AJJDHotel\Areas\Identity\Pages\Account\Register.cshtml
+                return RedirectToPage("/Account/Register", new { Area = "Identity", returnUrl = $"~/SearchResults/{Request.QueryString}" });
+                // var location = new Uri($"{Request.Scheme}://{Request.Host}");
+                //return RedirectToPage( location+ "/Identity/Account/Register");
+                //return Redirect("~/Identity/Account/Register", );
+                //var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
+                //string url = new Uri($"{Request.Scheme}://{Request.Host}") + "Identity/Account/Register";//+ Request.Query[location.ToString()];
+                //return RedirectToPage(url); // , new { returnUrl = location});
+                //return Redirect(url);
+
+                //var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
+
+                //var url = location.AbsoluteUri;
+                //return RedirectToPage("~/Identity/Account/Register", new { returnUrl = url });
+
             }
-            return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
         }
 
 
