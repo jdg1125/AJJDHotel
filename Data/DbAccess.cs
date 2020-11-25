@@ -112,6 +112,28 @@ namespace AJJDHotel.Data
         }
 
 
+        public List<Reservation> GetReservationsByUserId(string id)
+        {
+            return context.Reservations
+                .Where(x => x.Id == id)
+                .ToList();
+        }
+
+        public List<RoomType> GetRoomTypes()
+        {
+            return context.RoomTypes
+                .ToList();
+        }
+
+        //public RoomType GetRoomByReservationId(int reservationId)
+        //{
+        //    return context.Reservations
+        //        .Where(res => res.ReservationId == reservationId)
+        //        .Include(r => r.RoomId)
+        //            .ThenInclude(rt => rt.)
+        //}
+
+
         public List<Reservation> GetReservationsByName(string name)
         {
             throw new NotImplementedException();
