@@ -343,5 +343,17 @@ footer {
     display: none;
 }
 
+#accReservationTable th{
+    padding-left: 10px;
+    vertical-align: bottom;
+}
+
+#accReservationTable .cancel{
+    margin-top: 5px;
+    margin: 5px;
+    padding-left: 2px;
+    padding-right: 4px;
+}
+
 
 

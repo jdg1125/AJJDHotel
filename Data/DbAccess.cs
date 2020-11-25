@@ -99,10 +99,9 @@ namespace AJJDHotel.Data
         {
             if (confirmationNumber >= 8744305)
             {
-                int pk = confirmationNumber - 8744304;
+                int reservationId = confirmationNumber - 8744304;
 
-                return context.Reservations
-                    .Find(pk);
+                return GetReservationByReservationId(reservationId);
             }
             else
             {
@@ -110,6 +109,40 @@ namespace AJJDHotel.Data
                 throw new Exception();
             }
         }
+
+        public Reservation GetReservationByReservationId(int reservationId)
+        {
+            return context.Reservations
+                  .Find(reservationId);
+        }
+
+        public List<Reservation> GetReservationsByUserId(string id)
+        {
+            return context.Reservations
+                .Where(x => x.Id == id)
+                .ToList();
+        }
+
+        public List<RoomType> GetRoomTypes()
+        {
+            return context.RoomTypes
+                .ToList();
+        }
+
+        public void DeleteReservation(int reservationId)
+        {
+            var reservation = GetReservationByReservationId(reservationId);
+            context.Reservations.Remove(reservation);
+            var affectedRecords = context.SaveChanges();
+        }
+
+        //public RoomType GetRoomByReservationId(int reservationId)
+        //{
+        //    return context.Reservations
+        //        .Where(res => res.ReservationId == reservationId)
+        //        .Include(r => r.RoomId)
+        //            .ThenInclude(rt => rt.)
+        //}
 
 
         public List<Reservation> GetReservationsByName(string name)
