@@ -71,7 +71,8 @@ namespace AJJDHotel.Pages
             // TODO these two dbAccess queries are super wasteful, need better ones (projections)
             RoomType = dbAccess.GetRoomTypeByRoomTypeId(id);
 
-            TotalCharge = (decimal)nights * RoomType.Rate;
+            decimal tax = 0.08M;
+            TotalCharge = (decimal)nights * RoomType.Rate * (1 + tax); ;
 
             // gets first available room that has the desired room type id (need this to get room id for CreateReservation)
             Room = dbAccess.GetAvailableRoomByRoomTypeId(id, StartDate, EndDate);
@@ -79,7 +80,7 @@ namespace AJJDHotel.Pages
 
         }
 
-        public IActionResult OnPost(DateTime startdate, DateTime enddate, int numguests, int roomid, decimal totalcharge, string id)
+        public IActionResult OnPost(DateTime startdate, DateTime enddate, int numguests, int roomid, decimal totalcharge, string id, int roomtypeid)
         {
 
             // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
@@ -87,7 +88,7 @@ namespace AJJDHotel.Pages
 
             
 
-            return RedirectToPage("/OrderConfirmation", new { reservationId = resId });
+            return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
         }
 
         // possible helper method

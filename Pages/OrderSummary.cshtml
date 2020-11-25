@@ -39,12 +39,10 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
                         <td>Dates of Stay: </td>
                         <td>@Model.StartDate.Date.ToString("D") &mdash; @Model.EndDate.Date.ToString("D")</td>
                     </tr>
-
                     <tr>
                         <td>Cost: </td>
                         <td>
@@ -52,7 +50,7 @@
                                 int nights = (int)((Model.EndDate - Model.StartDate).TotalDays);
                                 decimal cost = nights * Model.RoomType.Rate;
                             }
-                            @cost
+                            @string.Format("{0:C}", cost)
                         </td>
                     </tr>
                     <tr>
@@ -62,12 +60,12 @@
                                 decimal tax = cost * (decimal)0.08;
                                 decimal total = tax + cost;
                             }
-                            @tax
+                            @string.Format("{0:C}", tax)
                         </td>
                     </tr>
                     <tr>
                         <td>Order Total:</td>
-                        <td>@total</td>
+                        <td>@string.Format("{0:C}", total) </td>
                     </tr>
                 </tbody>
             </table>
@@ -82,6 +80,7 @@
     <input type="hidden" name="roomid" value="@Model.Room.RoomId" />
     <input type="hidden" name="totalcharge" value="@Model.TotalCharge" />
     <input type="hidden" name="id" value="@Model.Id" />
+    <input type="hidden" name="roomtypeid" value="@Model.RoomType.RoomTypeId" />
 </form>
 
 
