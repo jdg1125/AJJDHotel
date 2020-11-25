@@ -20,5 +20,6 @@ namespace AJJDHotel.Data
         RoomType GetRoomTypeByRoomTypeId(int roomTypeId);
         ApplicationUser GetUserById(string userId);
         void DeleteReservation(int reservationId);
+        //List<RoomType> GetDisctinctBedTypes();
     }
 }
