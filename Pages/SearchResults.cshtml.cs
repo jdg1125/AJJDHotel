@@ -58,6 +58,7 @@ namespace AJJDHotel.Pages
             }
             else
             {
+                /// very important comments
                 var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
                 //C:\Users\student\Documents\GitHub\AJJDHotel\Areas\Identity\Pages\Account\Register.cshtml
                 return RedirectToPage("/Account/Register", new { Area = "Identity", returnUrl = $"~/SearchResults/{Request.QueryString}" } );
