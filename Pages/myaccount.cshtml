@@ -58,20 +58,19 @@
                 <br>
                 <input type="submit" class="btn buttonblue" name="submit" value="change" />
             </div>
-
     </form>
 
     <h2>My reservations</h2>
     <table id="accReservationTable" border="1">
         <thead>
             <tr>
-                <th>Confirmation Number</th>
-                <th>Room Type</th>
+                <th>Confirmation number</th>
+                <th>Room type</th>
                 <th>Beds</th>
                 <th>View</th>
                 <th>Date</th>
-                <th>Total Charge</th>
-                <th>number of guests</th>
+                <th>Total charge</th>
+                <th>Number of guests</th>
                 <th></th>
             </tr>
         </thead>
@@ -79,7 +78,6 @@
         {
             int confNum = Model.MakeConfirmationNumber(r.ReservationId);
             <tr>
-
                 <th>@confNum</th>
                 <th>n/a</th>
                 <th>n/a</th>
@@ -90,28 +88,11 @@
                 <th>
                     @if ((r.StartDate - DateTime.Today).TotalDays > 2)
                     {
-
-                        <button type="submit" class="button buttonblue">Cancel</button>
-
+                        <button type="submit" class="button buttonblue cancel">Cancel</button>
                     }
                 </th>
             </tr>
         }
-        @*<tr>
-                <th>123B</th>
-                <th>Junior Suite</th>
-                <th>1/10/2020</th>
-                <th>8 days</th>
-                <th>1 guests</th>
-            </tr>
-            <tr>
-                <th>123C</th>
-                <th>Deluxe Suite</th>
-                <th>10/15/2020</th>
-                <th>5 days</th>
-                <th>2 guests</th>
-            </tr>*@
-
     </table>
 
     <h2>Manage my account </h2>
