@@ -64,6 +64,8 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
+            StartDate= (DateTime)TempData.Peek("checkin");
+            EndDate = (DateTime)TempData.Peek("checkout");
             return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
         }
 
