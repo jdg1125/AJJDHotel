@@ -1,4 +1,5 @@
 ﻿using AJJDHotel.Models;
+using AJJDHotel.Pages;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,7 @@ namespace AJJDHotel.Data
 
         public int CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId)
         {
-            Reservation myRes = new Reservation { StartDate = startDate, EndDate = endDate, NumGuests = numGuests, RoomId = roomId, TotalCharge = totalCharge , Id = userId };
+            Reservation myRes = new Reservation { StartDate = startDate, EndDate = endDate, NumGuests = numGuests, RoomId = roomId, TotalCharge = totalCharge, Id = userId };
             context.Reservations
                 .Add(myRes);
             var affectedRecords = context.SaveChanges();
@@ -94,9 +95,20 @@ namespace AJJDHotel.Data
         }
 
 
-        public Reservation GetReservationByConfirmationNumber(string confirmationNumber)
+        public Reservation GetReservationByConfirmationNumber(int confirmationNumber)
         {
-            throw new NotImplementedException();
+            if (confirmationNumber >= 8744305)
+            {
+                int pk = confirmationNumber - 8744304;
+
+                return context.Reservations
+                    .Find(pk);
+            }
+            else
+            {
+                // TODO do better
+                throw new Exception();
+            }
         }
 
 

@@ -5,27 +5,20 @@
     ViewData["Title"] = "Order Confirmation";
 }
 
-@Model.StartDate.ToString()
 
-@*
     <div class="textContainer">
     <h1>Thank you, your room has been reserved.</h1>
     <p>Please check your email for order confirmation number or visit <a href="~/MyAccount">My Account</a> to review reservation information.</p>
-    <h3>Confirmation number: A21746</h3>
-    <h4>Dates of your stay: 20 November 2020 - 27 November 2020</h4>
-    @{ 
-        decimal sub = 7 * @Model.RoomsAvailable[Model.RoomChosen].Rate;
-        string total = $"{((sub *= (decimal)1.08)):c}";
-
-    }
-    <h5>Total charge: @total </h5>
+    <h3>Confirmation number: @Model.ConfirmationNumber</h3>
+    <h4>Dates of your stay: @Model.Reservation.StartDate.Date.ToString("D") &mdash; @Model.Reservation.EndDate.Date.ToString("D")</h4>
+    <h5>Total charge: @string.Format("{0:C}",Model.Reservation.TotalCharge) </h5>
     <div class="resultItem">
-        <img src="@Model.RoomsAvailable[Model.RoomChosen].ImgPath" alt="testImg" height="128" width="128" />
+        <img src="@Model.RoomType.ImgPath" alt="testImg" height="128" width="128" />
 
         <div class="textContainer">
-            <h3>@Model.RoomsAvailable[Model.RoomChosen].RoomName</h3>
-            <h5>$@Model.RoomsAvailable[Model.RoomChosen].Rate</h5>
-            <p>@Model.RoomsAvailable[Model.RoomChosen].Description</p>
+            <h3>@Model.RoomType.RoomName</h3>
+            <h5>$@Model.RoomType.Rate</h5>
+            <p>@Model.RoomType.Description</p>
         </div>
     </div>
-</div>*@
+</div>
