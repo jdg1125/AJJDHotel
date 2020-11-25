@@ -19,10 +19,10 @@ namespace AJJDHotel.Pages
 
         private readonly IDbAccess dbAccess;
 
-        [BindProperty]
+        [BindProperty, TempData]
         public DateTime StartDate { get; set; }
 
-        [BindProperty]
+        [BindProperty, TempData]
         public DateTime EndDate { get; set; }
 
         private readonly UserManager<ApplicationUser> _userManager;
@@ -64,8 +64,15 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            StartDate= (DateTime)TempData.Peek("checkin");
-            EndDate = (DateTime)TempData.Peek("checkout");
+            if (TempData.Peek("StartDate")!=null) {
+                StartDate = (DateTime)TempData.Peek("StartDate");
+                EndDate = (DateTime)TempData.Peek("EndDate");
+            }
+            else
+            {
+                StartDate = (DateTime)TempData.Peek("checkin");
+                EndDate = (DateTime)TempData.Peek("checkout");
+            }
             return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
         }
 

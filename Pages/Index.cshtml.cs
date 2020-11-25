@@ -16,9 +16,9 @@ namespace AJJDHotel.Pages
         public SignInManager<ApplicationUser> SignInManager { get; set; }
         public UserManager<ApplicationUser> UserManager { get; set; }
 
-        [BindProperty, TempData]
+        [BindProperty,TempData]
         public DateTime checkin { get; set; }
-        [BindProperty, TempData]
+        [BindProperty,TempData]
         public DateTime checkout { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
