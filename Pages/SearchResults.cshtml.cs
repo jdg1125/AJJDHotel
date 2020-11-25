@@ -61,16 +61,7 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            if (TempData.Peek("StartDate")!=null) {
-                StartDate = (DateTime)TempData.Peek("StartDate");
-                EndDate = (DateTime)TempData.Peek("EndDate");
-            }
-            else
-            {
-                StartDate = (DateTime)TempData.Peek("checkin");
-                EndDate = (DateTime)TempData.Peek("checkout");
-            }
-            return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
+            return RedirectToPage("OrderSummary", new { id = id });
         }
 
 
