@@ -116,10 +116,11 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName, 
                     LastName = Input.LastName
                 };
-                AJJDEmailRegister();
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    AJJDEmailRegister();
                     if (!await _roleManager.RoleExistsAsync(SD.AdminUser))
                         await _roleManager.CreateAsync(new IdentityRole(SD.AdminUser));
 
