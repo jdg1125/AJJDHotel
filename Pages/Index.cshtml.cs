@@ -16,10 +16,12 @@ namespace AJJDHotel.Pages
         public SignInManager<ApplicationUser> SignInManager { get; set; }
         public UserManager<ApplicationUser> UserManager { get; set; }
 
-        [BindProperty,TempData]
+        [BindProperty]
         public DateTime checkin { get; set; }
-        [BindProperty,TempData]
+        [BindProperty]
         public DateTime checkout { get; set; }
+        [BindProperty]
+        public int numGuests{get;set;}
 
         public IndexModel(ILogger<IndexModel> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
@@ -34,6 +36,9 @@ namespace AJJDHotel.Pages
         }
         public IActionResult OnPost()
         {
+            TempData["numGuests"]= numGuests;
+            TempData["checkin"]=checkin;
+            TempData["checkout"]=checkout;
 
             return RedirectToPage("SearchResults", new { start = checkin, end = checkout });
         }
