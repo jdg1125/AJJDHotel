@@ -19,11 +19,13 @@ namespace AJJDHotel.Pages
 
         private readonly IDbAccess dbAccess;
 
-        [BindProperty, TempData]
-        public DateTime StartDate { get; set; }
+        [BindProperty]
+        public DateTime checkin { get; set; }
 
-        [BindProperty, TempData]
-        public DateTime EndDate { get; set; }
+        [BindProperty]
+        public DateTime checkout { get; set; }
+        [BindProperty]
+        public int numGuests { get; set; }
 
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -35,8 +37,8 @@ namespace AJJDHotel.Pages
             this.dbAccess = dbAccess;
             AvailableRoomTypes = new List<RoomType>();
 
-            StartDate = new DateTime();
-            EndDate = new DateTime();
+            checkin = new DateTime();
+            checkout = new DateTime();
 
             _userManager = userManager;
 
@@ -45,12 +47,12 @@ namespace AJJDHotel.Pages
         public void OnGet(DateTime start, DateTime end)
         {
 
-            StartDate = start;
-            EndDate = end;
+            checkin = start;
+            checkout = end;
 
-            if (StartDate < EndDate)
+            if (checkin < checkout)
             {
-                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(StartDate, EndDate);
+                AvailableRoomTypes = dbAccess.GetAvailableRoomTypes(checkin, checkout);
             }
             else
             {
@@ -61,16 +63,15 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            if (TempData.Peek("StartDate")!=null) {
-                StartDate = (DateTime)TempData.Peek("StartDate");
-                EndDate = (DateTime)TempData.Peek("EndDate");
-            }
-            else
-            {
-                StartDate = (DateTime)TempData.Peek("checkin");
-                EndDate = (DateTime)TempData.Peek("checkout");
-            }
-            return RedirectToPage("OrderSummary", new { start = StartDate, end = EndDate, id = id });
+            return RedirectToPage("OrderSummary", new { start = checkin, end = checkout, id = id });
+        }
+        // for using the date pick on the search results page
+        public IActionResult OnPost(){
+            TempData["checkin"]=checkin;
+            TempData["checkout"]=checkin;
+            TempData["numGuests"]=numGuests;
+            return Page();
+
         }
 
 
