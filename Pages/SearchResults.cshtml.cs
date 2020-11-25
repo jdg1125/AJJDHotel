@@ -63,12 +63,12 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            return RedirectToPage("OrderSummary", new { start = checkin, end = checkout, id = id });
+            return RedirectToPage("OrderSummary", new { id = id });
         }
         // for using the date pick on the search results page
         public IActionResult OnPost(){
             TempData["checkin"]=checkin;
-            TempData["checkout"]=checkin;
+            TempData["checkout"]=checkout;
             TempData["numGuests"]=numGuests;
             return Page();
 

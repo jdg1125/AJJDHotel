@@ -52,11 +52,13 @@ namespace AJJDHotel.Pages
             
         }
 
-        public void OnGet(DateTime start, DateTime end, int id)
+        public void OnGet(int id)
         {
+            NumGuests=(int)(TempData["numGuests"]);
+            StartDate=(DateTime)TempData["checkin"];
+            EndDate=(DateTime)TempData["checkout"];
 
-            StartDate = start;
-            EndDate = end;
+
             RoomTypeId = id;
 
             // get the logged in user's id
