@@ -18,10 +18,27 @@ namespace AJJDHotel.Pages
 
         public Room Room { get; set; }
 
+        [BindProperty]
+        public int RoomTypeId { get; set; }
+        [BindProperty]
+        public string Description { get; set; }
+        [BindProperty]
+        public string Beds { get; set; }
+        [BindProperty]
+        public string View { get; set; }
+        [BindProperty]
+        public string RoomName { get; set; }
+        [BindProperty]
+        public decimal Rate { get; set; }
+        [BindProperty]
+        public string ImgPath { get; set; }
+
+
         public ManageRoomTypesModel(IDbAccess dbAccess)
         {
             this.dbAccess = dbAccess;
             RoomTypeList = new List<RoomType>();
+            Room = new Room();
         }
 
         public void OnGet()
@@ -29,9 +46,10 @@ namespace AJJDHotel.Pages
             RoomTypeList = dbAccess.GetRoomTypes();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            dbAccess.UpdateRoomTypes();
+            dbAccess.UpdateRoomType(RoomTypeId, Description, Beds, View, RoomName, Rate, ImgPath);
+            return new RedirectToPageResult("ManageRoomTypes");
         }
     }
 }

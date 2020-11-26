@@ -153,8 +153,15 @@ namespace AJJDHotel.Data
         //            .ThenInclude(rt => rt.)
         //}
 
-        public void UpdateRoomTypes()
+        public void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath)
         {
+            var room = GetRoomTypeByRoomTypeId(roomtypeId);
+            room.Description = description;
+            room.Beds = beds;
+            room.View = view;
+            room.RoomName = roomname;
+            room.Rate = rate;
+            room.ImgPath = imgpath;
             var affectedRecords = context.SaveChanges();
         }
 
