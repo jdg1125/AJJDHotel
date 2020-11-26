@@ -126,6 +126,9 @@ namespace AJJDHotel.Data
         public List<RoomType> GetRoomTypes()
         {
             return context.RoomTypes
+                .OrderBy(x => x.Beds)
+                .OrderBy(x => x.View)
+                .OrderByDescending(x => x.RoomName)
                 .ToList();
         }
 
