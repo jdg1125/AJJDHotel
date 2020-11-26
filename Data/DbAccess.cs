@@ -153,6 +153,11 @@ namespace AJJDHotel.Data
         //            .ThenInclude(rt => rt.)
         //}
 
+        public void UpdateRoomTypes()
+        {
+            var affectedRecords = context.SaveChanges();
+        }
+
 
         public List<Reservation> GetReservationsByName(string name)
         {

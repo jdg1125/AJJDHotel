@@ -16,6 +16,8 @@ namespace AJJDHotel.Pages
 
         public List<RoomType> RoomTypeList { get; set; }
 
+        public Room Room { get; set; }
+
         public ManageRoomTypesModel(IDbAccess dbAccess)
         {
             this.dbAccess = dbAccess;
@@ -25,7 +27,11 @@ namespace AJJDHotel.Pages
         public void OnGet()
         {
             RoomTypeList = dbAccess.GetRoomTypes();
+        }
 
+        public void OnPost()
+        {
+            dbAccess.UpdateRoomTypes();
         }
     }
 }
