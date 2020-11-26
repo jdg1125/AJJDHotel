@@ -17,6 +17,8 @@ namespace AJJDHotel.Pages
     {
         public List<RoomType> AvailableRoomTypes { get; set; }
 
+        public List<string> BedTypes { get; set; }
+
         private readonly IDbAccess dbAccess;
 
         [BindProperty]
@@ -30,12 +32,11 @@ namespace AJJDHotel.Pages
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-
-
         public SearchResultsModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
         {
             this.dbAccess = dbAccess;
             AvailableRoomTypes = new List<RoomType>();
+            BedTypes = new List<string>();
 
             checkin = new DateTime();
             checkout = new DateTime();
@@ -49,6 +50,8 @@ namespace AJJDHotel.Pages
 
             checkin = start;
             checkout = end;
+
+            BedTypes = dbAccess.GetDistinctBeds();
 
             if (checkin < checkout)
             {

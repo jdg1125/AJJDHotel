@@ -9,10 +9,12 @@
     <partial name="SearchBarPartial" model="5" />
 </div>
 
-<select id="bedViewBy"  onChange="bedBox()">
-    <option value="1 King">1 King</option>
-    <option value="1 Queen">1 Queen</option>
-    <option value="2 Queen">2 Queen </option>
+<label for="bedViewBy">Beds</label>
+<select id="bedViewBy" onChange="bedBox()">
+    @foreach (var bed in Model.BedTypes)
+    {
+        <option value="@bed">@bed</option>
+    }
     <option value="Any" selected="selected"> Any</option>
 </select>
 
@@ -47,7 +49,7 @@
 
 
 
-  
-        
-        
+
+
+
 </script>
