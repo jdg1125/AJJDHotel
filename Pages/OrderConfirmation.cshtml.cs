@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 
 namespace AJJDHotel.Pages
 {
@@ -58,21 +59,24 @@ namespace AJJDHotel.Pages
 
         public void AJJDEmailReservation(int confirmationNumber)
         {
-            //ApplicationUser A = new ApplicationUser();
-            //MailAddress to = new MailAddress(A.Email);
             MailAddress to = new MailAddress(User.Identity.Name);
             MailAddress from = new MailAddress("jtn2dsng@gmail.com");
 
+            String image = RoomType.ImgPath;
             MailMessage message = new MailMessage(from, to);
             message.Subject = "AJJD Hotel Registration";
-            //Need Confirmation Number
-            message.Body = "Thank you for ordering at AJJD Hotel. Here is your email information: " +
+            string EmailReceipt = "Thank you for ordering at AJJD Hotel. Here is your email information: " +
             "\nConfirmationNumber: " + confirmationNumber +
             "\nDates of your stay: " + Reservation.StartDate.Date.ToString("D") + " - " + Reservation.EndDate.Date.ToString("D") +
             "\nTotal Charge: " + string.Format("{0:C}", Reservation.TotalCharge) +
-            "\nRoom Name:" + RoomType.RoomName +//RoomsAvailable[RoomChosen].RoomName
+            "\nRoom Name: " + RoomType.RoomName +
             "\nRate: " + string.Format("{0:C}", RoomType.Rate) +
             "\nDescription: " + RoomType.Description;
+            message.Body = EmailReceipt;
+            AlternateView confEmail = AlternateView.CreateAlternateViewFromString(
+              $"{EmailReceipt} <br> <img src=\"" + image+ "\">", null, "text/html"
+            );
+            message.AlternateViews.Add(confEmail);
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
             {
