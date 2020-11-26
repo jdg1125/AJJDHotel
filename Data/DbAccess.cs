@@ -147,12 +147,6 @@ namespace AJJDHotel.Data
             var affectedRecords = context.SaveChanges();
         }
 
-        //public List<RoomType> GetDistinctBedTypes()
-        //{
-        //    return context.RoomTypes
-        //        .Disc
-        //}
-
         //public RoomType GetRoomByReservationId(int reservationId)
         //{
         //    return context.Reservations
