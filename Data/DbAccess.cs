@@ -126,6 +126,9 @@ namespace AJJDHotel.Data
         public List<RoomType> GetRoomTypes()
         {
             return context.RoomTypes
+                .OrderBy(x => x.Beds)
+                .OrderBy(x => x.View)
+                .OrderByDescending(x => x.RoomName)
                 .ToList();
         }
 
@@ -149,6 +152,18 @@ namespace AJJDHotel.Data
         //        .Include(r => r.RoomId)
         //            .ThenInclude(rt => rt.)
         //}
+
+        public void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath)
+        {
+            var room = GetRoomTypeByRoomTypeId(roomtypeId);
+            room.Description = description;
+            room.Beds = beds;
+            room.View = view;
+            room.RoomName = roomname;
+            room.Rate = rate;
+            room.ImgPath = imgpath;
+            var affectedRecords = context.SaveChanges();
+        }
 
 
         public List<Reservation> GetReservationsByName(string name)
