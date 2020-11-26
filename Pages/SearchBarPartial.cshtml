@@ -10,7 +10,7 @@
             Check-in:
             <input type="date" id="checkin" name="checkin"
                    value="@today"
-                   min="@today" max="2021-12-31" />
+                   min="@today" max="2021-12-31" onchange="dateValidation()" />
         </label>
         <label for="checkout">
             Check-out:
@@ -42,3 +42,12 @@
         return sb.ToString();
     }
 }
+
+
+<script>
+    function dateValidation() {
+        var mindate = document.getElementById("checkin");
+        var maxdate = document.getElementById("checkout");
+        maxdate.min = mindate.value;
+    }
+</script>
