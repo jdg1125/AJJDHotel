@@ -12,13 +12,18 @@ namespace AJJDHotel.Data
         int CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId);
         Reservation GetReservationByConfirmationNumber(int confirmationNumber);
         Reservation GetReservationByReservationId(int reservationId);
-        List<Reservation> GetReservationsByName(string name);
-        List<Reservation> GetReservationsByUserId(string id);
+        List<Reservation> GetReservationsByUserId(string userId);
+
+        Reservation GetReservationByConfirmation(int num);
+      
+      //  List<Reservation> GetReservationsByUserId(string id);
         Room GetAvailableRoomByRoomTypeId(int roomTypeId, DateTime startDate, DateTime endDate);
         //Room GetRoomByReservationId(int reservationId);
         List<RoomType> GetRoomTypes();
         RoomType GetRoomTypeByRoomTypeId(int roomTypeId);
         ApplicationUser GetUserById(string userId);
+
+        ApplicationUser GetUserByEmail(string email);
         void DeleteReservation(int reservationId);
         void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath);
         //List<RoomType> GetDisctinctBedTypes();

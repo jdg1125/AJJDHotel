@@ -94,6 +94,10 @@ namespace AJJDHotel.Data
                 .Find(userId);
         }
 
+        public ApplicationUser GetUserByEmail(string email)
+        {
+            return context.ApplicationUsers.FirstOrDefault(user => user.Email == email);
+        }
 
         public Reservation GetReservationByConfirmationNumber(int confirmationNumber)
         {
@@ -116,12 +120,12 @@ namespace AJJDHotel.Data
                   .Find(reservationId);
         }
 
-        public List<Reservation> GetReservationsByUserId(string id)
+     /*   public List<Reservation> GetReservationsByUserId(string id)
         {
             return context.Reservations
                 .Where(x => x.Id == id)
                 .ToList();
-        }
+        }*/
 
         public List<RoomType> GetRoomTypes()
         {
@@ -166,9 +170,34 @@ namespace AJJDHotel.Data
         }
 
 
-        public List<Reservation> GetReservationsByName(string name)
+        public List<Reservation> GetReservationsByUserId(string userId)
         {
-            throw new NotImplementedException();
+            List<Reservation> result = new List<Reservation>();
+
+            result.AddRange(context.Reservations
+                            .Include(res => res.Room)
+                            .ThenInclude(room => room.RoomType)
+                            .Where(res => res.Id == userId));
+
+            return result;
+        }
+
+        public Reservation GetReservationByConfirmation(int num)
+        {
+            Reservation result = null;
+            if (num >= 8744305)
+            {
+                num = num - 8744304;
+
+                var query = context.Reservations
+                       .Include(res => res.Room)
+                       .ThenInclude(room => room.RoomType)
+                       .Where(res => res.ReservationId == num);
+
+                result = query.FirstOrDefault();
+            }
+
+            return result;
         }
 
         public void UpdateApplicationUser(ApplicationUser user)

@@ -30,8 +30,6 @@ namespace AJJDHotel.Pages
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-
-
         public SearchResultsModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
         {
             this.dbAccess = dbAccess;
@@ -63,10 +61,9 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnGetReserve(int id)
         {
-            return RedirectToPage("OrderSummary", new { id = id });
+           return RedirectToPage("OrderSummary", new { id = id });
         }
-        // for using the date pick on the search results page
-        public IActionResult OnPost(){
+        public IActionResult OnPost(){         // for using the date pick on the search results page
             TempData["checkin"]=checkin;
             TempData["checkout"]=checkout;
             TempData["numGuests"]=numGuests;
