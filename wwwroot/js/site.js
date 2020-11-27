@@ -15,7 +15,6 @@ var roomTypeSelect = document.getElementById("roomTypeSelect");
 var results = []
 for (let i = 0; i < 24; i++) {
     results.push(document.getElementById(`result_${i}`));
-    console.log(2);
 }
 
 //results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];

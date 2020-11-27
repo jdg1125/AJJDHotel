@@ -355,5 +355,10 @@ footer {
     padding-right: 4px;
 }
 
-
+.hideView {
+    display: none;
+}
+.hideBed {
+    display: none;
+}
 

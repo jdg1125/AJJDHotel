@@ -78,6 +78,22 @@ namespace AJJDHotel.Data
                 .First();
         }
 
+        public List<string> GetDistinctBeds()
+        {
+                return context.RoomTypes
+                .Select(x => x.Beds)
+                .Distinct().ToList();
+            
+        }
+
+        public List<string> GetDistinctViews()
+        {
+            return context.RoomTypes
+            .Select(x => x.View)
+            .Distinct().ToList();
+
+        }
+
 
         // TODO gave up on getting specific element from table (room rate), but we do not need entire entity
         public RoomType GetRoomTypeByRoomTypeId(int roomTypeId)
@@ -143,12 +159,6 @@ namespace AJJDHotel.Data
             var affectedRecords = context.SaveChanges();
         }
 
-        //public List<RoomType> GetDistinctBedTypes()
-        //{
-        //    return context.RoomTypes
-        //        .Disc
-        //}
-
         //public RoomType GetRoomByReservationId(int reservationId)
         //{
         //    return context.Reservations
@@ -204,6 +214,8 @@ namespace AJJDHotel.Data
         {
             var affectedRecords = context.SaveChanges();
         }
+
+
 
     }
 }
