@@ -12,7 +12,12 @@ var slideIndex = 0;
 
 //vars for manage room types
 var roomTypeSelect = document.getElementById("roomTypeSelect");
-var results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];
+var results = []
+for (let i = 0; i < 24; i++) {
+    results.push(document.getElementById(`result_${i}`));
+}
+
+//results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];
 
 //define functions
 
@@ -59,35 +64,29 @@ var showCurrentDesc = (function () {
             oneToShow.classList.remove("textbox");
         }
 
-        switch (this.value) {
-            case "option_0":
-                oneToShow = results[0];
-                break;
-            case "option_1":
-                oneToShow = results[1];
-                break;
-            case "option_2":
-                oneToShow = results[2];
-                break;
-        }
+
+        oneToShow = results[(this.value).split('_')[1]];
+        console.log(oneToShow)
+        
 
         oneToShow.classList.remove("hideRes");
         oneToShow.classList.add("textbox");
+
     }
 })();
 
     //procedure - add event listeners and call relevant one-time functions
- 
+
     navIcon.addEventListener("click", showNav);
 
     if (slides != null && slides.length != 0)
         showSlides();
 
-   
 
-    if (roomTypeSelect != null) 
+
+    if (roomTypeSelect != null)
         roomTypeSelect.addEventListener("click", showCurrentDesc);
-    
+
 
 
 

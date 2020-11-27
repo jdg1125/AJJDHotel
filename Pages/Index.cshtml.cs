@@ -23,6 +23,12 @@ namespace AJJDHotel.Pages
         [BindProperty]
         public int numGuests{get;set;}
 
+
+        [BindProperty]
+        public string ResNumber { get; set; }
+        [BindProperty]
+        public string GuestEmail { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             SignInManager = signInManager;
@@ -30,10 +36,7 @@ namespace AJJDHotel.Pages
             UserManager = userManager;
         }
 
-        public void OnGet()
-        { 
-            
-        }
+        public void OnGet() { }
         public IActionResult OnPost()
         {
             TempData["numGuests"]= numGuests;
@@ -42,7 +45,13 @@ namespace AJJDHotel.Pages
 
             return RedirectToPage("SearchResults", new { start = checkin, end = checkout });
         }
-
+        
+        public IActionResult OnPostManage()
+        {
+            TempData["resNumber"] = ResNumber;
+            TempData["guestEmail"] = GuestEmail;
+            return RedirectToPage("ManageReservations", new { resNumber = ResNumber, guestEmail = GuestEmail });
+        }
     }
     }
 

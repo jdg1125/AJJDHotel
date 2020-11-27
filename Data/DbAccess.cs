@@ -78,6 +78,22 @@ namespace AJJDHotel.Data
                 .First();
         }
 
+        public List<string> GetDistinctBeds()
+        {
+                return context.RoomTypes
+                .Select(x => x.Beds)
+                .Distinct().ToList();
+            
+        }
+
+        public List<string> GetDistinctViews()
+        {
+            return context.RoomTypes
+            .Select(x => x.View)
+            .Distinct().ToList();
+
+        }
+
 
         // TODO gave up on getting specific element from table (room rate), but we do not need entire entity
         public RoomType GetRoomTypeByRoomTypeId(int roomTypeId)
@@ -94,6 +110,10 @@ namespace AJJDHotel.Data
                 .Find(userId);
         }
 
+        public ApplicationUser GetUserByEmail(string email)
+        {
+            return context.ApplicationUsers.FirstOrDefault(user => user.Email == email);
+        }
 
         public Reservation GetReservationByConfirmationNumber(int confirmationNumber)
         {
@@ -116,16 +136,19 @@ namespace AJJDHotel.Data
                   .Find(reservationId);
         }
 
-        public List<Reservation> GetReservationsByUserId(string id)
+     /*   public List<Reservation> GetReservationsByUserId(string id)
         {
             return context.Reservations
                 .Where(x => x.Id == id)
                 .ToList();
-        }
+        }*/
 
         public List<RoomType> GetRoomTypes()
         {
             return context.RoomTypes
+                .OrderBy(x => x.Beds)
+                .OrderBy(x => x.View)
+                .OrderByDescending(x => x.RoomName)
                 .ToList();
         }
 
@@ -144,11 +167,54 @@ namespace AJJDHotel.Data
         //            .ThenInclude(rt => rt.)
         //}
 
-
-        public List<Reservation> GetReservationsByName(string name)
+        public void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath)
         {
-            throw new NotImplementedException();
+            var room = GetRoomTypeByRoomTypeId(roomtypeId);
+            room.Description = description;
+            room.Beds = beds;
+            room.View = view;
+            room.RoomName = roomname;
+            room.Rate = rate;
+            room.ImgPath = imgpath;
+            var affectedRecords = context.SaveChanges();
         }
+
+
+        public List<Reservation> GetReservationsByUserId(string userId)
+        {
+            List<Reservation> result = new List<Reservation>();
+
+            result.AddRange(context.Reservations
+                            .Include(res => res.Room)
+                            .ThenInclude(room => room.RoomType)
+                            .Where(res => res.Id == userId));
+
+            return result;
+        }
+
+        public Reservation GetReservationByConfirmation(int num)
+        {
+            Reservation result = null;
+            if (num >= 8744305)
+            {
+                num = num - 8744304;
+
+                var query = context.Reservations
+                       .Include(res => res.Room)
+                       .ThenInclude(room => room.RoomType)
+                       .Where(res => res.ReservationId == num);
+
+                result = query.FirstOrDefault();
+            }
+
+            return result;
+        }
+
+        public void UpdateApplicationUser(ApplicationUser user)
+        {
+            var affectedRecords = context.SaveChanges();
+        }
+
 
 
     }

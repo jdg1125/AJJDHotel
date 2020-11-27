@@ -17,6 +17,9 @@ namespace AJJDHotel.Pages
     {
         public List<RoomType> AvailableRoomTypes { get; set; }
 
+        public List<string> BedTypes { get; set; }
+        public List<string> ViewTypes { get; set; }
+
         private readonly IDbAccess dbAccess;
 
         [BindProperty]
@@ -30,12 +33,11 @@ namespace AJJDHotel.Pages
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-
-
         public SearchResultsModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
         {
             this.dbAccess = dbAccess;
             AvailableRoomTypes = new List<RoomType>();
+            BedTypes = new List<string>();
 
             checkin = new DateTime();
             checkout = new DateTime();
@@ -49,6 +51,9 @@ namespace AJJDHotel.Pages
 
             checkin = start;
             checkout = end;
+
+            BedTypes = dbAccess.GetDistinctBeds();
+            ViewTypes = dbAccess.GetDistinctViews();
 
             if (checkin < checkout)
             {
@@ -67,11 +72,11 @@ namespace AJJDHotel.Pages
                 return RedirectToPage("OrderSummary", new { id = id });
             }
             else{
-                return RedirectToPage("/Account/Register", new { Area = "Identity", returnUrl = $"~/SearchResults/{Request.QueryString}" });
+                return RedirectToPage("/Account/Login", new { Area = "Identity", returnUrl = $"~/SearchResults/{Request.QueryString}" });
             }
+
         }
-        // for using the date pick on the search results page
-        public IActionResult OnPost(){
+        public IActionResult OnPost(){         // for using the date pick on the search results page
             TempData["checkin"]=checkin;
             TempData["checkout"]=checkout;
             TempData["numGuests"]=numGuests;
