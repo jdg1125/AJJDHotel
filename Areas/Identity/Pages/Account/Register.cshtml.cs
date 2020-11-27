@@ -104,9 +104,6 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
             int age = new DateTime(DateTime.Now.Subtract(Input.DOB).Ticks).Year - 1;
             if (age < 18) return Page();
              
-
-            //check over
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { 

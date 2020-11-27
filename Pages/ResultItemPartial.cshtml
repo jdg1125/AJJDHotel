@@ -16,7 +16,7 @@
         <div class="textContainer">
             <h3>@Model[i].RoomName</h3>
             @*<a href="~/Purchase?id=@i"><button class="button buttonblue">Reserve</button></a>*@
-            <a asp-page="/SearchResults" asp-route-ID="@Model[i].RoomTypeId" asp-page-handler="Reserve"><button class="button buttonblue">Reserve</button></a>
+            <a asp-page="/OrderSummary" asp-route-ID="@Model[i].RoomTypeId" asp-page-handler="Reserve"><button class="button buttonblue">Reserve</button></a>
            <h5 style="display: inline;padding-right:25px ;">$@Model[i].Rate</h5>
             <h5 style="display: inline; padding: 25px;"> Beds: @Model[i].Beds</h5>
             <h5 style="display: inline; padding: 25px;"> View: @Model[i].View</h5>

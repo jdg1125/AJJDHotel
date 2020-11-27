@@ -1,64 +1,82 @@
-﻿@*@page
+﻿@page
 @model AJJDHotel.Pages.ManageReservationsModel
 @using AJJDHotel.Models;
 @using System.Text;
-@{
 
-}
-
-<div class="adminView">
-    <h1>Manage Reservations</h1>
-    <button id="changeResView" class="btn buttonblue">Click to see results of searching by name</button>
-
+<h1>Manage Reservations</h1>
+@if (Model.WasSuccess)
+{
     <table class="resTable">
         <tr>
             <th>Confirmation Number</th>
-            <th>Hotel Location</th>
-            <th>Customer Name</th>
-            <th>Room Type</th>
             <th>Room Number</th>
+            <th>Room Type</th>
             <th>Check-in date</th>
             <th>Check-out date</th>
+            <th>Number of guests</th>
             <th>Total charge</th>
             <th>Management Options</th>
         </tr>
-        <tr>
-            @Html.Raw(RenderRowData(Model.QueryByName[0]))
-            <td>
-                <div class=" manageHide" id="manage1">
-                    <partial name="ManagePartial" model="@Model.QueryByName[0]" />
-                </div>
-            </td>
-        </tr>
-        <tr id="rowToHide" class="hideRes">
-            @Html.Raw(RenderRowData(Model.QueryByName[1]))
-            <td>
-                <div class=" manageHide" id="manage2">
-                    <partial name="ManagePartial" model="@Model.QueryByName[1]" />
-                </div>
-            </td>
-        </tr>
+        @if (Model.QueryByResNum != null)
+        {
+            <tr>
+                @Html.Raw(RenderRow(Model.QueryByResNum))
+                <td>
+                    <a asp-page="./Reservations/Delete" asp-route-id="@Model.QueryByResNum.ReservationId">Delete</a>
+                </td>
+            </tr>
+        }
+        else if (Model.QueryByEmail != null)
+        {
+            foreach (var res in Model.QueryByEmail)
+            {
+                <tr>
+                    @Html.Raw(RenderRow(res))
+                    <td>
+                        <a asp-page="./Reservations/Delete" asp-route-id="@res.ReservationId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
     </table>
-</div>
+}
+else
+{
+    <p>The search criteria do not match an existing reservation. Please try again: <a href="~/Index">Home</a></p>
+}
 
-@functions {
-    string RenderRowData(Reservation r)
+@functions
+{
+    string RenderRow(Reservation res)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(MakeCell(r.ConfirmationNum));
-        sb.Append(MakeCell(r.Location));
-        sb.Append(MakeCell(r.NameFirstLast));
-        sb.Append(MakeCell(r.RoomType));
-        sb.Append(MakeCell(r.RoomNum));
-        sb.Append(MakeCell(r.Checkin.ToString("D")));
-        sb.Append(MakeCell(r.Checkout.ToString("D")));
-        sb.Append(MakeCell($"{r.TotalCharge:C}"));
+        string open = "<td>";
+        string close = "</td>";
+
+        sb.Append(open);
+        sb.Append((8744304 + res.ReservationId));
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(res.Room.RoomNumber);
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(res.Room.RoomType.RoomName);
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(res.StartDate.Date.ToString("d"));
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(res.EndDate.Date.ToString("d"));
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(res.NumGuests);
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append($"{res.TotalCharge:C}");
+        sb.Append(close);
 
         return sb.ToString();
     }
 
-    string MakeCell(string s)
-    {
-        return $"<td>{s}</td>";
-    }
-}*@
+
+}
