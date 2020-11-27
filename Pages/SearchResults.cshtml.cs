@@ -43,7 +43,12 @@ namespace AJJDHotel.Pages
             _userManager = userManager;
 
         }
-
+        //public IActionResult OnGet()
+        //{
+        //    checkin =(DateTime) TempData.Peek("checkin");
+        //    checkout =(DateTime) TempData.Peek("checkout");
+        //    return RedirectToPage("SearchResults", new { start = checkin, end= checkout });
+        //}
         public void OnGet(DateTime start, DateTime end)
         {
 
