@@ -50,8 +50,7 @@ namespace AJJDHotel.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var FirstName = user.FirstName;
             var LastName =  user.LastName;
-            Testname=user.FirstName;
-            TestLname= user.LastName;
+ 
             
 
             Username = userName;
@@ -100,6 +99,17 @@ namespace AJJDHotel.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            // probs want a fancy get and set method with some valiation or something?/ error checking 
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+            }
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+            }
+
+            
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
