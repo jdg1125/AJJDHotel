@@ -19,6 +19,16 @@
 </select>
 
 
+<label for="viewViewBy">View</label>
+<select id="viewViewBy" onChange="viewBox()">
+    @foreach (var view in Model.ViewTypes)
+    {
+        <option value="@view">@view</option>
+    }
+    <option value="Any" selected="selected"> Any</option>
+</select>
+
+
 <br />
 <partial name="ResultItemPartial" model="Model.AvailableRoomTypes" />
 
@@ -33,18 +43,38 @@
             var divValue = allItems[i].getElementsByTagName("input")[1].value;
             if (boxInput != "Any") {
                 if (divValue != boxInput) {
-                    allItems[i].classList.add("hide");
+                    allItems[i].classList.add("hideBed");
                 }
                 else {
-                    allItems[i].classList.remove("hide");
+                    allItems[i].classList.remove("hideBed");
                 }
             }
             else {
-                allItems[i].classList.remove("hide");
+                allItems[i].classList.remove("hideBed");
             }
         }
+        viewBox();
+    }
 
-
+    function viewBox() {
+        var e = document.getElementById("viewViewBy");
+        var boxInput = e.options[e.selectedIndex].value;
+        var allItems = document.querySelectorAll(".resultsWrapper .resultItem");
+        for (var i = 0; i < allItems.length; i += 1) {
+            var divValue = allItems[i].getElementsByTagName("input")[2].value;
+            if (boxInput != "Any") {
+                if (divValue != boxInput) {
+                    allItems[i].classList.add("hideView");
+                }
+                else {
+                    allItems[i].classList.remove("hideView");
+                }
+            }
+            else {
+                allItems[i].classList.remove("hideView");
+            }
+        }
+        bedBox();
     }
 
 </script>

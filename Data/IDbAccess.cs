@@ -22,6 +22,7 @@ namespace AJJDHotel.Data
         void DeleteReservation(int reservationId);
         void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath);
         List<string> GetDistinctBeds();
+        List<string> GetDistinctViews();
         //List<RoomType> GetDisctinctBedTypes();
     }
 }

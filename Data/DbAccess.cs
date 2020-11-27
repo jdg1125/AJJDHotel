@@ -86,6 +86,14 @@ namespace AJJDHotel.Data
             
         }
 
+        public List<string> GetDistinctViews()
+        {
+            return context.RoomTypes
+            .Select(x => x.View)
+            .Distinct().ToList();
+
+        }
+
 
         // TODO gave up on getting specific element from table (room rate), but we do not need entire entity
         public RoomType GetRoomTypeByRoomTypeId(int roomTypeId)

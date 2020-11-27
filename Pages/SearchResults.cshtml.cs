@@ -18,6 +18,7 @@ namespace AJJDHotel.Pages
         public List<RoomType> AvailableRoomTypes { get; set; }
 
         public List<string> BedTypes { get; set; }
+        public List<string> ViewTypes { get; set; }
 
         private readonly IDbAccess dbAccess;
 
@@ -52,6 +53,7 @@ namespace AJJDHotel.Pages
             checkout = end;
 
             BedTypes = dbAccess.GetDistinctBeds();
+            ViewTypes = dbAccess.GetDistinctViews();
 
             if (checkin < checkout)
             {
