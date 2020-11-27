@@ -92,9 +92,9 @@ namespace AJJDHotel.Pages
         {
             try
             {
-                NumGuests = (int)(TempData["numGuests"]);
-                StartDate = (DateTime)TempData["checkin"];
-                EndDate = (DateTime)TempData["checkout"];
+                NumGuests = (int)TempData.Peek("numGuests");
+                StartDate = (DateTime)TempData.Peek("checkin");
+                EndDate = (DateTime)TempData.Peek("checkout");
 
 
                 RoomTypeId = id;
