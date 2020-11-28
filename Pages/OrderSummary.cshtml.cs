@@ -189,9 +189,9 @@ namespace AJJDHotel.Pages
 
         public static string GeneratePassword(int passwordSize = 8)
         {
-            const string LOWER = "abcdefghijklmnopqrstuvwxyz";
-            const string UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const string NUMBER = "0123456789";
+            const string LOWER = "abcdefghijkmnopqrstuvwxyz";
+            const string UPPER = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+            const string NUMBER = "23456789";
             const string SPECIAL = "!@#$%^&*()?";
 
 

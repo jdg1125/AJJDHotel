@@ -1,4 +1,5 @@
 ﻿@page
+@using AJJDHotel.Utility
 @model AJJDHotel.Pages.OrderConfirmationModel
 
 @{
@@ -6,13 +7,17 @@
 }
 
 
-    <div class="textContainer">
+<div class="textContainer">
     <h1>Thank you, your room has been reserved.</h1>
     <p>Please check your email for order confirmation number or visit <a href="~/MyAccount">My Account</a> to review reservation information.</p>
     <h3>Confirmation number: @Model.ConfirmationNumber</h3>
     <h4>Dates of your stay: @Model.Reservation.StartDate.Date.ToString("D") &mdash; @Model.Reservation.EndDate.Date.ToString("D")</h4>
-    <h5>Total charge: @string.Format("{0:C}",Model.Reservation.TotalCharge) </h5>
-    <h5>Your new password: <span style="color:#FF0000;font-family:'Times New Roman', Times, serif">@Model.Password</span></h5>
+    <h5>Total charge: @string.Format("{0:C}", Model.Reservation.TotalCharge) </h5>
+    @if (Model.User.IsInRole(SD.AdminUser))
+    {
+
+        <h5>Your new password: <span style="color:#FF0000;font-family:'Times New Roman', Times, serif">@Model.Password</span></h5>
+    }
     <div class="resultItem">
         <img src="@Model.RoomType.ImgPath" alt="testImg" height="128" width="128" />
 

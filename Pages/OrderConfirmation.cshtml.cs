@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net;
 using System.Net.Mail;
+using Microsoft.AspNetCore.Identity;
 using System.Net.Mime;
 
 namespace AJJDHotel.Pages
 {
     public class OrderConfirmationModel : PageModel
     {
-
         private readonly IDbAccess dbAccess;
 
         [BindProperty]
