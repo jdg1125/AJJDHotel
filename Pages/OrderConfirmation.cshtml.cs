@@ -23,6 +23,7 @@ namespace AJJDHotel.Pages
         public Reservation Reservation { get; set; }
         public RoomType RoomType { get; set; }
         public int ConfirmationNumber { get; set; }
+        public string Password { get; set; }
 
         public OrderConfirmationModel(IDbAccess dbAccess)
         {
@@ -31,8 +32,10 @@ namespace AJJDHotel.Pages
         }
 
 
-        public void OnGet(int reservationId, int roomTypeId)
+        public void OnGet(int reservationId, int roomTypeId, string password)
         {
+            Password = password;
+
             ConfirmationNumber = MakeConfirmationNumber(reservationId);
 
             Reservation = dbAccess.GetReservationByConfirmationNumber(ConfirmationNumber);
