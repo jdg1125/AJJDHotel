@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AJJDHotel.Pages
 {
-    public class MyAccountModel : PageModel
+    public class MyReservationsModel : PageModel
     {
         private readonly IDbAccess dbAccess;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -22,7 +22,7 @@ namespace AJJDHotel.Pages
 
 
 
-        public MyAccountModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
+        public MyReservationsModel(IDbAccess dbAccess, UserManager<ApplicationUser> userManager)
         {
             this.dbAccess = dbAccess;
             UsersReservations = new List<Reservation>();
@@ -38,7 +38,7 @@ namespace AJJDHotel.Pages
         public void OnGetCancel(int id)
         {
             num = id;
-             this.OnGet();
+            this.OnGet();
         }
 
         public int MakeConfirmationNumber(int pk)
