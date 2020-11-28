@@ -37,7 +37,7 @@ namespace AJJDHotel.Areas.Identity.Pages.Account
             }
             else
             {
-                return RedirectToPage();
+                return RedirectToPage("/Index", new { area = "Pages"});
             }
         }
     }

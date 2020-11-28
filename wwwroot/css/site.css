@@ -66,6 +66,12 @@ header {
     
 }
 
+#logout {
+    background-color: #003049;
+    color: #ECEAEA;
+    border: 0;
+}
+
 .showNav {
     display: flex;
     flex-wrap: nowrap;
