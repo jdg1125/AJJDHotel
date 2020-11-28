@@ -170,6 +170,7 @@ namespace AJJDHotel.Data
         public void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath)
         {
             var room = GetRoomTypeByRoomTypeId(roomtypeId);
+            context.SaveChanges();  //redundant?
             room.Description = description;
             room.Beds = beds;
             room.View = view;
