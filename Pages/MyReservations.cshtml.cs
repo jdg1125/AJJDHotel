@@ -18,6 +18,9 @@ namespace AJJDHotel.Pages
         public ApplicationUser ApplicationUser { get; set; }
         public List<Reservation> UsersReservations { get; set; }
 
+        [BindProperty]
+        public int ReservationId { get; set; }
+
         public int num { get; set; }
 
 
@@ -35,10 +38,17 @@ namespace AJJDHotel.Pages
             ApplicationUser = dbAccess.GetUserById(id);
             UsersReservations = dbAccess.GetReservationsByUserId(id);
         }
-        public void OnGetCancel(int id)
+        //public void OnGetCancel(int id)
+        //{
+        //    num = id;
+        //    dbAccess.DeleteReservation(id);
+        //    this.OnGet();
+        //}
+
+        public IActionResult OnPost()
         {
-            num = id;
-            this.OnGet();
+            dbAccess.DeleteReservation(ReservationId);
+            return new RedirectToPageResult("MyReservations");
         }
 
         public int MakeConfirmationNumber(int pk)

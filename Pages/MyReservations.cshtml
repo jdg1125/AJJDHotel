@@ -1,6 +1,6 @@
 ﻿@page
 @using AJJDHotel.Utility
-@model AJJDHotel.Pages.MyAccountModel
+@model AJJDHotel.Pages.MyReservationsModel
 @{
     ViewData["Title"] = "Home page";
 }
@@ -61,7 +61,7 @@
             </div>
     </form>-->
 
-    <h2>My reservations</h2>
+    <h1>My reservations</h1>
     <table id="accReservationTable" border="1">
         <thead>
             <tr>
@@ -89,9 +89,13 @@
                 <th>
                     @if ((r.StartDate - DateTime.Today).TotalDays > 2)
                     {
-                        <a asp-page="/myaccount" asp-route-ID="@r.ReservationId" asp-page-handler="Cancel">
+                        @*<a asp-page="/MyReservations" asp-route-ID="@r.ReservationId" asp-page-handler="Cancel">
+                                <button type="submit" class="button buttonblue cancel">Cancel</button>
+                            </a>*@
+                        <form method="post">
+                            <input type="hidden" id="ReservationId" name="ReservationId" value="@r.ReservationId" />
                             <button type="submit" class="button buttonblue cancel">Cancel</button>
-                        </a>
+                        </form>
                     }
                 </th>
             </tr>
@@ -103,6 +107,6 @@
     @*<h2>Manage my account </h2>
         <input type="button" class="btn buttonblue" id="submit" value="Delete my account" />*@
     <br />
-    <h3>To change your personal info, visit <a href="~/Identity/Account/Manage">Manage your account</a> page</h3>
+    <h3>To change your personal info, visit <a href="~/Identity/Account/Manage">Manage your account</a> page.</h3>
 
 </div>
