@@ -69,8 +69,7 @@ namespace AJJDHotel.Pages
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-
-            public string Password = "P@ssword1";
+            public string Password { get; set; }
 
             [Required]
             [Display(Name = "Birthday")]
@@ -96,7 +95,6 @@ namespace AJJDHotel.Pages
                 StartDate = (DateTime)TempData.Peek("checkin");
                 EndDate = (DateTime)TempData.Peek("checkout");
 
-
                 RoomTypeId = id;
 
                 Id = UserManager.GetUserId(User);
@@ -104,8 +102,8 @@ namespace AJJDHotel.Pages
 
                 double nights = (EndDate - StartDate).TotalDays;
 
-                // gets room to get room rate of desired room to calculate total charge for CreateReservation and display total charge here
-                // TODO these two dbAccess queries are super wasteful, need better ones (projections)
+                // get room type to calculate total charge for reservation
+                // TODO do these 2 queries in one query
                 RoomType = dbAccess.GetRoomTypeByRoomTypeId(id);
 
                 decimal tax = 0.08M;
@@ -139,6 +137,7 @@ namespace AJJDHotel.Pages
                     LastName = Input.LastName
                 };
 
+                Input.Password = GeneratePassword();
                 var result = await UserManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -153,7 +152,7 @@ namespace AJJDHotel.Pages
             // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
             int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
 
-            return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+            return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid , password = Input.Password});
         }
 
         // possible helper method
@@ -187,6 +186,52 @@ namespace AJJDHotel.Pages
             }
 
         }
+
+        public static string GeneratePassword(int passwordSize = 8)
+        {
+            const string LOWER = "abcdefghijkmnopqrstuvwxyz";
+            const string UPPER = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+            const string NUMBER = "23456789";
+            const string SPECIAL = "!@#$%^&*()?";
+
+
+
+            string allowed = LOWER + UPPER + NUMBER + SPECIAL;
+
+            Random _random = new Random();
+            string password = "";
+            string[] requiredTypes = new string[] { LOWER, UPPER, NUMBER, SPECIAL };
+
+            string[] passwordArray = new string[passwordSize];
+            List<int> availableSlots = new List<int>();
+            for (int i = 0; i < passwordSize; i++)
+            {
+                availableSlots.Add(i);
+            }
+            foreach (string requiredType in requiredTypes)
+            {
+
+                int nextSlotIndex = _random.Next(availableSlots.Count);
+                int nextSlot = availableSlots.ElementAt(nextSlotIndex);
+                string nextChar = requiredType[_random.Next(requiredType.Length)].ToString();
+                passwordArray[nextSlot] = nextChar;
+                availableSlots.Remove(nextSlot);
+            }
+            for (int i = 0; i < passwordArray.Length; i++)
+            {
+                if (passwordArray[i] == null)
+                {
+                    passwordArray[i] = allowed[_random.Next(allowed.Length)].ToString();
+                }
+            }
+
+            foreach (var a in passwordArray)
+            {
+                password += a;
+            }
+            return password;
+        }
+
 
 
 
