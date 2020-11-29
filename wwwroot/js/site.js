@@ -13,8 +13,11 @@ var slideIndex = 0;
 //vars for manage room types
 var roomTypeSelect = document.getElementById("roomTypeSelect");
 var results = []
-for (let i = 0; i < 24; i++) {
-    results.push(document.getElementById(`result_${i}`));
+if (document.getElementById("numOfRoomTypes") !== null) {
+    const numOfRoomTypes = document.getElementById("numOfRoomTypes").value;
+    for (let i = 0; i < numOfRoomTypes; i++) {
+        results.push(document.getElementById(`result_${i}`));
+    }
 }
 
 //results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];
@@ -67,7 +70,7 @@ var showCurrentDesc = (function () {
 
         oneToShow = results[(this.value).split('_')[1]];
         console.log(oneToShow)
-        
+
 
         oneToShow.classList.remove("hideRes");
         oneToShow.classList.add("textbox");
@@ -75,17 +78,17 @@ var showCurrentDesc = (function () {
     }
 })();
 
-    //procedure - add event listeners and call relevant one-time functions
+//procedure - add event listeners and call relevant one-time functions
 
-    navIcon.addEventListener("click", showNav);
+navIcon.addEventListener("click", showNav);
 
-    if (slides != null && slides.length != 0)
-        showSlides();
+if (slides != null && slides.length != 0)
+    showSlides();
 
 
 
-    if (roomTypeSelect != null)
-        roomTypeSelect.addEventListener("click", showCurrentDesc);
+if (roomTypeSelect != null)
+    roomTypeSelect.addEventListener("click", showCurrentDesc);
 
 
 

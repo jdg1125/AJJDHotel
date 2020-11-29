@@ -11,6 +11,7 @@
 
     <form name="modify-room-types" method="post" class="col-6">
 
+        <input type="hidden" id="numOfRoomTypes" value="@Model.RoomTypeList.Count" />
         <div class="textbox">
             <div class="dropdown dropdown-margin">
                 <label for="roomTypeSelect">Select a room type</label>
