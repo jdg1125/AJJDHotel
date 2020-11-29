@@ -13,8 +13,11 @@ var slideIndex = 0;
 //vars for manage room types
 var roomTypeSelect = document.getElementById("roomTypeSelect");
 var results = []
-for (let i = 0; i < 24; i++) {
-    results.push(document.getElementById(`result_${i}`));
+if (document.getElementById("numOfRoomTypes") !== null) {
+    const numOfRoomTypes = document.getElementById("numOfRoomTypes").value;
+    for (let i = 0; i < numOfRoomTypes; i++) {
+        results.push(document.getElementById(`result_${i}`));
+    }
 }
 
 //results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];
@@ -76,6 +79,14 @@ var showCurrentDesc = (function () {
 })();
 
 //procedure - add event listeners and call relevant one-time functions
+<<<<<<< HEAD
+=======
+
+navIcon.addEventListener("click", showNav);
+
+if (slides != null && slides.length != 0)
+    showSlides();
+>>>>>>> d499e330617e9c0d37b35a4bbfc3d5b2cf853555
 
 navIcon.addEventListener("click", showNav);
 

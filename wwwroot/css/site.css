@@ -275,11 +275,15 @@ footer {
 /* account stuff */
 #account{
     text-align: left !important;
-} 
+}
+
+#account h2 {
+    margin-top: 20px;
+}
 /*#account #label{
     text-align: left;
 }*/
-#account input[type=text],#account input[type=email],#account input[type=date] {
+/*#account input[type=text],#account input[type=email],#account input[type=date] {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -287,7 +291,8 @@ footer {
     border-radius: 4px;
     box-sizing: border-box;
     width: 100%;
-}
+}*/
+
 #account .btn{
     text-align: left;
 }
