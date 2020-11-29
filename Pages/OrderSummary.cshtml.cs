@@ -156,11 +156,8 @@ namespace AJJDHotel.Pages
 
             }
 
-<<<<<<< HEAD
             return RedirectToPage("/OrderSummary", new { id=roomtypeid});  //if the admin's form is incomplete, refresh page
-=======
-            return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid , password = Input.Password});
->>>>>>> d499e330617e9c0d37b35a4bbfc3d5b2cf853555
+
         }
 
         // possible helper method
