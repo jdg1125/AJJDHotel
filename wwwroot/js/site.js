@@ -78,15 +78,13 @@ var showCurrentDesc = (function () {
     }
 })();
 
-//procedure - add event listeners and call relevant one-time functions
-<<<<<<< HEAD
-=======
+
 
 navIcon.addEventListener("click", showNav);
 
 if (slides != null && slides.length != 0)
     showSlides();
->>>>>>> d499e330617e9c0d37b35a4bbfc3d5b2cf853555
+
 
 navIcon.addEventListener("click", showNav);
 
