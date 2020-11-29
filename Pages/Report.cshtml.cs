@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using AJJDHotel.Models;
 using AJJDHotel.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using AJJDHotel.Utility;
 
 namespace AJJDHotel.Pages
 {
+    [Authorize(Roles = SD.AdminUser)]
+
     public class ReportModel : PageModel
     {
 

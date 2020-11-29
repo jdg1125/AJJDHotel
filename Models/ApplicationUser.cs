@@ -9,7 +9,11 @@ namespace AJJDHotel.Models
 {
     public class ApplicationUser : IdentityUser
     {
-       
+        //public EditModel(AJJDHotel.Data.ApplicationDbContext context)
+        
+        //    _context = context;
+        //
+
         [Required]
         public bool IsAdmin { get; set; }
 

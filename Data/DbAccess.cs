@@ -78,6 +78,30 @@ namespace AJJDHotel.Data
                 .First();
         }
 
+        public List<Room> GetAllAvailableRoomsByRoomType(int roomTypeId, DateTime startDate, DateTime endDate)
+        {
+            SqliteParameter startDateP = new SqliteParameter("@startDate", startDate);
+            SqliteParameter endDateP = new SqliteParameter("@endDate", endDate);
+
+            // get bad rooms
+            string getAvailableRoomsSql = @"SELECT Rooms.RoomId, RoomNumber, Rooms.RoomTypeId
+                                            FROM Rooms
+                                            INNER JOIN RoomTypes ON RoomTypes.RoomTypeId = Rooms.RoomTypeId
+                                            WHERE Rooms.RoomId NOT IN (
+	                                            SELECT Rooms.RoomId
+	                                            FROM Rooms
+	                                            INNER JOIN Reservations ON Rooms.RoomId = Reservations.RoomId
+	                                            WHERE ((Reservations.StartDate <= @startDate and Reservations.EndDate > @startDate)
+	                                                or (Reservations.StartDate < @endDate and Reservations.EndDate > @endDate)
+	                                                or (Reservations.StartDate >= @startDate and Reservations.EndDate < @endDate)))";
+
+            List<Room> results = new List<Room>();
+            results.AddRange(context.Rooms
+                .FromSqlRaw(getAvailableRoomsSql, startDateP, endDateP)
+                .Where(x => x.RoomTypeId == roomTypeId));
+            return results;
+        }
+
         public List<string> GetDistinctBeds()
         {
                 return context.RoomTypes

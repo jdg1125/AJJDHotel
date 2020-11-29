@@ -11,11 +11,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Reservation.ReservationId" />
+            <input type="hidden" asp-for="Reservation.Id" />
+
             <div class="form-group">
-                <label asp-for="Reservation.RoomId" class="control-label"></label>
+                <p>Guest has reserved room @Model.Reservation.Room.RoomNumber</p>
+                <label asp-for="Reservation.RoomId" class="control-label">Reassign room:</label>
                 <select asp-for="Reservation.RoomId" class="form-control" asp-items="ViewBag.RoomId"></select>
                 <span asp-validation-for="Reservation.RoomId" class="text-danger"></span>
             </div>
@@ -39,11 +42,7 @@
                 <input asp-for="Reservation.NumGuests" class="form-control" />
                 <span asp-validation-for="Reservation.NumGuests" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Reservation.Id" class="control-label"></label>
-                <select asp-for="Reservation.Id" class="form-control" asp-items="ViewBag.Id"></select>
-                <span asp-validation-for="Reservation.Id" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -52,7 +51,8 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="../ManageReservations" asp-route-resNumber="@Model.ResNumber" 
+       asp-route-guestEmail="@Model.GuestEmail">Back to List</a>
 </div>
 
 @section Scripts {

@@ -4,11 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using AJJDHotel.Data;
 using AJJDHotel.Models;
+using AJJDHotel.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AJJDHotel.Pages
 {
+    [Authorize(Roles = SD.AdminUser)]
+
     public class ManageRoomTypesModel : PageModel
     {
 
