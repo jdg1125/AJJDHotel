@@ -21,6 +21,7 @@ namespace AJJDHotel.Pages
         public string ResNumber { get; set; }
         public string GuestEmail { get; set; }
 
+        
         private IDbAccess _dbAccess;
         public bool WasSuccess { get; set; }
         public ManageReservationsModel(IDbAccess dbAccess)

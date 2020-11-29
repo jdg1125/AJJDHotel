@@ -126,7 +126,8 @@ namespace AJJDHotel.Pages
         {
             DateTime now = DateTime.Now;
             int age = new DateTime(DateTime.Now.Subtract(Input.DOB).Ticks).Year - 1;
-            if (age < 18) return Page();
+            if (age < 18)
+                return RedirectToPage("/OrderSummary", new { id = roomtypeid });
 
             if (ModelState.IsValid)
             {
@@ -148,12 +149,15 @@ namespace AJJDHotel.Pages
                 }
 
                 id = dbAccess.GetUserByEmail(Input.Email).Id; //Because Admin is logged in, we overwrite id regardless of whether a new account was created.
+
+                // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
+                int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
+
+                return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+
             }
 
-            // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
-            int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
-
-            return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+            return RedirectToPage("/OrderSummary", new { id=roomtypeid});  //if the admin's form is incomplete, refresh page
         }
 
         // possible helper method

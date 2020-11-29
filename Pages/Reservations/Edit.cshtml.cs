@@ -8,44 +8,59 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AJJDHotel.Data;
 using AJJDHotel.Models;
+using Microsoft.AspNetCore.Authorization;
+using AJJDHotel.Utility;
 
 namespace AJJDHotel.Pages.Reservations
 {
+    [Authorize(Roles = SD.AdminUser)]
     public class EditModel : PageModel
     {
-        private readonly AJJDHotel.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly IDbAccess _dbAccess;
 
-        public EditModel(AJJDHotel.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, IDbAccess dbAccess)
         {
             _context = context;
+            _dbAccess = dbAccess;
         }
 
         [BindProperty]
         public Reservation Reservation { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public string ResNumber { get; set; }
+        public string GuestEmail { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? id, string resNumber, string guestEmail)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
+            ResNumber = resNumber;
+            GuestEmail = guestEmail;
+
             Reservation = await _context.Reservations
                 .Include(r => r.ApplicationUser)
-                .Include(r => r.Room).FirstOrDefaultAsync(m => m.ReservationId == id);
+                .Include(r => r.Room)
+                .ThenInclude(room => room.RoomType).FirstOrDefaultAsync(m => m.ReservationId == id);
 
             if (Reservation == null)
             {
                 return NotFound();
             }
-           ViewData["Id"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-           ViewData["RoomId"] = new SelectList(_context.Rooms, "RoomId", "RoomId");
+
+            List<Room> AvailableRooms = _dbAccess.GetAllAvailableRoomsByRoomType(Reservation.Room.RoomType.RoomTypeId, 
+                Reservation.StartDate, Reservation.EndDate);
+
+           ViewData["RoomId"] = new SelectList(AvailableRooms, "RoomId", "RoomId");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string resNumber, string guestEmail)
         {
             if (!ModelState.IsValid)
             {
@@ -70,7 +85,7 @@ namespace AJJDHotel.Pages.Reservations
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../ManageReservations", new {resNumber=resNumber, guestEmail = guestEmail });
         }
 
         private bool ReservationExists(int id)

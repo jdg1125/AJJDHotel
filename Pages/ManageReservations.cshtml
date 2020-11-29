@@ -22,7 +22,11 @@
             <tr>
                 @Html.Raw(RenderRow(Model.QueryByResNum))
                 <td>
-                    <a asp-page="./Reservations/Delete" asp-route-id="@Model.QueryByResNum.ReservationId">Delete</a>
+                    <a asp-page="./Reservations/Delete" asp-route-id="@Model.QueryByResNum.ReservationId"
+                       asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail">Delete</a>
+                    <a asp-page="./Reservations/Edit" asp-route-id="@Model.QueryByResNum.ReservationId"
+                       asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail">Edit</a>
+
                 </td>
             </tr>
         }
@@ -33,7 +37,11 @@
                 <tr>
                     @Html.Raw(RenderRow(res))
                     <td>
-                        <a asp-page="./Reservations/Delete" asp-route-id="@res.ReservationId">Delete</a>
+                        <a asp-page="./Reservations/Delete" asp-route-id="@res.ReservationId"
+                           asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail">Delete</a>
+                        <a asp-page="./Reservations/Edit" asp-route-id="@res.ReservationId"
+                           asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail">Edit</a>
+
                     </td>
                 </tr>
             }

@@ -5,62 +5,8 @@
     ViewData["Title"] = "Home page";
 }
 <div id="account">
-    @Model.num
-    <!--<h1>My account</h1>
-
-    <h2>Update personal info</h2>
-
-    <form name="update-info" method="GET"
-          action="process.php">
-
-        <div class="update-box">
-            <div class="textbox">
-                <label for="first-name">First Name:</label>
-                <input type="text" placeholder="" name="first-name" value="Model.ApplicationUser.FirstName">
-            </div>
-
-            <div class="textbox">
-                <label for="Last-name">Last name:</label>
-                <input type="text" placeholder="" name="Last-name" value="Model.ApplicationUser.LastName">
-            </div>
-
-            <div class="textbox">
-                <label for="phone-number">phone number:</label>
-                <input type="text" placeholder="" name="phone-number" value="Model.ApplicationUser.PhoneNumber">
-            </div>
-
-            <div class="textbox">
-                <label for="birthday">birthday:</label>-->
-                @* <input type="date" placeholder="" name="birthday" value="">*@
-                <!--<input type="text" placeholder="01/14/1990" value="Model.ApplicationUser.DOB.ToString("d")" onfocus="(this.type='date')" onblur="(this.type='text')">
-            </div>
-
-            <div class="textbox">
-                <label for="email">email:</label>
-                <input type="email" name="email" id="email-address" placeholder="email@example.com" />
-            </div>
-
-            <input type="submit" class="btn buttonblue" name="submit" value="update" />
-            <h4>change password</h4>
-
-            <div class="textbox">
-                <label for="new-Password">New password:</label>
-                <input type="password" placeholder="password" name="new-Password" value="">
-            </div>
-
-            <div class="textbox">
-                <label for="retype-Password">retype password:</label>
-                <input type="password" placeholder="password" name="retype-Password" value="">
-            </div>
-
-            <div class="textbox">
-                <label for="old-Password">old password:</label>
-                <input type="password" placeholder="password" name="old-Password" value="">
-                <br>
-                <input type="submit" class="btn buttonblue" name="submit" value="change" />
-            </div>
-    </form>-->
-
+  @* @Model.num *@
+    
     <h2>My reservations</h2>
     <table id="accReservationTable" border="1">
         <thead>
@@ -91,14 +37,16 @@
                     {
                         <a asp-page="/myaccount" asp-route-ID="@r.ReservationId" asp-page-handler="Cancel">
                             <button type="submit" class="button buttonblue cancel">Cancel</button>
-                            </a>
-                            }
-                    </th>
+                        </a>
+                    }
+                </th>
             </tr>
         }
     </table>
-
+    
+    
+       
     @*<h2>Manage my account </h2>
-    <input type="button" class="btn buttonblue" id="submit" value="Delete my account" />*@
+            <input type="button" class="btn buttonblue" id="submit" value="Delete my account" />*@
 
 </div>

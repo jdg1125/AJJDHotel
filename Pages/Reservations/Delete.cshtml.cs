@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AJJDHotel.Data;
 using AJJDHotel.Models;
+using Microsoft.AspNetCore.Authorization;
+using AJJDHotel.Utility;
 
 namespace AJJDHotel.Pages.Reservations
 {
+    [Authorize(Roles=SD.AdminUser)]
     public class DeleteModel : PageModel
     {
         private readonly AJJDHotel.Data.ApplicationDbContext _context;
@@ -22,8 +25,14 @@ namespace AJJDHotel.Pages.Reservations
         [BindProperty]
         public Reservation Reservation { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public string ResNumber { get; set; }
+        public string GuestEmail { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? id, string resNumber, string guestEmail)
         {
+            ResNumber = resNumber;
+            GuestEmail = guestEmail;
+
             if (id == null)
             {
                 return NotFound();
@@ -40,7 +49,7 @@ namespace AJJDHotel.Pages.Reservations
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, string resNumber, string guestEmail)
         {
             if (id == null)
             {
@@ -55,7 +64,7 @@ namespace AJJDHotel.Pages.Reservations
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../ManageReservations", new { resNumber=resNumber, guestEmail=guestEmail});
         }
     }
 }

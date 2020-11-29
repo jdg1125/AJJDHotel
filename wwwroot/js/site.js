@@ -67,7 +67,7 @@ var showCurrentDesc = (function () {
 
         oneToShow = results[(this.value).split('_')[1]];
         console.log(oneToShow)
-        
+
 
         oneToShow.classList.remove("hideRes");
         oneToShow.classList.add("textbox");
@@ -75,17 +75,15 @@ var showCurrentDesc = (function () {
     }
 })();
 
-    //procedure - add event listeners and call relevant one-time functions
+//procedure - add event listeners and call relevant one-time functions
 
-    navIcon.addEventListener("click", showNav);
+navIcon.addEventListener("click", showNav);
 
-    if (slides != null && slides.length != 0)
-        showSlides();
+if (slides != null && slides.length != 0)
+    showSlides();
 
-
-
-    if (roomTypeSelect != null)
-        roomTypeSelect.addEventListener("click", showCurrentDesc);
+if (roomTypeSelect != null)
+    roomTypeSelect.addEventListener("click", showCurrentDesc);
 
 
 
