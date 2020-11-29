@@ -1,11 +1,11 @@
 ﻿@page
 @using AJJDHotel.Utility
-@model AJJDHotel.Pages.MyAccountModel
+@model AJJDHotel.Pages.MyReservationsModel
 @{
     ViewData["Title"] = "Home page";
 }
 <div id="account">
-    @Model.num
+
     <!--<h1>My account</h1>
 
     <h2>Update personal info</h2>
@@ -31,8 +31,8 @@
 
             <div class="textbox">
                 <label for="birthday">birthday:</label>-->
-                @* <input type="date" placeholder="" name="birthday" value="">*@
-                <!--<input type="text" placeholder="01/14/1990" value="Model.ApplicationUser.DOB.ToString("d")" onfocus="(this.type='date')" onblur="(this.type='text')">
+    @* <input type="date" placeholder="" name="birthday" value="">*@
+    <!--<input type="text" placeholder="01/14/1990" value="Model.ApplicationUser.DOB.ToString("d")" onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
 
             <div class="textbox">
@@ -61,7 +61,7 @@
             </div>
     </form>-->
 
-    <h2>My reservations</h2>
+    <h1>My reservations</h1>
     <table id="accReservationTable" border="1">
         <thead>
             <tr>
@@ -72,7 +72,7 @@
                 <th>Date</th>
                 <th>Total charge</th>
                 <th>Number of guests</th>
-                <th></th>
+                <th>Cancel reservation*</th>
             </tr>
         </thead>
         @foreach (var r in Model.UsersReservations)
@@ -80,25 +80,33 @@
             int confNum = Model.MakeConfirmationNumber(r.ReservationId);
             <tr>
                 <th>@confNum</th>
-                <th>n/a</th>
-                <th>n/a</th>
-                <th>n/a</th>
+                <th>@r.Room.RoomType.RoomName</th>
+                <th>@r.Room.RoomType.Beds</th>
+                <th>@r.Room.RoomType.View</th>
                 <th>@r.StartDate.ToShortDateString() &ndash; @r.EndDate.ToString("d")</th>
-                <th>@r.TotalCharge</th>
+                <th>@string.Format("{0:C}", r.TotalCharge)</th>
                 <th>@r.NumGuests</th>
                 <th>
                     @if ((r.StartDate - DateTime.Today).TotalDays > 2)
                     {
-                        <a asp-page="/myaccount" asp-route-ID="@r.ReservationId" asp-page-handler="Cancel">
+                        @*<a asp-page="/MyReservations" asp-route-ID="@r.ReservationId" asp-page-handler="Cancel">
+                                <button type="submit" class="button buttonblue cancel">Cancel</button>
+                            </a>*@
+                        <form method="post">
+                            <input type="hidden" id="ReservationId" name="ReservationId" value="@r.ReservationId" />
                             <button type="submit" class="button buttonblue cancel">Cancel</button>
-                            </a>
-                            }
-                    </th>
+                        </form>
+                    }
+                </th>
             </tr>
         }
     </table>
 
+    <h6 style="margin-top: 7px">*To cancel a reservation less than 2 days away, please call hotel support.</h6>
+
     @*<h2>Manage my account </h2>
-    <input type="button" class="btn buttonblue" id="submit" value="Delete my account" />*@
+        <input type="button" class="btn buttonblue" id="submit" value="Delete my account" />*@
+    <br />
+    <h3>To change your personal info, visit <a href="~/Identity/Account/Manage">Manage your account</a> page.</h3>
 
 </div>

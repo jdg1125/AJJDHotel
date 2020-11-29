@@ -8,7 +8,7 @@
 
     <div class="textContainer">
     <h1>Thank you, your room has been reserved.</h1>
-    <p>Please check your email for order confirmation number or visit <a href="~/MyAccount">My Account</a> to review reservation information.</p>
+    <p>Please check your email for order confirmation number or visit <a href="~/MyReservations">My Reservations</a> to review reservation information.</p>
     <h3>Confirmation number: @Model.ConfirmationNumber</h3>
     <h4>Dates of your stay: @Model.Reservation.StartDate.Date.ToString("D") &mdash; @Model.Reservation.EndDate.Date.ToString("D")</h4>
     <h5>Total charge: @string.Format("{0:C}",Model.Reservation.TotalCharge) </h5>
