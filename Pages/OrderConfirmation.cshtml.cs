@@ -10,9 +10,11 @@ using System.Net;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AJJDHotel.Pages
 {
+    [Authorize]
     public class OrderConfirmationModel : PageModel
     {
         private readonly IDbAccess dbAccess;
