@@ -150,9 +150,14 @@ namespace AJJDHotel.Pages
                 id = dbAccess.GetUserByEmail(Input.Email).Id; //Because Admin is logged in, we overwrite id regardless of whether a new account was created.
 
                 // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
-                int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
-
+                int resId=-1; 
+                bool CanMakeRes =dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id, ref resId);
+                if(CanMakeRes){
                 return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+                }
+                else{
+                    return RedirectToPage("SearchResults", new{start=startdate,enddate=enddate });
+                }
 
             }
 

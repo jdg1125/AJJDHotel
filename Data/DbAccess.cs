@@ -42,14 +42,23 @@ namespace AJJDHotel.Data
         }
 
 
-        public int CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId)
+        public bool CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId,ref int resId)
         {
+            List<RoomType> free= GetAvailableRoomTypes(startDate,endDate);
+            List<RoomType> matches= free.Where(p => p.RoomTypeId==roomId).ToList();
+
+            if (matches.Count<1)
+            {
+                return false;
+            }
+            else{
             Reservation myRes = new Reservation { StartDate = startDate, EndDate = endDate, NumGuests = numGuests, RoomId = roomId, TotalCharge = totalCharge, Id = userId };
             context.Reservations
                 .Add(myRes);
             var affectedRecords = context.SaveChanges();
             // returns the PK of the reservation that was just made
-            return myRes.ReservationId;
+            resId = myRes.ReservationId;
+           return true;}
 
         }
 
