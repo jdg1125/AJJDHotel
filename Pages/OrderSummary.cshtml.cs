@@ -152,11 +152,20 @@ namespace AJJDHotel.Pages
                 // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
                 int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
 
-                return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+                if (result.Succeeded) 
+                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, password=Input.Password });
+                else
+                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
 
             }
 
-            return RedirectToPage("/OrderSummary", new { id=roomtypeid});  //if the admin's form is incomplete, refresh page
+            if (UserManager.IsInRoleAsync(await UserManager.FindByIdAsync(id), SD.CustomerUser).Result)
+            {
+                int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
+                return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId=roomtypeid });
+            }
+
+            return RedirectToPage("/OrderSummary", new { id = roomtypeid });  //if the admin's form is incomplete, refresh page
 
         }
 
