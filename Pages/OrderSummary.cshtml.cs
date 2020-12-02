@@ -153,9 +153,9 @@ namespace AJJDHotel.Pages
                 int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
 
                 if (result.Succeeded) 
-                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, password=Input.Password });
+                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, password=Input.Password, firstName = Input.FirstName, lastName = Input.LastName});
                 else
-                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, firstName = Input.FirstName, lastName = Input.LastName });
 
             }
 
