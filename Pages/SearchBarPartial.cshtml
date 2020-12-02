@@ -2,32 +2,46 @@
 @{
     string today = DateTime.Today.ToString("u");
     today = today.Substring(0, today.IndexOf(' '));
+
+    string tomorrow = DateTime.Today.AddDays(1).ToString("u");
+    tomorrow = tomorrow.Substring(0, tomorrow.IndexOf(' '));
+
+    string maxStart = DateTime.Today.AddYears(2).ToString("u");
+    maxStart = maxStart.Substring(0, maxStart.IndexOf(' '));
+
+    string maxEnd = DateTime.Today.AddDays(1).AddYears(2).ToString("u");
+    maxEnd = maxEnd.Substring(0, maxEnd.IndexOf(' '));
 }
 <form method="Post">
     <div class="searchBar">
 
         <label for="checkin">
             Check-in:
+
+
             <input type="date" id="checkin" name="checkin"
                    value="@today"
-                   min="@today" max="2021-12-31" onchange="dateValidation()" />
+                   min="@today" max="@maxStart" />
         </label>
         <label for="checkout">
             Check-out:
+
+
             <input type="date" id="checkout" name="checkout"
-                   value="@today"
-                   min="@today" max="2021-12-31" />
+                   value="@tomorrow"
+                   min="@tomorrow" max="@maxEnd" />
         </label>
         <label for="numGuests">
             Number of guests:
+
+
             <select id="numGuests" name="numGuests">
                 @Html.Raw(@RenderDropDown(Model));
             </select>
         </label>
-        <label for="submit">
-            @*<a href="~/SearchResults?sorry=false"><button class="btn buttonblue" id="submit" value="Search">Search</button></a>*@
-            <input type="submit" class="btn buttonblue" value="Search">
-        </label>
+        <label for="submit"> </label>
+
+        <input type="submit" class="btn buttonblue" value="Search">
 
     </div>
 </form>
@@ -44,10 +58,4 @@
 }
 
 
-<script>
-    function dateValidation() {
-        var mindate = document.getElementById("checkin");
-        var maxdate = document.getElementById("checkout");
-        maxdate.min = mindate.value;
-    }
-</script>
+ 

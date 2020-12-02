@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AJJDHotel.Data;
 using AJJDHotel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,12 @@ namespace AJJDHotel.Areas.Identity.Pages.Account.Manage
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.context = context;
         }
 
         public string Username { get; set; }
@@ -43,6 +46,8 @@ namespace AJJDHotel.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
         }
+
+        public ApplicationDbContext context;
 
         private async Task LoadAsync(ApplicationUser user)
         {
@@ -102,15 +107,26 @@ namespace AJJDHotel.Areas.Identity.Pages.Account.Manage
             // probs want a fancy get and set method with some valiation or something?/ error checking 
             if (Input.FirstName != user.FirstName)
             {
+                var fname = context.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault(f => f.FirstName == user.FirstName);
+                if(fname != null)
+                {
+                    fname.FirstName = Input.FirstName;
+                    context.ApplicationUsers.Update(fname);
+                    context.SaveChanges();
+                }  
                 user.FirstName = Input.FirstName;
             }
             if (Input.LastName != user.LastName)
             {
+                var lname = context.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault(l => l.LastName == user.LastName);
+                if(lname != null)
+                {
+                    lname.LastName = Input.LastName;
+                    context.ApplicationUsers.Update(lname);
+                    context.SaveChanges();
+                }
                 user.LastName = Input.LastName;
             }
-
-            
-
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

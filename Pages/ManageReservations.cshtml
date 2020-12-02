@@ -9,6 +9,8 @@
     <table class="resTable">
         <tr>
             <th>Confirmation Number</th>
+            <th>Guest Name</th>
+            <th>Guest Email</th>
             <th>Room Number</th>
             <th>Room Type</th>
             <th>Check-in date</th>
@@ -63,6 +65,12 @@ else
 
         sb.Append(open);
         sb.Append((8744304 + res.ReservationId));
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(Model.Guest.FirstName + " " + Model.Guest.LastName);
+        sb.Append(close);
+        sb.Append(open);
+        sb.Append(Model.Guest.Email);
         sb.Append(close);
         sb.Append(open);
         sb.Append(res.Room.RoomNumber);
