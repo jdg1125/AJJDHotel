@@ -20,10 +20,24 @@ if (document.getElementById("numOfRoomTypes") !== null) {
     }
 }
 
-//results = [document.getElementById("result_0"), document.getElementById("result_1"), document.getElementById("result_2")];
+//updating DatePickers
+var start = document.getElementById("checkin");
+var end = document.getElementById("checkout");
+if (start != null) {
+    start.valueAsDate = new Date(start.value);
+
+    start.onchange = function () {
+        end.valueAsDate = new Date();
+        let endDate = new Date(start.value);
+        endDate.setDate(endDate.getDate() + 1);
+        end.valueAsDate = new Date(endDate);
+        end.min = end.value;
+        
+    }
+}
+
 
 //define functions
-
 
 function showSlides() {
 
