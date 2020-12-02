@@ -27,7 +27,9 @@
     }
     <option value="Any" selected="selected"> Any</option>
 </select>
+<br/>
 
+<span class="DateSearchStr"><span id="Marker">checkin: </span>@String.Format("{0:M/d/yyyy}", Model.checkin) <span id="hypthen">-</span> <span id="Marker">checkout: </span>@String.Format("{0:M/d/yyyy}", Model.checkin)</span> 
 
 <br />
 <partial name="ResultItemPartial" model="Model.AvailableRoomTypes" />
