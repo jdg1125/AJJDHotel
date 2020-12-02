@@ -30,6 +30,7 @@ namespace AJJDHotel.Pages.Reservations
 
         public string ResNumber { get; set; }
         public string GuestEmail { get; set; }
+        public int numDays { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id, string resNumber, string guestEmail)
         {
@@ -53,20 +54,20 @@ namespace AJJDHotel.Pages.Reservations
 
             List<Room> AvailableRooms = _dbAccess.GetAllAvailableRoomsByRoomType(Reservation.Room.RoomType.RoomTypeId, 
                 Reservation.StartDate, Reservation.EndDate);
-
+            AvailableRooms.Add(Reservation.Room);
            ViewData["RoomId"] = new SelectList(AvailableRooms, "RoomId", "RoomId");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(string resNumber, string guestEmail)
+        public async Task<IActionResult> OnPostAsync(string resNumber, string guestEmail, int numDays)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || Reservation.EndDate <= Reservation.StartDate)
             {
                 return Page();
             }
-
+            ReduceTotalCharge(numDays);
             _context.Attach(Reservation).State = EntityState.Modified;
 
             try
@@ -91,6 +92,12 @@ namespace AJJDHotel.Pages.Reservations
         private bool ReservationExists(int id)
         {
             return _context.Reservations.Any(e => e.ReservationId == id);
+        }
+
+        public void ReduceTotalCharge(int numDays)
+        {
+            int new_numDays = (Reservation.EndDate - Reservation.StartDate).Days;
+            Reservation.TotalCharge *= ((decimal)new_numDays / numDays);
         }
     }
 }
