@@ -44,8 +44,9 @@ namespace AJJDHotel.Data
 
         public bool CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId,ref int resId)
         {
+	    var Room = context.Rooms.Find(roomId);
             List<RoomType> free= GetAvailableRoomTypes(startDate,endDate);
-            List<RoomType> matches= free.Where(p => p.RoomTypeId==roomId).ToList();
+            List<RoomType> matches= free.Where(p => p.RoomTypeId==Room.RoomTypeId).ToList();
 
             if (matches.Count<1)
             {
