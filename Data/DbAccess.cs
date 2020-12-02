@@ -75,7 +75,7 @@ namespace AJJDHotel.Data
             return context.Rooms
                 .FromSqlRaw(getAvailableRoomsSql, startDateP, endDateP)
                 .Where(x => x.RoomTypeId == roomTypeId)
-                .First();
+                .FirstOrDefault();
         }
 
         public List<Room> GetAllAvailableRoomsByRoomType(int roomTypeId, DateTime startDate, DateTime endDate)
