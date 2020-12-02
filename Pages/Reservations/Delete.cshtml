@@ -55,6 +55,7 @@
           asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail">
         <input type="hidden" asp-for="Reservation.ReservationId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="../ManageReservations" asp-route-resNumber="@Model.ResNumber" 
+       asp-route-guestEmail="@Model.GuestEmail">Back to List</a>
     </form>
 </div>

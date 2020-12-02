@@ -21,6 +21,7 @@ namespace AJJDHotel.Pages
         public string ResNumber { get; set; }
         public string GuestEmail { get; set; }
 
+        public ApplicationUser Guest;
         
         private IDbAccess _dbAccess;
         public bool WasSuccess { get; set; }
@@ -38,16 +39,20 @@ namespace AJJDHotel.Pages
             if (ResNumber != null)
             {
                 if ((WasSuccess = Int32.TryParse(ResNumber, out int numAsInt)))
-                    WasSuccess = (QueryByResNum = _dbAccess.GetReservationByConfirmation(numAsInt)) == null ? false : true;
+                    if ((WasSuccess = (QueryByResNum = _dbAccess.GetReservationByConfirmation(numAsInt)) == null ? false : true))
+                        Guest = _dbAccess.GetUserById(QueryByResNum.Id);
+
             }
             else if (GuestEmail != null)
             {
-                ApplicationUser user;
-                if ((WasSuccess = (user = _dbAccess.GetUserByEmail(GuestEmail)) != null))
-                    WasSuccess = (QueryByEmail = _dbAccess.GetReservationsByUserId(user.Id)).Count == 0 ? false : true;
+                if ((WasSuccess = (Guest = _dbAccess.GetUserByEmail(GuestEmail)) != null))
+                    WasSuccess = (QueryByEmail = _dbAccess.GetReservationsByUserId(Guest.Id)).Count == 0 ? false : true;
             }
             else
                 WasSuccess = false;
+
+
+
         }
     }
 }

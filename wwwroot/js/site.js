@@ -24,7 +24,7 @@ if (document.getElementById("numOfRoomTypes") !== null) {
 var start = document.getElementById("checkin");
 var end = document.getElementById("checkout");
 if (start != null) {
-    start.valueAsDate = new Date();
+    start.valueAsDate = new Date(start.value);
 
     start.onchange = function () {
         end.valueAsDate = new Date();
@@ -32,6 +32,7 @@ if (start != null) {
         endDate.setDate(endDate.getDate() + 1);
         end.valueAsDate = new Date(endDate);
         end.min = end.value;
+        
     }
 }
 
