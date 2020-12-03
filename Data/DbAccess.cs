@@ -249,6 +249,16 @@ namespace AJJDHotel.Data
         {
             var affectedRecords = context.SaveChanges();
         }
+        public bool IsRoomOpen(int roomtypeId, DateTime startDate, DateTime endDate){
+            List<RoomType> free= GetAvailableRoomTypes(startDate,endDate);
+            List<RoomType> matches= free.Where(p => p.RoomTypeId==roomtypeId).ToList();
+            if (matches.Count<1)
+            {
+                return false;
+            }
+            else{return true;}
+
+        }
 
 
 
