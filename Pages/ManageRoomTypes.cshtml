@@ -23,6 +23,7 @@
                     }
 
                 </select>
+                <input type="hidden" id="index" name="Index" value="-1" />
             </div>
         </div>
 
@@ -34,33 +35,33 @@
 
                 <img src="@Model.RoomTypeList[i].ImgPath" alt="testImg" height="128" width="128" />
                 <div>
-                    <input type="hidden" id="RoomTypeId" name="RoomTypeId" value="@Model.RoomTypeList[i].RoomTypeId" />
+                    <input type="hidden" id="RoomTypeId" name="RoomTypeId[@i]" value="@Model.RoomTypeList[i].RoomTypeId" />
                 </div>
                 <div>
                     <label for="RoomName">Room Name</label>
-                    <input type="text" id="RoomName" class="form-control" name="RoomName" value="@Model.RoomTypeList[i].RoomName">
+                    <input type="text" id="RoomName" class="form-control" name="RoomName[@i]" value="@Model.RoomTypeList[i].RoomName">
                 </div>
                 <div>
                     <label for="Description">Description</label>
-                    <textarea id="Description" rows="5" class="form-control" name="Description" value="">@Model.RoomTypeList[i].Description</textarea>
+                    <textarea id="Description" rows="5" class="form-control" name="Description[@i]" value="">@Model.RoomTypeList[i].Description</textarea>
                 </div>
 
                 <div>
                     <label for="View">View</label>
-                    <input type="text" id="View" class="form-control" name="View" value="@Model.RoomTypeList[i].View">
+                    <input type="text" id="View" class="form-control" name="View[@i]" value="@Model.RoomTypeList[i].View">
                 </div>
 
                 <div>
                     <label for="Beds">Beds</label>
-                    <input type="text" id="Beds" class="form-control" name="Beds" value="@Model.RoomTypeList[i].Beds">
+                    <input type="text" id="Beds" class="form-control" name="Beds[@i]" value="@Model.RoomTypeList[i].Beds">
                 </div>
                 <div>
                     <label for="Rate">Rate per night</label>
-                    <input type="number" id="Rate" class="form-control" name="Rate" value="@Model.RoomTypeList[i].Rate">
+                    <input type="number" id="Rate" class="form-control" name="Rate[@i]" value="@Model.RoomTypeList[i].Rate">
                 </div>
                 <div>
                     <label for="ImgPath">ImageURL</label>
-                    <input type="text" id="ImgPath" class="form-control" name="ImgPath" value="@Model.RoomTypeList[i].ImgPath">
+                    <input type="text" id="ImgPath" class="form-control" name="ImgPath[@i]" value="@Model.RoomTypeList[i].ImgPath">
                 </div>
 
             </div>
@@ -69,3 +70,16 @@
     </form>
 
 </div>
+
+
+@section Scripts {
+    <script>
+        var selector = document.getElementById("roomTypeSelect");
+        var index = document.getElementById("index");
+
+        selector.onchange = function () {
+            var rawString = selector.options[selector.selectedIndex].value;
+            index.value = rawString.split('_')[1];
+        };
+    </script>
+} 
