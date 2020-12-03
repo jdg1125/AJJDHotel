@@ -4,7 +4,7 @@ CSCI 3600 Project
 If you want to test the site with existing credentials, these allow you to access the two roles:
 
 Administrator
-username: jdg1125@gmail.com
+username: uxfre@brillionhistoricalsociety.com
 pw: P@ssword1
 
 Customer 
