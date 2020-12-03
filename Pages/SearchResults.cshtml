@@ -9,25 +9,28 @@
     <partial name="SearchBarPartial" model="5" />
 </div>
 
-<label for="bedViewBy">Beds</label>
-<select id="bedViewBy" onChange="bedBox()">
-    @foreach (var bed in Model.BedTypes)
-    {
-        <option value="@bed">@bed</option>
-    }
-    <option value="Any" selected="selected"> Any</option>
-</select>
+<form>
+    <label for="bedViewBy">Beds</label>
+    <select id="bedViewBy" onChange="bedBox()">
+        @foreach (var bed in Model.BedTypes)
+        {
+            <option value="@bed">@bed</option>
+        }
+        <option value="Any" selected="selected"> Any</option>
+    </select>
 
 
-<label for="viewViewBy">View</label>
-<select id="viewViewBy" onChange="viewBox()">
-    @foreach (var view in Model.ViewTypes)
-    {
-        <option value="@view">@view</option>
-    }
-    <option value="Any" selected="selected"> Any</option>
-</select>
-<br/>
+    <label for="viewViewBy">View</label>
+    <select id="viewViewBy" onChange="viewBox()">
+        @foreach (var view in Model.ViewTypes)
+        {
+            <option value="@view">@view</option>
+        }
+        <option value="Any" selected="selected"> Any</option>
+    </select>
+</form>
+<br />
+
 
 <span class="DateSearchStr"><span id="Marker">checkin: </span>@Model.checkin.ToShortDateString() <span id="hypthen">-</span> <span id="Marker">checkout: </span>@Model.checkout.ToShortDateString()</span> 
 
