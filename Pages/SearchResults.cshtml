@@ -31,7 +31,8 @@
 </form>
 <br />
 
-<span class="DateSearchStr"><span id="Marker">checkin: </span>@String.Format("{0:M/d/yyyy}", Model.checkin) <span id="hypthen">-</span> <span id="Marker">checkout: </span>@String.Format("{0:M/d/yyyy}", Model.checkin)</span>
+
+<span class="DateSearchStr"><span id="Marker">checkin: </span>@Model.checkin.ToShortDateString() <span id="hypthen">-</span> <span id="Marker">checkout: </span>@Model.checkout.ToShortDateString()</span> 
 
 <br />
 <partial name="ResultItemPartial" model="Model.AvailableRoomTypes" />
