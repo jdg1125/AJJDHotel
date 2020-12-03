@@ -55,7 +55,9 @@ namespace AJJDHotel.Pages.Reservations
             List<Room> AvailableRooms = _dbAccess.GetAllAvailableRoomsByRoomType(Reservation.Room.RoomType.RoomTypeId, 
                 Reservation.StartDate, Reservation.EndDate);
             AvailableRooms.Add(Reservation.Room);
-           ViewData["RoomId"] = new SelectList(AvailableRooms, "RoomId", "RoomId");
+
+           ViewData["RoomId"] = new SelectList(AvailableRooms, nameof(Room.RoomId), nameof(Room.RoomNumber));
+
             return Page();
         }
 

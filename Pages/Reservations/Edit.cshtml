@@ -5,8 +5,8 @@
     ViewData["Title"] = "Edit";
 }
 @{
-    var newStartDate = Model.Reservation.StartDate.ToString("s") + "Z";
-    var newEndDate = Model.Reservation.EndDate.AddDays(-1).ToString("s") + "Z";
+    var newStartDate = Model.Reservation.StartDate.ToString("s")+".000";
+    var newEndDate = Model.Reservation.EndDate.AddDays(-1).ToString("s")+".000";
     int numDays = (Model.Reservation.EndDate - Model.Reservation.StartDate).Days;
 }
 
@@ -16,7 +16,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail" asp-route-numDays = "@numDays">
+        <form method="post" asp-route-resNumber="@Model.ResNumber" asp-route-guestEmail="@Model.GuestEmail" asp-route-numDays="@numDays">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Reservation.ReservationId" />
             <input type="hidden" asp-for="Reservation.Id" />
@@ -30,19 +31,23 @@
 
 
             <div class="form-group">
-                @*<label asp-for="Reservation.StartDate" class="control-label"></label>*@
-                <input asp-for="Reservation.StartDate" class="form-control"
+
+                <label asp-for="Reservation.StartDate" class="control-label"></label>
+                <input id="start" asp-for="Reservation.StartDate" class="form-control"
+
                        min="@newStartDate" max="@newEndDate" />
                 <span asp-validation-for="Reservation.StartDate" class="text-danger"></span>
             </div>
 
             @{
-                var newStartDate2 = Model.Reservation.StartDate.AddDays(1).ToString("s") + "Z";
-                var newEndDate2 = Model.Reservation.EndDate.ToString("s") + "Z";
+
+                var newStartDate2 = Model.Reservation.StartDate.AddDays(1).ToString("s")+".000";
+                var newEndDate2 = Model.Reservation.EndDate.ToString("s")+".000";
             }
             <div class="form-group">
                 <label asp-for="Reservation.EndDate" class="control-label"></label>
-                <input asp-for="Reservation.EndDate" class="form-control"
+                <input id="end" asp-for="Reservation.EndDate"  class="form-control"
+
                        min="@newStartDate2" max="@newEndDate2" />
                 <span asp-validation-for="Reservation.EndDate" class="text-danger"></span>
             </div>
@@ -71,4 +76,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   
 }
