@@ -6,6 +6,7 @@ using AJJDHotel.Data;
 using AJJDHotel.Models;
 using AJJDHotel.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -23,19 +24,21 @@ namespace AJJDHotel.Pages
         public Room Room { get; set; }
 
         [BindProperty]
-        public int RoomTypeId { get; set; }
+        public int Index { get; set; }
         [BindProperty]
-        public string Description { get; set; }
+        public List<int> RoomTypeId { get; set; }
         [BindProperty]
-        public string Beds { get; set; }
+        public List<string> Description { get; set; }
         [BindProperty]
-        public string View { get; set; }
+        public List<string> Beds { get; set; }
         [BindProperty]
-        public string RoomName { get; set; }
+        public List<string> View { get; set; }
         [BindProperty]
-        public decimal Rate { get; set; }
+        public List<string> RoomName { get; set; }
         [BindProperty]
-        public string ImgPath { get; set; }
+        public List<decimal> Rate { get; set; }
+        [BindProperty]
+        public List<string> ImgPath { get; set; }
 
 
         public ManageRoomTypesModel(IDbAccess dbAccess)
@@ -52,7 +55,7 @@ namespace AJJDHotel.Pages
 
         public IActionResult OnPost()
         {
-            dbAccess.UpdateRoomType(RoomTypeId, Description, Beds, View, RoomName, Rate, ImgPath);
+            dbAccess.UpdateRoomType(RoomTypeId[Index], Description[Index], Beds[Index], View[Index], RoomName[Index], Rate[Index], ImgPath[Index]);
             return new RedirectToPageResult("ManageRoomTypes");
         }
     }
