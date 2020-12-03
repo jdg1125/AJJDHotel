@@ -127,6 +127,8 @@ namespace AJJDHotel.Pages
         public async Task<IActionResult> OnPost(DateTime startdate, DateTime enddate, int numguests, int roomid, decimal totalcharge, string id, int roomtypeid)
         {
             DateTime now = DateTime.Now;
+            if(Input.DOB > DateTime.Now)
+                return RedirectToPage("/OrderSummary", new { id = roomtypeid });
             int age = new DateTime(DateTime.Now.Subtract(Input.DOB).Ticks).Year - 1;
             if (age < 18)
                 return RedirectToPage("/OrderSummary", new { id = roomtypeid });
@@ -145,6 +147,7 @@ namespace AJJDHotel.Pages
                 Input.Password = GeneratePassword();
                 var result = await UserManager.CreateAsync(user, Input.Password);
                 int resId=-1;
+                
                 if (result.Succeeded)
                 {
                     AJJDEmailRegister();
