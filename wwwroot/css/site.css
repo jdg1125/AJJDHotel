@@ -372,4 +372,12 @@ footer {
 .hideBed {
     display: none;
 }
+.DateSearchStr{
+    display: inline;
+    padding-top: 50px;
+    font-size: xx-large;
+}
+/* .DateSearchStr #Marker{
+    color: #003049;
+} */
 

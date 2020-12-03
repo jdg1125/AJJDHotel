@@ -10,9 +10,11 @@ using System.Net;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AJJDHotel.Pages
 {
+    [Authorize]
     public class OrderConfirmationModel : PageModel
     {
         private readonly IDbAccess dbAccess;
@@ -25,6 +27,11 @@ namespace AJJDHotel.Pages
         public int ConfirmationNumber { get; set; }
         public string Password { get; set; }
 
+        [BindProperty]
+        public string FirstName { get; set; }
+        [BindProperty]
+        public string LastName { get; set; }
+
         public OrderConfirmationModel(IDbAccess dbAccess)
         {
             this.dbAccess = dbAccess;
@@ -32,9 +39,12 @@ namespace AJJDHotel.Pages
         }
 
 
-        public void OnGet(int reservationId, int roomTypeId, string password)
+        public void OnGet(int reservationId, int roomTypeId, string password, string firstName, string lastName)
         {
             Password = password;
+
+            FirstName = firstName;
+            LastName = lastName;
 
             ConfirmationNumber = MakeConfirmationNumber(reservationId);
 
@@ -43,6 +53,8 @@ namespace AJJDHotel.Pages
             RoomType = dbAccess.GetRoomTypeByRoomTypeId(roomTypeId);
 
             AJJDEmailReservation(ConfirmationNumber);
+
+
         }
 
         public int MakeConfirmationNumber(int pk)

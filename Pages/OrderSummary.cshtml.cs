@@ -150,19 +150,26 @@ namespace AJJDHotel.Pages
                 id = dbAccess.GetUserByEmail(Input.Email).Id; //Because Admin is logged in, we overwrite id regardless of whether a new account was created.
 
                 // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
+
                 int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
 
                 if (result.Succeeded) 
-                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, password=Input.Password });
+                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, password=Input.Password, firstName = Input.FirstName, lastName = Input.LastName});
                 else
-                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+                    return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, firstName = Input.FirstName, lastName = Input.LastName });
 
             }
 
             if (UserManager.IsInRoleAsync(await UserManager.FindByIdAsync(id), SD.CustomerUser).Result)
             {
-                int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
-                return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId=roomtypeid });
+                            int resId=-1; 
+                bool CanMakeRes =dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id, ref resId);
+                if(CanMakeRes){
+                return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid });
+                }
+                else{
+                    return RedirectToPage("SearchResults", new{start=startdate,enddate=enddate });
+                }
             }
 
             return RedirectToPage("/OrderSummary", new { id = roomtypeid });  //if the admin's form is incomplete, refresh page

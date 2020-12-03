@@ -9,7 +9,7 @@ namespace AJJDHotel.Data
     public interface IDbAccess
     {
         List<RoomType> GetAvailableRoomTypes(DateTime startDate, DateTime endDate);
-        int CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId);
+        bool CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId,ref int resId);
         Reservation GetReservationByConfirmationNumber(int confirmationNumber);
         Reservation GetReservationByReservationId(int reservationId);
         List<Reservation> GetReservationsByUserId(string userId);

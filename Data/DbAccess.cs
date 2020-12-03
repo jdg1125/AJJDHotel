@@ -42,14 +42,24 @@ namespace AJJDHotel.Data
         }
 
 
-        public int CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId)
+        public bool CreateReservation(DateTime startDate, DateTime endDate, int numGuests, int roomId, decimal totalCharge, string userId,ref int resId)
         {
+	    var Room = context.Rooms.Find(roomId);
+            List<RoomType> free= GetAvailableRoomTypes(startDate,endDate);
+            List<RoomType> matches= free.Where(p => p.RoomTypeId==Room.RoomTypeId).ToList();
+
+            if (matches.Count<1)
+            {
+                return false;
+            }
+            else{
             Reservation myRes = new Reservation { StartDate = startDate, EndDate = endDate, NumGuests = numGuests, RoomId = roomId, TotalCharge = totalCharge, Id = userId };
             context.Reservations
                 .Add(myRes);
             var affectedRecords = context.SaveChanges();
             // returns the PK of the reservation that was just made
-            return myRes.ReservationId;
+            resId = myRes.ReservationId;
+           return true;}
 
         }
 
@@ -75,7 +85,7 @@ namespace AJJDHotel.Data
             return context.Rooms
                 .FromSqlRaw(getAvailableRoomsSql, startDateP, endDateP)
                 .Where(x => x.RoomTypeId == roomTypeId)
-                .First();
+                .FirstOrDefault();
         }
 
         public List<Room> GetAllAvailableRoomsByRoomType(int roomTypeId, DateTime startDate, DateTime endDate)
