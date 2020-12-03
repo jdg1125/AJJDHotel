@@ -11,6 +11,7 @@ using System.Net.Mail;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
+using AJJDHotel.Utility;
 
 namespace AJJDHotel.Pages
 {
@@ -32,6 +33,9 @@ namespace AJJDHotel.Pages
         [BindProperty]
         public string LastName { get; set; }
 
+        [BindProperty]
+        public string Email { get; set; }
+
         public OrderConfirmationModel(IDbAccess dbAccess)
         {
             this.dbAccess = dbAccess;
@@ -39,12 +43,13 @@ namespace AJJDHotel.Pages
         }
 
 
-        public void OnGet(int reservationId, int roomTypeId, string password, string firstName, string lastName)
+        public void OnGet(int reservationId, int roomTypeId, string password, string firstName, string lastName, string email)
         {
             Password = password;
 
             FirstName = firstName;
             LastName = lastName;
+            Email = email;
 
             ConfirmationNumber = MakeConfirmationNumber(reservationId);
 
@@ -52,7 +57,15 @@ namespace AJJDHotel.Pages
 
             RoomType = dbAccess.GetRoomTypeByRoomTypeId(roomTypeId);
 
-            AJJDEmailReservation(ConfirmationNumber);
+            if (User.IsInRole(SD.CustomerUser))
+            {
+                AJJDEmailReservation(ConfirmationNumber, User.Identity.Name);
+            }
+            else if (User.IsInRole(SD.AdminUser))
+            {
+                AJJDEmailReservation(ConfirmationNumber, Email);
+            }
+            
 
 
         }
@@ -72,9 +85,11 @@ namespace AJJDHotel.Pages
             return confirmation - 8744304;
         }
 
-        public void AJJDEmailReservation(int confirmationNumber)
+        public void AJJDEmailReservation(int confirmationNumber, string customerEmail)
         {
-            MailAddress to = new MailAddress(User.Identity.Name);
+
+
+            MailAddress to = new MailAddress(customerEmail);
             MailAddress from = new MailAddress("jtn2dsng@gmail.com");
 
             String image = RoomType.ImgPath;
