@@ -96,6 +96,10 @@ namespace AJJDHotel.Pages
                 EndDate = (DateTime)TempData.Peek("checkout");
 
                 RoomTypeId = id;
+                if (!(dbAccess.IsRoomOpen(id,StartDate,EndDate)))
+                {
+                    return RedirectToPage("index");
+                }
 
                 Id = UserManager.GetUserId(User);
                 ApplicationUser = dbAccess.GetUserById(Id);
@@ -140,6 +144,7 @@ namespace AJJDHotel.Pages
 
                 Input.Password = GeneratePassword();
                 var result = await UserManager.CreateAsync(user, Input.Password);
+                int resId=-1;
                 if (result.Succeeded)
                 {
                     AJJDEmailRegister();
@@ -149,9 +154,10 @@ namespace AJJDHotel.Pages
 
                 id = dbAccess.GetUserByEmail(Input.Email).Id; //Because Admin is logged in, we overwrite id regardless of whether a new account was created.
 
+
                 // CreateReservation method returns the PK of the newly-created Reservation; use it to get confirmation number
 
-                int resId = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id);
+                bool a = dbAccess.CreateReservation(startdate, enddate, numguests, roomid, totalcharge, id, ref resId);
 
                 if (result.Succeeded) 
                     return RedirectToPage("/OrderConfirmation", new { reservationId = resId, roomTypeId = roomtypeid, password=Input.Password, firstName = Input.FirstName, lastName = Input.LastName});
@@ -176,7 +182,7 @@ namespace AJJDHotel.Pages
 
         }
 
-        // possible helper method
+        // possible helper method8744365
         public decimal GetTotalCharge(int roomTypeId)
         {
             throw new NotImplementedException();

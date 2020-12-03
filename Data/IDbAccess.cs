@@ -29,6 +29,7 @@ namespace AJJDHotel.Data
         void UpdateRoomType(int roomtypeId, string description, string beds, string view, string roomname, decimal rate, string imgpath);
         List<string> GetDistinctBeds();
         List<string> GetDistinctViews();
+        bool IsRoomOpen(int roomtypeId, DateTime startDate, DateTime endDate);
         //List<RoomType> GetDisctinctBedTypes();
     }
 }
