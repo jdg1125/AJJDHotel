@@ -67,7 +67,7 @@ namespace AJJDHotel.Pages.Reservations
         {
             if (!ModelState.IsValid || Reservation.EndDate <= Reservation.StartDate)
             {
-                return RedirectToPage("./Edit", new { id = Reservation.ReservationId, guestEmail=guestEmail, numDays=numDays});
+                return RedirectToPage("./Edit", new { id = Reservation.ReservationId, resNumber=resNumber, guestEmail=guestEmail,});
             }
             ReduceTotalCharge(numDays);
             _context.Attach(Reservation).State = EntityState.Modified;
